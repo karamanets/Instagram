@@ -24,7 +24,8 @@ final class LogoView: UIView {
     private var imageView: UIImageView = {
         /// preserve vector data and single scale in assets plus original render
         let image = UIImageView()
-        image.image = UIImage(named: "logo")
+        image.image = UIImage(named: "logo")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
+                                                            renderingMode: .alwaysOriginal)
         return image
     }()
     

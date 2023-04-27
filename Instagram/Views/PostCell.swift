@@ -46,6 +46,7 @@ final class PostCell: UITableViewCell {
         static let subtitleFontSize: CGFloat = 10
         static let commentLabelFont: CGFloat = 14
         static let commentToLikeTopOffset: CGFloat = 12
+        static let bookMarkButtonToPostImageOffset:CGFloat = 12
     }
     
     //MARK: Private Property
@@ -68,7 +69,7 @@ final class PostCell: UITableViewCell {
     private let optionsButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        button.tintColor = UIColor.black
+        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
         return button
     }()
     private let postImage: UIImageView = {
@@ -78,19 +79,20 @@ final class PostCell: UITableViewCell {
     }()
     private let likeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = UIColor.black
+        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
         button.setImage(UIImage(systemName: "heart"), for: .normal)
+        
         return button
     }()
     private let commentButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = UIColor.black
+        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
         button.setImage(UIImage(systemName: "bubble.right"), for: .normal)
         return button
     }()
     private let sharedButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = UIColor.black
+        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
         return button
     }()
@@ -98,6 +100,12 @@ final class PostCell: UITableViewCell {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UiConstants.subtitleFontSize, weight: .bold)
         return label
+    }()
+    private let bookMarkButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
+        button.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        return button
     }()
     private let commentLabel: UILabel = {
        let label = UILabel()
@@ -111,6 +119,8 @@ final class PostCell: UITableViewCell {
 private extension PostCell {
     
     func initialize() {
+        
+        buttonsAction()
         selectionStyle = .none
         
         /// userImage - right
@@ -167,6 +177,13 @@ private extension PostCell {
             make.top.equalTo(actionsStack.snp.bottom).offset(UiConstants.likesLabelToActionStackOffset)
         }
         
+        contentView.addSubview(bookMarkButton)
+        bookMarkButton.snp.makeConstraints { make in
+            make.top.equalTo(postImage.snp.bottom).offset(UiConstants.bookMarkButtonToPostImageOffset)
+            make.height.equalTo(UiConstants.actionStackHeight)
+            make.trailing.equalToSuperview().inset(UiConstants.contentInset)
+        }
+        
         /// Comment label -  below likes label
         contentView.addSubview(commentLabel)
         commentLabel.snp.makeConstraints { make in
@@ -184,6 +201,31 @@ private extension PostCell {
         let range = NSRange(location: .zero, length: comment.userName.count)
         attributeString.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: UiConstants.commentLabelFont), range: range)
         commentLabel.attributedText = attributeString
+    }
+    
+    //MARK: Button Actions
+    
+    func buttonsAction() {
+        likeButton.addTarget(self, action: #selector(likeButtonAction(_:)), for: .touchUpInside)
+        commentButton.addTarget(self, action: #selector(commentButtonAction(_:)), for: .touchUpInside)
+        sharedButton.addTarget(self, action: #selector(sharedButtonAction(_:)), for: .touchUpInside)
+        bookMarkButton.addTarget(self, action: #selector(bookMarkButtonAction(_:)), for: .touchUpInside)
+    }
+    
+    @objc func likeButtonAction(_ sender: UIButton) {
+        print("Like")
+    }
+    
+    @objc func commentButtonAction(_ sender: UIButton) {
+        print("Add comment")
+    }
+    
+    @objc func sharedButtonAction(_ sender: UIButton) {
+        print("Shared")
+    }
+    
+    @objc func bookMarkButtonAction(_ sender: UIButton) {
+        print("Add to bookMark")
     }
 }
 

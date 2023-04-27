@@ -8,14 +8,12 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
+    
     //MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGroupedBackground
-        /// Elements
-        setUpBarButtonItems()
-        setUpTableView()
+        initialize()
     }
     
     //MARK: Init
@@ -28,31 +26,54 @@ class ViewController: UIViewController {
     }
     
     //MARK: Private properties
-    private let dataService = FakeDataService()
-    
     private let tableView = UITableView()
-    //MARK: DataService
     private var items: [FeedItemType] = []
-
+    
+    //MARK: DataService
+    private let dataService = FakeDataService()
 }
 
-//MARK: - Bar Button Items
-private extension ViewController {
+//MARK: - Private methods
+private extension HomeViewController {
+    func initialize() {
+        /// View
+        view.backgroundColor = .systemGroupedBackground
+        /// Elements
+        setUpBarItems()
+        setUpTableView()
+    }
+}
+
+//MARK: - Bar Items
+private extension HomeViewController {
     
-    func setUpBarButtonItems() {
+    func setUpBarItems() {
         /// Make icon left item black
         navigationController?.navigationBar.tintColor = .black
         /// Add Bar Items
         navigationItem.leftBarButtonItems = makeLeftBarButtonItem()
         navigationItem.rightBarButtonItems = makeRightBarButtonItem()
+        
+        makeBarBottomIcon()
+    }
+    
+    /// Bar bottom image title tag
+    func makeBarBottomIcon() {
+        let image = UIImage(systemName: "homekit")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
+                                                                  renderingMode: .alwaysOriginal)
+        let tabItem = UITabBarItem(title: "", image: image , tag: 0)
+        self.tabBarItem = tabItem
     }
     
     /// Bar Button left
     func makeLeftBarButtonItem() -> [UIBarButtonItem] {
+        
         /// Add logo mage
         let logoBarButtonItem = UIBarButtonItem(customView: LogoView())
         /// Add bar button
-        let dropDownButtonItem = UIBarButtonItem(title: nil , image: UIImage(systemName: "chevron.down"), target: self, action: nil, menu: makeDropDownMenu())
+        let image = UIImage(systemName: "chevron.down")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
+                                                                       renderingMode: .alwaysOriginal)
+        let dropDownButtonItem = UIBarButtonItem(title: nil , image: image, target: self, action: nil, menu: makeDropDownMenu())
         
         /// return logo and button
         return [logoBarButtonItem, dropDownButtonItem]
@@ -61,18 +82,15 @@ private extension ViewController {
     /// Bar Buttons right
     func makeRightBarButtonItem() -> [UIBarButtonItem] {
         /// Two button
-        let addBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus.app"), style: .plain, target: self, action: #selector(addBarAction))
-        let directButtonItem = UIBarButtonItem(image: UIImage(systemName: "paperplane"), style: .plain, target: self, action: #selector(directButtonAction))
+        let addImage = UIImage(systemName: "plus.app")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
+                                                                       renderingMode: .alwaysOriginal)
+        let addBarButtonItem = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(addBarAction))
+        
+        let directImage = UIImage(systemName: "paperplane")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
+                                                                       renderingMode: .alwaysOriginal)
+        let directButtonItem = UIBarButtonItem(image: directImage, style: .plain, target: self, action: #selector(directButtonAction))
         
         return [directButtonItem, addBarButtonItem]
-    }
-    
-    /// Right Bar Button Actions
-    @objc func addBarAction() {
-        print("Add some")
-    }
-    @objc func directButtonAction() {
-        print("Hello")
     }
     
     /// Bar Item
@@ -84,10 +102,18 @@ private extension ViewController {
         
         return UIMenu(children: [subscriberItem, favoriteItem])
     }
+    
+    /// Right Bar Button Actions
+    @objc func addBarAction() {
+        print("Add some")
+    }
+    @objc func directButtonAction() {
+        print("Hello")
+    }
 }
 
 //MARK: - TableView
-private extension ViewController {
+private extension HomeViewController {
     
     func setUpTableView() {
         view.addSubview(tableView)
@@ -97,6 +123,7 @@ private extension ViewController {
         }
         tableView.dataSource = self
         tableView.separatorColor = .clear
+        tableView.showsVerticalScrollIndicator = false
         /// Register  cell
         tableView.register(StoriesSetCell.self, forCellReuseIdentifier: String(describing: StoriesSetCell.self))
         tableView.register(PostCell.self, forCellReuseIdentifier: String(describing: PostCell.self))
@@ -104,7 +131,7 @@ private extension ViewController {
 }
 
 //MARK: TableView Data Source
-extension ViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         items.count

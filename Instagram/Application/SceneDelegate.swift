@@ -15,9 +15,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let vc = ViewController()
-        window?.rootViewController = UINavigationController(rootViewController: vc)
+        
+        /// ViewControllers
+        let vcHome = HomeViewController()
+        let vcSearch = SearchViewController()
+        let vcNewPost = NewPostViewController()
+        let vcReels = ReelsViewController()
+        let vcProfile = ProfileViewController()
+        
+        /// NavigationControllers
+        let navHome = UINavigationController(rootViewController: vcHome)
+        let navSearch = UINavigationController(rootViewController: vcSearch)
+        let navNewPost = UINavigationController(rootViewController: vcNewPost)
+        let navReels = UINavigationController(rootViewController: vcReels)
+        let navProfile = UINavigationController(rootViewController: vcProfile)
+        
+        /// TabBar
+        let tabBar = UITabBarController()
+        
+        tabBar.setViewControllers([navHome, navSearch, navNewPost, navReels, navProfile], animated: true)
+        
+        window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
+        
+        /// Preloading
+        vcSearch.loadViewIfNeeded()
+        vcNewPost.loadViewIfNeeded()
+        vcReels.loadViewIfNeeded()
+        vcProfile.loadViewIfNeeded()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,4 +75,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
