@@ -10,7 +10,7 @@ import SnapKit
 
 final class StoriesSetCell: UITableViewCell {
     //MARK: Public method
-    func configure(with info: FeedStoriesCellInfo) {
+    func configure(with info: StoriesCellInfo) {
         self.items = info
         collectionView.reloadData()
         //print(info)
@@ -34,7 +34,7 @@ final class StoriesSetCell: UITableViewCell {
     
     //MARK: Private properties
     private var collectionView: UICollectionView!
-    private var items: FeedStoriesCellInfo = [] /// typealias name (array)
+    private var items: StoriesCellInfo = [] /// typealias name (array)
 }
 
 //MARK: - Private methods

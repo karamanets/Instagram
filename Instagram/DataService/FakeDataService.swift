@@ -10,20 +10,23 @@ import UIKit
 struct FakeDataService {
     
     //MARK: Public
-     var arrayFakeData: [FeedItemType] = []
+    var arrayFakeDataTypeStoryAndPostForHomeVC: [InstagramItemType] = []
+    
+    var arrayFakeDataImages: [UIImage] = []
     
     //MARK: Init
     init() {
         setUpDataPost()
+        setUpArrayOfImagesForSearchVC()
     }
     
     //MARK: Private methods
     private mutating func setUpDataPost() {
         
-        var tempData: [FeedItemType] = []
+        var tempData: [InstagramItemType] = []
         
         for _ in 1...100 {
-            let post: FeedItemType = .post(FeedPostItemInfo(userImage: setUpRandomImage(),
+            let post: InstagramItemType = .post(PostItemInfo(userImage: setUpRandomImage(),
                                                             userName: setUpRandomName(),
                                                             postSubtitle: setUpRandomSubtitle(),
                                                             postImage: setUpRandomImage(),
@@ -35,15 +38,15 @@ struct FakeDataService {
         
         tempData.insert(.stories(setUpDataStoriesArray()), at: 0)
         
-        arrayFakeData = tempData
+        arrayFakeDataTypeStoryAndPostForHomeVC = tempData
     }
     
-    private func setUpDataStoriesArray() -> [FeedStoriesItemCellInfo] {
+    private func setUpDataStoriesArray() -> [StoriesItemCellInfo] {
 
-        var tempArray: [FeedStoriesItemCellInfo] = []
+        var tempArray: [StoriesItemCellInfo] = []
 
         for _ in 1...100 {
-            let story = FeedStoriesItemCellInfo(image: setUpRandomImage(), userName: setUpRandomName(), isAddButtonVisible: false, isNewStory: setUpRandomIsNew())
+            let story = StoriesItemCellInfo(image: setUpRandomImage(), userName: setUpRandomName(), isAddButtonVisible: false, isNewStory: setUpRandomIsNew())
             tempArray.append(story)
         }
         return tempArray
@@ -90,6 +93,15 @@ struct FakeDataService {
         let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"].randomElement()
         let image = UIImage(named: imagesName ?? "")
         return image ?? UIImage()
+    }
+    
+    private mutating func setUpArrayOfImagesForSearchVC() {
+        var tempImageArray: [UIImage] = []
+        
+        for _ in 1...100 {
+            tempImageArray.append(setUpRandomImage())
+        }
+        arrayFakeDataImages = tempImageArray
     }
     
     private func setUpRandomComment() -> String {

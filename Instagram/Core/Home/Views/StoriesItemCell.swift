@@ -13,7 +13,7 @@ import SnapKit
 class StoriesItemCell: UICollectionViewCell {
     
     //MARK: Public
-    func configure(with info: FeedStoriesItemCellInfo) { /// use one item from array of StoriesCellInfo
+    func configure(with info: StoriesItemCellInfo) { /// use one item from array of StoriesCellInfo
         imageView.image = info.image
         userLabel.text = info.userName
         addButton.isHidden = !info.isAddButtonVisible

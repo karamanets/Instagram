@@ -9,11 +9,11 @@ import UIKit
 
 
 //MARK: Stories Model
-struct FeedStoriesItemCellInfo {
+struct StoriesItemCellInfo {
     let image: UIImage
     let userName: String
     let isAddButtonVisible: Bool
     let isNewStory: Bool
 }
 
-typealias FeedStoriesCellInfo = [FeedStoriesItemCellInfo]
+typealias StoriesCellInfo = [StoriesItemCellInfo]

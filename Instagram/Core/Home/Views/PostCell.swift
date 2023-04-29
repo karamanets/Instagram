@@ -11,7 +11,7 @@ import SnapKit
 final class PostCell: UITableViewCell {
     
     //MARK: Public
-    func configure(with info: FeedPostItemInfo) {
+    func configure(with info: PostItemInfo) {
         userImage.image = info.userImage
         userName.text = info.userName
         subtitle.text = info.postSubtitle
@@ -204,7 +204,6 @@ private extension PostCell {
     }
     
     //MARK: Button Actions
-    
     func buttonsAction() {
         likeButton.addTarget(self, action: #selector(likeButtonAction(_:)), for: .touchUpInside)
         commentButton.addTarget(self, action: #selector(commentButtonAction(_:)), for: .touchUpInside)

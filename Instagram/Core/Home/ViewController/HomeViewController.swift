@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     //MARK: Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
-        items = dataService.arrayFakeData
+        items = dataService.arrayFakeDataTypeStoryAndPostForHomeVC
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     
     //MARK: Private properties
     private let tableView = UITableView()
-    private var items: [FeedItemType] = []
+    private var items: [InstagramItemType] = []
     
     //MARK: DataService
     private let dataService = FakeDataService()
@@ -37,7 +37,7 @@ class HomeViewController: UIViewController {
 private extension HomeViewController {
     func initialize() {
         /// View
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = UIColor(named: "customBackground")
         /// Elements
         setUpBarItems()
         setUpTableView()

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C8287C329FB97220064E58A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8287C229FB97220064E58A /* TextField.swift */; };
+		2CAC43C629FCBE0D0098306F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC43C529FCBE0D0098306F /* SearchCell.swift */; };
 		2CC67D5429F1210800550457 /* FakeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC67D5329F1210800550457 /* FakeDataService.swift */; };
 		2CD8D2C129EF874D00996964 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8D2C029EF874D00996964 /* AppDelegate.swift */; };
 		2CD8D2C329EF874D00996964 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8D2C229EF874D00996964 /* SceneDelegate.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		2C8287C229FB97220064E58A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		2CAC43C529FCBE0D0098306F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		2CC67D5329F1210800550457 /* FakeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDataService.swift; sourceTree = "<group>"; };
 		2CD8D2BD29EF874D00996964 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD8D2C029EF874D00996964 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		2C8287BF29FB70BB0064E58A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CAC43C529FCBE0D0098306F /* SearchCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				2CD8D2C329EF874D00996964 /* SceneDelegate.swift in Sources */,
 				2CF85A0129FA16F9007ABE2D /* ProfileViewController.swift in Sources */,
 				2CC67D5429F1210800550457 /* FakeDataService.swift in Sources */,
+				2CAC43C629FCBE0D0098306F /* SearchCell.swift in Sources */,
 				2CD8D2E029EFAAE400996964 /* ItemType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

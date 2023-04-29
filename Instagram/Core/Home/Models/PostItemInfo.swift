@@ -8,7 +8,7 @@
 import UIKit
 
 //MARK: Post Model
-struct FeedPostItemInfo {
+struct PostItemInfo {
     let userImage: UIImage
     let userName: String
     let postSubtitle: String
