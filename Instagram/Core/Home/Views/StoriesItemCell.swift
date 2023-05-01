@@ -10,7 +10,7 @@
 import UIKit
 import SnapKit
 
-class StoriesItemCell: UICollectionViewCell {
+final class StoriesItemCell: UICollectionViewCell {
     
     //MARK: Public
     func configure(with info: StoriesItemCellInfo) { /// use one item from array of StoriesCellInfo

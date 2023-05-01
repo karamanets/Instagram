@@ -33,10 +33,12 @@ class SearchViewController: UIViewController {
     }()
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 5
+        layout.minimumLineSpacing = 5
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: String(describing: SearchCell.self))
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 5)
+        collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         return collectionView
     }()
 }

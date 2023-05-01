@@ -24,13 +24,23 @@ class SearchCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: Private
+    //MARK: Constants
+    private enum UIConstants {
+        static let iconTop: CGFloat = 10
+        static let iconTrailing: CGFloat = -10
+        static let iconSize: CGFloat = 20
+        static let imageShadowOffset: CGFloat = 2.0
+        static let imageShadowOpacity: Float = 0.5
+        static let imageShadowRadius: CGFloat = 3
+    }
+    
+    //MARK: Private property
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.layer.shadowColor = UIColor(named: "shadowImagesSearch")?.cgColor
-        view.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        view.layer.shadowOpacity = 0.5
-        view.layer.shadowRadius = 3
+        view.layer.shadowOffset = CGSize(width: UIConstants.imageShadowOffset, height: UIConstants.imageShadowOffset)
+        view.layer.shadowOpacity = UIConstants.imageShadowOpacity
+        view.layer.shadowRadius = UIConstants.imageShadowRadius
         return view
     }()
     private let icon: UIImageView = {
@@ -52,9 +62,9 @@ private extension SearchCell {
         
         addSubview(icon)
         icon.snp.makeConstraints { make in
-            make.top.equalTo(10)
-            make.trailing.equalTo(-10)
-            make.size.equalTo(20)
+            make.top.equalTo(UIConstants.iconTop)
+            make.trailing.equalTo(UIConstants.iconTrailing)
+            make.size.equalTo(UIConstants.iconSize)
         }
     }
 }
