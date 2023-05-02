@@ -89,7 +89,7 @@ struct FakeDataService {
         return like
     }
     
-    private func setUpRandomImage() -> UIImage {
+    func setUpRandomImage() -> UIImage {
         let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"].randomElement()
         let image = UIImage(named: imagesName ?? "")
         return image ?? UIImage()

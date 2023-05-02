@@ -15,10 +15,6 @@ class NewPostCell: UITableViewCell {
         
     }
     
-    override class func awakeFromNib() {
-        
-    }
-    
     //MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,12 +30,7 @@ class NewPostCell: UITableViewCell {
     }
     
     //MARK: Private Property
-    let titleLabel: UILabel = {
-       let label = ProjectTitleLabel(withTextAlignment: .left, andFont: UIFont.preferredFont(forTextStyle: .headline))
-        label.text = "Hew Post"
-        
-        return label
-    }()
+
     
 }
 
@@ -50,27 +41,16 @@ private extension NewPostCell {
         
         backgroundColor = .clear
         separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+
       
         
-        /// Header HStack
-        let HStackHeader = UIStackView(arrangedSubviews: [titleLabel])
-        HStackHeader.axis = .horizontal
-        HStackHeader.alignment = .fill
-        //HStackHeader.spacing = 10
-        //HStackHeader.setCustomSpacing(100, after: labelHeader)
-        contentView.addSubview(HStackHeader)
-        HStackHeader.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            HStackHeader.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            HStackHeader.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor, constant: 16),
-            HStackHeader.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor, constant: -16),
-            HStackHeader.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+
         
     }
 }
 
-class ProjectTitleLabel: UILabel {
+class TextLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

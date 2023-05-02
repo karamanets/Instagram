@@ -49,38 +49,14 @@ private extension SearchViewController {
         /// View
         view.backgroundColor = UIColor(named: "customBackground")
         
-        /// Elements
-        makeBarBottomIcon()
-        setUpTextField()
-        setUpCollectionView()
-
-        /// Bar bottom image title tag
-        func makeBarBottomIcon() {
-            let image = UIImage(systemName: "magnifyingglass")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
-                                                                              renderingMode: .alwaysOriginal)
-            let tabItem = UITabBarItem(title: "", image: image , tag: 1)
-            self.tabBarItem = tabItem
-        }
-    }
-}
-
-//MARK: SetUp TextField
-private extension SearchViewController {
-    
-    func setUpTextField() {
+        /// Elements Constraints
         text.delegate = self
         view.addSubview(text)
         text.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(80)
             make.leading.trailing.equalToSuperview().inset(16)
         }
-    }
-}
-
-//MARK: setUp CollectionView
-private extension SearchViewController {
-    
-    func setUpCollectionView() {
+        
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         view.addSubview(collectionView)
@@ -88,6 +64,17 @@ private extension SearchViewController {
             make.top.equalTo(text.snp.bottom).offset(10)
             make.leading.trailing.bottom.equalToSuperview()
         }
+        
+        /// Methods
+        makeBarBottomIcon()
+    }
+    
+    /// Bar bottom image title tag
+    func makeBarBottomIcon() {
+        let image = UIImage(systemName: "magnifyingglass")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
+                                                                          renderingMode: .alwaysOriginal)
+        let tabItem = UITabBarItem(title: "", image: image , tag: 1)
+        self.tabBarItem = tabItem
     }
 }
 
