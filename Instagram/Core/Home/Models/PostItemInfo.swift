@@ -13,7 +13,7 @@ struct PostItemInfo {
     let userName: String
     let postSubtitle: String
     let postImage: UIImage
-    let numberOfLiks: Int
+    let numberOfLikes: Int
     let comment: CommentShortInfo?
 }
 

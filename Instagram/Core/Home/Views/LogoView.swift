@@ -24,8 +24,7 @@ final class LogoView: UIView {
     private var imageView: UIImageView = {
         /// preserve vector data and single scale in assets plus original render
         let image = UIImageView()
-        image.image = UIImage(named: "logo")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
-                                                            renderingMode: .alwaysOriginal)
+        image.image = UIImage(named: "logo")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
         return image
     }()
     
@@ -38,6 +37,7 @@ final class LogoView: UIView {
 
 //MARK: - Private methods
 private extension LogoView {
+    
     func initialize() {
         addSubview(imageView)
         imageView.snp.makeConstraints { make in

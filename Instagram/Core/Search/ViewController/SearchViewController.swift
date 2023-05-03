@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
         text.enablesReturnKeyAutomatically = true
         text.spellCheckingType = .yes
         text.smartInsertDeleteType = .yes
-        text.tintColor = UIColor(named: "textFieldIcon")
+        text.tintColor = UIColor.theme.textFieldBackground
         text.setIcon(UIImage(systemName: "magnifyingglass")!)
         return text
     }()
@@ -47,7 +47,7 @@ class SearchViewController: UIViewController {
 private extension SearchViewController {
     func initialize() {
         /// View
-        view.backgroundColor = UIColor(named: "customBackground")
+        view.backgroundColor = UIColor.theme.background
         
         /// Elements Constraints
         text.delegate = self
@@ -71,8 +71,7 @@ private extension SearchViewController {
     
     /// Bar bottom image title tag
     func makeBarBottomIcon() {
-        let image = UIImage(systemName: "magnifyingglass")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
-                                                                          renderingMode: .alwaysOriginal)
+        let image = UIImage(systemName: "magnifyingglass")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
         let tabItem = UITabBarItem(title: "", image: image , tag: 1)
         self.tabBarItem = tabItem
     }

@@ -16,7 +16,7 @@ final class PostCell: UITableViewCell {
         userName.text = info.userName
         subtitle.text = info.postSubtitle
         postImage.image = info.postImage
-        likesLabel.text = "\(info.numberOfLiks) Likes"
+        likesLabel.text = "\(info.numberOfLikes) Likes"
         if let comment = info.comment {
             configureComment(with: comment)
         }
@@ -56,57 +56,67 @@ final class PostCell: UITableViewCell {
         view.clipsToBounds = true
         return view
     }()
+    
     private let userName: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UiConstants.userNameFontSize, weight: .bold)
         return label
     }()
+    
     private let subtitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UiConstants.subtitleFontSize, weight: .light)
         return label
     }()
+    
     private let optionsButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
+        button.tintColor = UIColor.theme.icons
         return button
     }()
+    
     private let postImage: UIImageView = {
        let view = UIImageView()
         view.image = UIImage(named: "LogoPost")
         return view
     }()
+    
     private let likeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
+        button.tintColor = UIColor.theme.icons
         button.setImage(UIImage(systemName: "heart"), for: .normal)
         
         return button
     }()
+    
     private let commentButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
+        button.tintColor = UIColor.theme.icons
         button.setImage(UIImage(systemName: "bubble.right"), for: .normal)
         return button
     }()
+    
     private let sharedButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
+        button.tintColor = UIColor.theme.icons
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
         return button
     }()
+    
     private let likesLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UiConstants.subtitleFontSize, weight: .bold)
         return label
     }()
+    
     private let bookMarkButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = UIColor(named: "barItems") ?? .systemGroupedBackground
+        button.tintColor = UIColor.theme.icons
         button.setImage(UIImage(systemName: "bookmark"), for: .normal)
         return button
     }()
+    
     private let commentLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UiConstants.commentLabelFont)

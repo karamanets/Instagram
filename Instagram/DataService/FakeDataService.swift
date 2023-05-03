@@ -30,7 +30,7 @@ struct FakeDataService {
                                                             userName: setUpRandomName(),
                                                             postSubtitle: setUpRandomSubtitle(),
                                                             postImage: setUpRandomImage(),
-                                                            numberOfLiks: setUpRandomLike(),
+                                                            numberOfLikes: setUpRandomLike(),
                                                             comment: CommentShortInfo(userName: setUpRandomName(), commentText: setUpRandomComment())))
             
             tempData.append(post)

@@ -37,7 +37,7 @@ class SearchCell: UICollectionViewCell {
     //MARK: Private property
     private let imageView: UIImageView = {
         let view = UIImageView()
-        view.layer.shadowColor = UIColor(named: "shadowImagesSearch")?.cgColor
+        view.layer.shadowColor = UIColor.theme.shadow.cgColor
         view.layer.shadowOffset = CGSize(width: UIConstants.imageShadowOffset, height: UIConstants.imageShadowOffset)
         view.layer.shadowOpacity = UIConstants.imageShadowOpacity
         view.layer.shadowRadius = UIConstants.imageShadowRadius

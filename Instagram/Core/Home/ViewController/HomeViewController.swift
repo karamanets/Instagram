@@ -37,7 +37,7 @@ class HomeViewController: UIViewController {
 private extension HomeViewController {
     func initialize() {
         /// View
-        view.backgroundColor = UIColor(named: "customBackground")
+        view.backgroundColor = UIColor.theme.background
         /// Elements
         setUpBarItems()
         setUpTableView()
@@ -59,8 +59,7 @@ private extension HomeViewController {
     
     /// Bar bottom image title tag
     func makeBarBottomIcon() {
-        let image = UIImage(systemName: "homekit")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
-                                                                  renderingMode: .alwaysOriginal)
+        let image = UIImage(systemName: "homekit")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
         let tabItem = UITabBarItem(title: "", image: image , tag: 0)
         self.tabBarItem = tabItem
     }
@@ -71,8 +70,7 @@ private extension HomeViewController {
         /// Add logo mage
         let logoBarButtonItem = UIBarButtonItem(customView: LogoView())
         /// Add bar button
-        let image = UIImage(systemName: "chevron.down")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
-                                                                       renderingMode: .alwaysOriginal)
+        let image = UIImage(systemName: "chevron.down")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
         let dropDownButtonItem = UIBarButtonItem(title: nil , image: image, target: self, action: nil, menu: makeDropDownMenu())
         
         /// return logo and button
@@ -82,12 +80,10 @@ private extension HomeViewController {
     /// Bar Buttons right
     func makeRightBarButtonItem() -> [UIBarButtonItem] {
         /// Two button
-        let addImage = UIImage(systemName: "plus.app")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
-                                                                       renderingMode: .alwaysOriginal)
+        let addImage = UIImage(systemName: "plus.app")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
         let addBarButtonItem = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(addBarAction))
         
-        let directImage = UIImage(systemName: "paperplane")?.withTintColor(UIColor(named: "barItems") ?? .systemGroupedBackground,
-                                                                       renderingMode: .alwaysOriginal)
+        let directImage = UIImage(systemName: "paperplane")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
         let directButtonItem = UIBarButtonItem(image: directImage, style: .plain, target: self, action: #selector(directButtonAction))
         
         return [directButtonItem, addBarButtonItem]

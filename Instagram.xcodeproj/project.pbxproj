@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C009F2529FF62E400A79861 /* NewPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C009F2429FF62E400A79861 /* NewPostCell.swift */; };
+		2C0D967A2A0237A10031D680 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D96792A0237A10031D680 /* Color.swift */; };
 		2C8287C329FB97220064E58A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8287C229FB97220064E58A /* TextField.swift */; };
 		2CAC43C629FCBE0D0098306F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC43C529FCBE0D0098306F /* SearchCell.swift */; };
 		2CC67D5429F1210800550457 /* FakeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC67D5329F1210800550457 /* FakeDataService.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		2C009F2429FF62E400A79861 /* NewPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCell.swift; sourceTree = "<group>"; };
+		2C0D96792A0237A10031D680 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		2C8287C229FB97220064E58A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		2CAC43C529FCBE0D0098306F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		2CC67D5329F1210800550457 /* FakeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDataService.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				2C8287C229FB97220064E58A /* TextField.swift */,
+				2C0D96792A0237A10031D680 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				2CD8D2EA29EFB7CF00996964 /* StoriesSetCell.swift in Sources */,
 				2CF859FB29FA169C007ABE2D /* SearchViewController.swift in Sources */,
 				2CD8D2EC29EFB8A100996964 /* PostCell.swift in Sources */,
+				2C0D967A2A0237A10031D680 /* Color.swift in Sources */,
 				2CD8D2E429EFAD8100996964 /* PostItemInfo.swift in Sources */,
 				2CD8D2C329EF874D00996964 /* SceneDelegate.swift in Sources */,
 				2CF85A0129FA16F9007ABE2D /* ProfileViewController.swift in Sources */,
