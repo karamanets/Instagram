@@ -26,7 +26,16 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: Private properties
-    private let tableView = UITableView()
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorColor = .clear
+        tableView.showsVerticalScrollIndicator = false
+        /// Register  cells
+        tableView.register(StoriesSetCell.self, forCellReuseIdentifier: String(describing: StoriesSetCell.self))
+        tableView.register(PostCell.self, forCellReuseIdentifier: String(describing: PostCell.self))
+        return tableView
+    }()
+    
     private var items: [InstagramItemType] = []
     
     //MARK: DataService
@@ -38,9 +47,38 @@ private extension HomeViewController {
     func initialize() {
         /// View
         view.backgroundColor = UIColor.theme.background
-        /// Elements
+        /// Methods
         setUpBarItems()
-        setUpTableView()
+        
+        /// Elements
+        view.addSubview(tableView)
+        tableView.dataSource = self
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+}
+
+//MARK: - TableView DataSource
+extension HomeViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = items[indexPath.row]
+        switch item {
+        case .stories(let info):
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: StoriesSetCell.self), for: indexPath) as! StoriesSetCell
+            cell.configure(with: info)
+            return cell
+            
+        case .post(let post):
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
+            cell.configure(with: post)
+            return cell
+        }
     }
 }
 
@@ -105,46 +143,5 @@ private extension HomeViewController {
     }
     @objc func directButtonAction() {
         print("Hello")
-    }
-}
-
-//MARK: - TableView
-private extension HomeViewController {
-    
-    func setUpTableView() {
-        view.addSubview(tableView)
-        /// Constraints
-        tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        tableView.dataSource = self
-        tableView.separatorColor = .clear
-        tableView.showsVerticalScrollIndicator = false
-        /// Register  cell
-        tableView.register(StoriesSetCell.self, forCellReuseIdentifier: String(describing: StoriesSetCell.self))
-        tableView.register(PostCell.self, forCellReuseIdentifier: String(describing: PostCell.self))
-    }
-}
-
-//MARK: TableView Data Source
-extension HomeViewController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.row]
-        switch item {
-        case .stories(let info):
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: StoriesSetCell.self), for: indexPath) as! StoriesSetCell
-            cell.configure(with: info)
-            return cell
-            
-        case .post(let post):
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
-            cell.configure(with: post)
-            return cell
-        }
     }
 }

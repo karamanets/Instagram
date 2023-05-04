@@ -23,7 +23,7 @@ class NewPostViewController: UIViewController {
 
     //MARK: Private property
     private lazy var galleryButton: UIButton = {
-        var config = UIButton.Configuration.filled()
+        var config = UIButton.Configuration.tinted()
         config.title = "Gallery"
         let transformer = UIConfigurationTextAttributesTransformer { incoming in
             var outgoing = incoming
@@ -99,19 +99,26 @@ class NewPostViewController: UIViewController {
         return view
     }()
     
-    private let tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .plain)
-        table.showsVerticalScrollIndicator = false
-        table.separatorColor = .clear
-        //table.estimatedRowHeight = 100
-        //table.sectionHeaderHeight = 40
-        //table.rowHeight = UITableView.automaticDimension
-        //table.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        table.backgroundColor = .clear
-        table.register(NewPostCell.self, forCellReuseIdentifier: String(describing: NewPostCell.self))
-        return table
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 2
+        layout.minimumInteritemSpacing = 2
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.register(NewPostCell.self, forCellWithReuseIdentifier: String(describing: NewPostCell.self))
+        collection.showsVerticalScrollIndicator = false
+        return collection
     }()
-   
+    
+    private lazy var sheetViewController: UIViewController = {
+       let sheet = GallerySheet(nibName: nil, bundle: nil)
+        sheet.modalPresentationStyle = .pageSheet
+        return sheet
+    }()
+    
+    //MARK: DataService
+    private let items = FakeDataService()
+    
+    
 }
 
 //MARK: - Private methods
@@ -131,7 +138,7 @@ private extension NewPostViewController {
         mainImage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(UIScreen.main.bounds.height / 2.5)
+            make.height.equalTo(view.frame.height / 2.5)
         }
         
         /// Center HStack
@@ -149,14 +156,13 @@ private extension NewPostViewController {
             make.height.equalTo(50)
         }
         
-        /// TableView
-        tableView.delegate = self
-        tableView.dataSource = self
-       // view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-//            make.top.equalTo(mainImage.snp.bottom)
-//            make.leading.trailing.equalToSuperview()
-//            make.bottom.equalToSuperview()
+        /// CollectionView
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(HStackHeader.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     
@@ -205,16 +211,24 @@ private extension NewPostViewController {
         print("Next")
     }
     
-    func selectedButtonAction() -> UIAction {
-        let action = UIAction { _ in
-            print("Selected images")
+    func galleryButtonAction() -> UIAction {
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
+            
+            if
+                #available(iOS 15.0, *),
+                let sheet = self.sheetViewController.sheetPresentationController
+            {
+                sheet.detents = [.medium(), .large()]
+            }
+            self.present(self.sheetViewController, animated: true)
         }
         return action
     }
     
-    func galleryButtonAction() -> UIAction {
+    func selectedButtonAction() -> UIAction {
         let action = UIAction { _ in
-            print("Gallery show sheet")
+            print("Selected images")
         }
         return action
     }
@@ -227,28 +241,33 @@ private extension NewPostViewController {
     }
 }
 
-//MARK: TableView DataSource
-extension NewPostViewController: UITableViewDataSource {
+//MARK: CollectionView DataSource
+extension NewPostViewController: UICollectionViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items.arrayFakeDataImages.count
     }
     
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: NewPostCell.self), for: indexPath) as! NewPostCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: NewPostCell.self), for: indexPath) as! NewPostCell
         
-        //let cell = UITableViewCell()
+        cell.configure(with: items.arrayFakeDataImages[indexPath.item])
         
         return cell
     }
-    
-    
 }
 
-//MARK: TableView Delegate
-extension NewPostViewController: UITableViewDelegate {
+//MARK: UICollectionView Delegate Flow Layout
+extension NewPostViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.bounds.width / 4.075, height: view.bounds.height / 8)
+    }
+}
+
+//MARK: CollectionView Delegate
+extension NewPostViewController: UICollectionViewDelegate {
     
 }
 

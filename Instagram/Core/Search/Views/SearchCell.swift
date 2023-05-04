@@ -37,12 +37,9 @@ class SearchCell: UICollectionViewCell {
     //MARK: Private property
     private let imageView: UIImageView = {
         let view = UIImageView()
-        view.layer.shadowColor = UIColor.theme.shadow.cgColor
-        view.layer.shadowOffset = CGSize(width: UIConstants.imageShadowOffset, height: UIConstants.imageShadowOffset)
-        view.layer.shadowOpacity = UIConstants.imageShadowOpacity
-        view.layer.shadowRadius = UIConstants.imageShadowRadius
         return view
     }()
+    
     private let icon: UIImageView = {
         let icon = UIImage(systemName: "photo.fill.on.rectangle.fill")?.withRenderingMode(.alwaysTemplate)
         let view = UIImageView(image: icon)

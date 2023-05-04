@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C009F2529FF62E400A79861 /* NewPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C009F2429FF62E400A79861 /* NewPostCell.swift */; };
 		2C0D967A2A0237A10031D680 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D96792A0237A10031D680 /* Color.swift */; };
+		2C6DD9972A036CFA0003069C /* GallerySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DD9962A036CFA0003069C /* GallerySheet.swift */; };
 		2C8287C329FB97220064E58A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8287C229FB97220064E58A /* TextField.swift */; };
 		2CAC43C629FCBE0D0098306F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC43C529FCBE0D0098306F /* SearchCell.swift */; };
 		2CC67D5429F1210800550457 /* FakeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC67D5329F1210800550457 /* FakeDataService.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		2C009F2429FF62E400A79861 /* NewPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCell.swift; sourceTree = "<group>"; };
 		2C0D96792A0237A10031D680 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		2C6DD9962A036CFA0003069C /* GallerySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerySheet.swift; sourceTree = "<group>"; };
 		2C8287C229FB97220064E58A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		2CAC43C529FCBE0D0098306F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		2CC67D5329F1210800550457 /* FakeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDataService.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				2C009F2429FF62E400A79861 /* NewPostCell.swift */,
+				2C6DD9962A036CFA0003069C /* GallerySheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				2CF859FD29FA16C1007ABE2D /* NewPostViewController.swift in Sources */,
 				2CD8D2DE29EF9D1000996964 /* LogoView.swift in Sources */,
 				2C8287C329FB97220064E58A /* TextField.swift in Sources */,
+				2C6DD9972A036CFA0003069C /* GallerySheet.swift in Sources */,
 				2CD8D2D729EF87FD00996964 /* HomeViewController.swift in Sources */,
 				2CF859FF29FA16E7007ABE2D /* ReelsViewController.swift in Sources */,
 				2CD8D2E229EFAC7A00996964 /* StoriesCellInfo.swift in Sources */,

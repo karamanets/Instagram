@@ -15,8 +15,7 @@ class SearchViewController: UIViewController {
         initialize()
     }
     
-    //MARK: Private
-    private let dataService = FakeDataService()
+    //MARK: Private property
     private let text: UITextField = {
         let text = UITextField()
         text.borderStyle = .roundedRect
@@ -31,20 +30,25 @@ class SearchViewController: UIViewController {
         text.setIcon(UIImage(systemName: "magnifyingglass")!)
         return text
     }()
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 5
-        layout.minimumLineSpacing = 5
+        layout.minimumLineSpacing = 2
+        layout.minimumInteritemSpacing = 2
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: String(describing: SearchCell.self))
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
         return collectionView
     }()
+    
+    //MARK: DataService
+    private let dataService = FakeDataService()
 }
 
 //MARK: - Private methods
 private extension SearchViewController {
+    
     func initialize() {
         /// View
         view.backgroundColor = UIColor.theme.background
@@ -85,7 +89,6 @@ extension SearchViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
 }
     
 //MARK: CollectionView Delegate FlowLayout
@@ -94,7 +97,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView:
                         UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width / 3 - 10, height: view.frame.height / 5 - 50)
+        return CGSize(width: view.bounds.width / 3.075, height: view.bounds.height / 6.15)
     }
 }
 
