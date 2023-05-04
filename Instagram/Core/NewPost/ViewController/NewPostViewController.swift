@@ -117,8 +117,6 @@ class NewPostViewController: UIViewController {
     
     //MARK: DataService
     private let items = FakeDataService()
-    
-    
 }
 
 //MARK: - Private methods
@@ -197,7 +195,6 @@ private extension NewPostViewController {
         
         return nextButton
     }
-    
 }
 
 //MARK: Button Actions
@@ -269,5 +266,16 @@ extension NewPostViewController: UICollectionViewDelegateFlowLayout {
 //MARK: CollectionView Delegate
 extension NewPostViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView,  shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        
+        print("\(indexPath.item)")
+        
+        let indexNewImage = (indexPath.item)
+        
+        mainImage.image = items.arrayFakeDataImages[indexNewImage]
+    
+        return true
+      
+    }
 }
 
