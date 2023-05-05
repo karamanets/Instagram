@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C009F2529FF62E400A79861 /* NewPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C009F2429FF62E400A79861 /* NewPostCell.swift */; };
 		2C0D967A2A0237A10031D680 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D96792A0237A10031D680 /* Color.swift */; };
-		2C6DD9972A036CFA0003069C /* GallerySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DD9962A036CFA0003069C /* GallerySheet.swift */; };
+		2C6DD9972A036CFA0003069C /* GallerySheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DD9962A036CFA0003069C /* GallerySheetViewController.swift */; };
 		2C8287C329FB97220064E58A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8287C229FB97220064E58A /* TextField.swift */; };
 		2CAC43C629FCBE0D0098306F /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC43C529FCBE0D0098306F /* SearchCell.swift */; };
 		2CC67D5429F1210800550457 /* FakeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC67D5329F1210800550457 /* FakeDataService.swift */; };
@@ -26,6 +26,7 @@
 		2CD8D2EA29EFB7CF00996964 /* StoriesSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8D2E929EFB7CF00996964 /* StoriesSetCell.swift */; };
 		2CD8D2EC29EFB8A100996964 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8D2EB29EFB8A100996964 /* PostCell.swift */; };
 		2CD8D2EE29EFC2E900996964 /* StoriesItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8D2ED29EFC2E900996964 /* StoriesItemCell.swift */; };
+		2CF385E62A04C0A2006A6CEA /* GallerySheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF385E52A04C0A2006A6CEA /* GallerySheetCell.swift */; };
 		2CF859FB29FA169C007ABE2D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF859FA29FA169C007ABE2D /* SearchViewController.swift */; };
 		2CF859FD29FA16C1007ABE2D /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF859FC29FA16C1007ABE2D /* NewPostViewController.swift */; };
 		2CF859FF29FA16E7007ABE2D /* ReelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF859FE29FA16E7007ABE2D /* ReelsViewController.swift */; };
@@ -35,7 +36,7 @@
 /* Begin PBXFileReference section */
 		2C009F2429FF62E400A79861 /* NewPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCell.swift; sourceTree = "<group>"; };
 		2C0D96792A0237A10031D680 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		2C6DD9962A036CFA0003069C /* GallerySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerySheet.swift; sourceTree = "<group>"; };
+		2C6DD9962A036CFA0003069C /* GallerySheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerySheetViewController.swift; sourceTree = "<group>"; };
 		2C8287C229FB97220064E58A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		2CAC43C529FCBE0D0098306F /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		2CC67D5329F1210800550457 /* FakeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDataService.swift; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 		2CD8D2E929EFB7CF00996964 /* StoriesSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesSetCell.swift; sourceTree = "<group>"; };
 		2CD8D2EB29EFB8A100996964 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		2CD8D2ED29EFC2E900996964 /* StoriesItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesItemCell.swift; sourceTree = "<group>"; };
+		2CF385E52A04C0A2006A6CEA /* GallerySheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerySheetCell.swift; sourceTree = "<group>"; };
 		2CF859FA29FA169C007ABE2D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		2CF859FC29FA16C1007ABE2D /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		2CF859FE29FA16E7007ABE2D /* ReelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelsViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				2CF859FC29FA16C1007ABE2D /* NewPostViewController.swift */,
+				2C6DD9962A036CFA0003069C /* GallerySheetViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -83,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				2C009F2429FF62E400A79861 /* NewPostCell.swift */,
-				2C6DD9962A036CFA0003069C /* GallerySheet.swift */,
+				2CF385E52A04C0A2006A6CEA /* GallerySheetCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -333,7 +336,7 @@
 				2CF859FD29FA16C1007ABE2D /* NewPostViewController.swift in Sources */,
 				2CD8D2DE29EF9D1000996964 /* LogoView.swift in Sources */,
 				2C8287C329FB97220064E58A /* TextField.swift in Sources */,
-				2C6DD9972A036CFA0003069C /* GallerySheet.swift in Sources */,
+				2C6DD9972A036CFA0003069C /* GallerySheetViewController.swift in Sources */,
 				2CD8D2D729EF87FD00996964 /* HomeViewController.swift in Sources */,
 				2CF859FF29FA16E7007ABE2D /* ReelsViewController.swift in Sources */,
 				2CD8D2E229EFAC7A00996964 /* StoriesCellInfo.swift in Sources */,
@@ -342,6 +345,7 @@
 				2CF859FB29FA169C007ABE2D /* SearchViewController.swift in Sources */,
 				2CD8D2EC29EFB8A100996964 /* PostCell.swift in Sources */,
 				2C0D967A2A0237A10031D680 /* Color.swift in Sources */,
+				2CF385E62A04C0A2006A6CEA /* GallerySheetCell.swift in Sources */,
 				2CD8D2E429EFAD8100996964 /* PostItemInfo.swift in Sources */,
 				2CD8D2C329EF874D00996964 /* SceneDelegate.swift in Sources */,
 				2CF85A0129FA16F9007ABE2D /* ProfileViewController.swift in Sources */,

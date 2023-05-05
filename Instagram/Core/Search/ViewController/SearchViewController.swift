@@ -118,4 +118,13 @@ extension SearchViewController: UICollectionViewDataSource {
     }
 }
 
-
+//MARK: CollectionView Delegate
+extension SearchViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let index = indexPath.item
+        
+        print("Selected image number: \(index)")
+    }
+}

@@ -110,7 +110,7 @@ class NewPostViewController: UIViewController {
     }()
     
     private lazy var sheetViewController: UIViewController = {
-       let sheet = GallerySheet(nibName: nil, bundle: nil)
+       let sheet = GallerySheetViewController(nibName: nil, bundle: nil)
         sheet.modalPresentationStyle = .pageSheet
         return sheet
     }()
@@ -130,6 +130,8 @@ private extension NewPostViewController {
         navigationItem.rightBarButtonItem = makeRightBarItem()
         /// Methods
         makeTabBarIcon()
+        
+        self.isModalInPresentation = true
         
         /// Main Image
         view.addSubview(mainImage)
@@ -201,7 +203,10 @@ private extension NewPostViewController {
 private extension NewPostViewController {
     
     @objc func dismissButtonAction(_ sender: UIButton) {
-        print("Add new Post")
+        
+        guard let _ = self.tabBarController?.viewControllers else { return }
+        
+        tabBarController?.selectedIndex = 0
     }
     
     @objc func nextButtonAction(_ sender: UIButton) {
@@ -225,7 +230,7 @@ private extension NewPostViewController {
     
     func selectedButtonAction() -> UIAction {
         let action = UIAction { _ in
-            print("Selected images")
+            print("SELECT MULTIPLE")
         }
         return action
     }
@@ -268,7 +273,7 @@ extension NewPostViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView,  shouldSelectItemAt indexPath: IndexPath) -> Bool {
         
-        print("\(indexPath.item)")
+        print("Selected image number:\(indexPath.item)")
         
         let indexNewImage = (indexPath.item)
         
@@ -278,4 +283,5 @@ extension NewPostViewController: UICollectionViewDelegate {
       
     }
 }
+
 
