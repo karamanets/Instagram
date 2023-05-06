@@ -125,7 +125,7 @@ final class PostCell: UITableViewCell {
     }()
 }
 
-//MARK: Private Methods
+//MARK: - Private Methods
 private extension PostCell {
     
     func initialize() {
@@ -213,7 +213,12 @@ private extension PostCell {
         commentLabel.attributedText = attributeString
     }
     
-    //MARK: Button Actions
+}
+
+//MARK: Button Actions
+private extension PostCell {
+    
+    /// Button actions
     func buttonsAction() {
         likeButton.addTarget(self, action: #selector(likeButtonAction(_:)), for: .touchUpInside)
         commentButton.addTarget(self, action: #selector(commentButtonAction(_:)), for: .touchUpInside)
@@ -222,19 +227,18 @@ private extension PostCell {
     }
     
     @objc func likeButtonAction(_ sender: UIButton) {
-        print("Like")
+        print("[⚠️] Like button pressed")
     }
     
     @objc func commentButtonAction(_ sender: UIButton) {
-        print("Add comment")
+        print("[⚠️] Add comment pressed")
     }
     
     @objc func sharedButtonAction(_ sender: UIButton) {
-        print("Shared")
+        print("[⚠️] Shared button pressed")
     }
     
     @objc func bookMarkButtonAction(_ sender: UIButton) {
-        print("Add to bookMark")
+        print("[⚠️] Add to bookMark pressed")
     }
 }
-

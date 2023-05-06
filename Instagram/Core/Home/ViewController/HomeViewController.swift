@@ -139,9 +139,9 @@ private extension HomeViewController {
     
     /// Right Bar Button Actions
     @objc func addBarAction() {
-        print("Add some")
+        print("[⚠️] Add button pressed")
     }
     @objc func directButtonAction() {
-        print("Hello")
+        print("[⚠️] Direct button pressed")
     }
 }

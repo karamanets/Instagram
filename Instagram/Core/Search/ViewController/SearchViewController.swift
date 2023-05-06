@@ -125,6 +125,6 @@ extension SearchViewController: UICollectionViewDelegate {
         
         let index = indexPath.item
         
-        print("Selected image number: \(index)")
+        print("[⚠️] Selected image number: \(index)")
     }
 }

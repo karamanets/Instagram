@@ -95,7 +95,7 @@ extension GallerySheetViewController: UITableViewDelegate {
         
         let index = indexPath.section
         
-        print("Selected item: \(items[index])")
+        print("[⚠️] Selected item: \(items[index])")
         
         dismiss(animated: true)
     }

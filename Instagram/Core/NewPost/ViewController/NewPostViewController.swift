@@ -210,7 +210,7 @@ private extension NewPostViewController {
     }
     
     @objc func nextButtonAction(_ sender: UIButton) {
-        print("Next")
+        print("[⚠️] Next")
     }
     
     func galleryButtonAction() -> UIAction {
@@ -230,14 +230,14 @@ private extension NewPostViewController {
     
     func selectedButtonAction() -> UIAction {
         let action = UIAction { _ in
-            print("SELECT MULTIPLE")
+            print("[⚠️] SELECT MULTIPLE")
         }
         return action
     }
     
     func photoButtonAction() -> UIAction {
         let action = UIAction { _ in
-            print("Photo Button add")
+            print("[⚠️] Photo Button add")
         }
         return action
     }
@@ -273,7 +273,7 @@ extension NewPostViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView,  shouldSelectItemAt indexPath: IndexPath) -> Bool {
         
-        print("Selected image number:\(indexPath.item)")
+        print("[⚠️] Selected image number:\(indexPath.item)")
         
         let indexNewImage = (indexPath.item)
         
