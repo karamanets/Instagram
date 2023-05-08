@@ -73,6 +73,7 @@ final class PostCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.tintColor = UIColor.theme.icons
+        button.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
         return button
     }()
     
