@@ -35,7 +35,6 @@ final class PostCell: UITableViewCell {
     private enum UiConstants {
         static let userImageSize: CGFloat = 30
         static let contentInset: CGFloat = 12
-        static let userImageTopInset: CGFloat = 6
         static let userNameStackOffset: CGFloat = 12
         static let postImageToUserImageOffset: CGFloat = 6
         static let actionStackHeight: CGFloat = 24
@@ -50,26 +49,26 @@ final class PostCell: UITableViewCell {
     }
     
     //MARK: Private Property
-    private let userImage: UIImageView = {
+    private lazy var userImage: UIImageView = {
        let view = UIImageView()
         view.layer.cornerRadius = UiConstants.userImageSize / 2
         view.clipsToBounds = true
         return view
     }()
     
-    private let userName: UILabel = {
+    private lazy var userName: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UiConstants.userNameFontSize, weight: .bold)
         return label
     }()
     
-    private let subtitle: UILabel = {
+    private lazy var subtitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UiConstants.subtitleFontSize, weight: .light)
         return label
     }()
     
-    private let optionsButton: UIButton = {
+    private lazy var optionsButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.tintColor = UIColor.theme.icons
@@ -77,13 +76,13 @@ final class PostCell: UITableViewCell {
         return button
     }()
     
-    private let postImage: UIImageView = {
+    private lazy var postImage: UIImageView = {
        let view = UIImageView()
         view.image = UIImage(named: "LogoPost")
         return view
     }()
     
-    private let likeButton: UIButton = {
+    private lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = UIColor.theme.icons
         button.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -91,34 +90,34 @@ final class PostCell: UITableViewCell {
         return button
     }()
     
-    private let commentButton: UIButton = {
+    private lazy var commentButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = UIColor.theme.icons
         button.setImage(UIImage(systemName: "bubble.right"), for: .normal)
         return button
     }()
     
-    private let sharedButton: UIButton = {
+    private lazy var sharedButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = UIColor.theme.icons
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
         return button
     }()
     
-    private let likesLabel: UILabel = {
+    private lazy var likesLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UiConstants.subtitleFontSize, weight: .bold)
         return label
     }()
     
-    private let bookMarkButton: UIButton = {
+    private lazy var bookMarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = UIColor.theme.icons
         button.setImage(UIImage(systemName: "bookmark"), for: .normal)
         return button
     }()
     
-    private let commentLabel: UILabel = {
+    private lazy var commentLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UiConstants.commentLabelFont)
         label.numberOfLines = 5
@@ -138,7 +137,7 @@ private extension PostCell {
         contentView.addSubview(userImage)
         userImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(UiConstants.contentInset)
-            make.top.equalToSuperview().inset(UiConstants.userImageTopInset)
+            make.top.equalToSuperview()
             make.size.equalTo(UiConstants.userImageSize)
         }
         

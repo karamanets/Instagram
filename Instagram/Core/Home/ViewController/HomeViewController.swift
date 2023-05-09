@@ -59,29 +59,6 @@ private extension HomeViewController {
     }
 }
 
-//MARK: - TableView DataSource
-extension HomeViewController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.row]
-        switch item {
-        case .stories(let info):
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: StoriesSetCell.self), for: indexPath) as! StoriesSetCell
-            cell.configure(with: info)
-            return cell
-            
-        case .post(let post):
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
-            cell.configure(with: post)
-            return cell
-        }
-    }
-}
-
 //MARK: - Bar Items
 private extension HomeViewController {
     
@@ -145,3 +122,28 @@ private extension HomeViewController {
         print("[⚠️] Direct button pressed")
     }
 }
+
+//MARK: - TableView DataSource
+extension HomeViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = items[indexPath.row]
+        switch item {
+        case .stories(let info):
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: StoriesSetCell.self), for: indexPath) as! StoriesSetCell
+            cell.configure(with: info)
+            return cell
+            
+        case .post(let post):
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostCell.self), for: indexPath) as! PostCell
+            cell.configure(with: post)
+            return cell
+        }
+    }
+}
+
+

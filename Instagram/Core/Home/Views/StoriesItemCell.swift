@@ -32,39 +32,40 @@ final class StoriesItemCell: UICollectionViewCell {
     
     //MARK: Private constants
     private enum UIConstants {
-        static let imageSize: CGFloat = 60
+        static let imageSize: CGFloat = 80
         static let imageInset: CGFloat = 6
-        static let labelInset: CGFloat = 6
         static let labelOffset: CGFloat = 6
         static let userTextFont: CGFloat = 10
         static let buttonSize: CGFloat = 20
-        static let circleImageSize: CGFloat = 75
+        static let circleImageSize: CGFloat = 83
     }
     
     //MARK: Private property
     private var imageView: UIImageView = {
        let view = UIImageView()
-        view.layer.cornerRadius = UIConstants.imageSize / 2
         view.clipsToBounds = true
+        view.layer.cornerRadius = UIConstants.imageSize / 2
         return view
     }()
-    private var userLabel: UILabel = {
-       let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: UIConstants.userTextFont)
-        label.textAlignment = .center
-        return label
-    }()
-    private var addButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "LogoPlus"), for: .normal)
-        return button
-    }()
+    
     private var circleImage: UIImageView = {
        let view = UIImageView()
         view.image = UIImage(named: "LogoCircle")
         return view
     }()
     
+    private var userLabel: UILabel = {
+       let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: UIConstants.userTextFont)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private var addButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "LogoPlus"), for: .normal)
+        return button
+    }()
 }
 
 //MARK: Private methods
@@ -73,14 +74,15 @@ private extension StoriesItemCell {
     func initialize() {
         contentView.addSubview(imageView)
         imageView.snp.makeConstraints { make in
-            make.size.equalTo(UIConstants.imageSize)
-            make.leading.top.trailing.equalToSuperview().inset(UIConstants.imageInset)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(UIConstants.imageInset)
+            make.width.height.equalTo(UIConstants.imageSize)
         }
         
         contentView.addSubview(userLabel)
         userLabel.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview().inset(UIConstants.labelInset)
             make.top.equalTo(imageView.snp.bottom).offset(UIConstants.labelOffset)
+            make.centerX.equalTo(imageView.snp.centerX)
         }
         
         contentView.addSubview(addButton)
@@ -91,7 +93,7 @@ private extension StoriesItemCell {
         
         contentView.addSubview(circleImage)
         circleImage.snp.makeConstraints { make in
-            make.center.equalTo(imageView)
+            make.center.equalTo(imageView.snp.center)
             make.size.equalTo(UIConstants.circleImageSize)
         }
     }

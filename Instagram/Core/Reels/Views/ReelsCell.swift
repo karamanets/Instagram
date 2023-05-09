@@ -27,14 +27,14 @@ final class ReelsCell: UICollectionViewCell {
     
     //MARK: UIConstant
     private enum UIConstant {
-        static let inset: CGFloat = 12
+        static let inset: CGFloat = 15
         static let topOfLeftIcons = 35
         static let reelsCornerRadius: CGFloat = 15
         static let reelsLabelFont: CGFloat = 26
         static let reelsIconWidth: CGFloat = 35
         static let reelsIconHeight: CGFloat = 30
         static let iconsScale: CGFloat = 1.2
-        static let spacingRightIconsToNumbers: CGFloat = 5
+        static let spacingRightIconsToNumbers: CGFloat = 4
         static let iconsNumbersFont: CGFloat = 18
         static let iconToLabelSpacing: CGFloat = 2
         static let rightImageSize: CGFloat = 40
@@ -231,48 +231,6 @@ private extension ReelsCell {
             make.width.equalTo(UIConstant.reelsIconWidth)
         }
         
-        addSubview(likesIconButton)
-        likesIconButton.snp.makeConstraints { make in
-            make.trailing.equalTo(UIConstant.inset).inset(UIConstant.inset)
-            make.top.equalTo(snp.centerY).offset(UIConstant.topOfLeftIcons)
-        }
-        
-        addSubview(numberOfLikes)
-        numberOfLikes.snp.makeConstraints { make in
-            make.top.equalTo(likesIconButton.snp.bottom).offset(UIConstant.spacingRightIconsToNumbers)
-            make.centerX.equalTo(likesIconButton.snp.centerX)
-        }
-        
-        addSubview(commentIconButton)
-        commentIconButton.snp.makeConstraints { make in
-            make.top.equalTo(numberOfLikes.snp.bottom).offset(UIConstant.inset)
-            make.centerX.equalTo(likesIconButton.snp.centerX)
-        }
-        
-        addSubview(numberOfComments)
-        numberOfComments.snp.makeConstraints { make in
-            make.top.equalTo(commentIconButton.snp.bottom).offset(UIConstant.spacingRightIconsToNumbers)
-            make.centerX.equalTo(likesIconButton.snp.centerX)
-        }
-        
-        addSubview(sharedButton)
-        sharedButton.snp.makeConstraints { make in
-            make.top.equalTo(numberOfComments.snp.bottom).offset(UIConstant.inset)
-            make.centerX.equalTo(likesIconButton.snp.centerX)
-        }
-        
-        addSubview(numberOfShared)
-        numberOfShared.snp.makeConstraints { make in
-            make.top.equalTo(sharedButton.snp.bottom).offset(UIConstant.spacingRightIconsToNumbers)
-            make.centerX.equalTo(likesIconButton.snp.centerX)
-        }
-        
-        addSubview(menuButton)
-        menuButton.snp.makeConstraints { make in
-            make.top.equalTo(numberOfShared.snp.bottom).offset(UIConstant.inset)
-            make.centerX.equalTo(likesIconButton.snp.centerX)
-        }
-        
         addSubview(musicIcon)
         musicIcon.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-UIConstant.inset)
@@ -281,9 +239,51 @@ private extension ReelsCell {
         
         addSubview(rightUserImage)
         rightUserImage.snp.makeConstraints { make in
-            make.centerX.equalTo(likesIconButton.snp.centerX)
             make.width.height.equalTo(UIConstant.rightImageSize)
             make.bottom.equalTo(musicIcon.snp.bottom)
+            make.trailing.equalToSuperview().inset(UIConstant.inset)
+        }
+        
+        addSubview(menuButton)
+        menuButton.snp.makeConstraints { make in
+            make.bottom.equalTo(rightUserImage.snp.top).offset(-UIConstant.inset)
+            make.centerX.equalTo(rightUserImage.snp.centerX)
+        }
+        
+        addSubview(numberOfShared)
+        numberOfShared.snp.makeConstraints { make in
+            make.bottom.equalTo(menuButton.snp.top).offset(-UIConstant.inset)
+            make.centerX.equalTo(rightUserImage.snp.centerX)
+        }
+        
+        addSubview(sharedButton)
+        sharedButton.snp.makeConstraints { make in
+            make.bottom.equalTo(numberOfShared.snp.top).offset(-UIConstant.spacingRightIconsToNumbers)
+            make.centerX.equalTo(rightUserImage.snp.centerX)
+        }
+        
+        addSubview(numberOfComments)
+        numberOfComments.snp.makeConstraints { make in
+            make.bottom.equalTo(sharedButton.snp.top).offset(-UIConstant.inset)
+            make.centerX.equalTo(rightUserImage.snp.centerX)
+        }
+        
+        addSubview(commentIconButton)
+        commentIconButton.snp.makeConstraints { make in
+            make.bottom.equalTo(numberOfComments.snp.top).offset(-UIConstant.spacingRightIconsToNumbers)
+            make.centerX.equalTo(rightUserImage.snp.centerX)
+        }
+        
+        addSubview(numberOfLikes)
+        numberOfLikes.snp.makeConstraints { make in
+            make.bottom.equalTo(commentIconButton.snp.top).offset(-UIConstant.inset)
+            make.centerX.equalTo(rightUserImage.snp.centerX)
+        }
+        
+        addSubview(likesIconButton)
+        likesIconButton.snp.makeConstraints { make in
+            make.bottom.equalTo(numberOfLikes.snp.top).inset(-UIConstant.spacingRightIconsToNumbers)
+            make.centerX.equalTo(rightUserImage.snp.centerX)
         }
         
         addSubview(musicLabel)
