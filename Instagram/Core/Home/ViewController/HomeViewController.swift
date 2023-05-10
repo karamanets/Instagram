@@ -44,6 +44,7 @@ class HomeViewController: UIViewController {
 
 //MARK: - Private methods
 private extension HomeViewController {
+    
     func initialize() {
         /// View
         view.backgroundColor = UIColor.theme.background

@@ -1,5 +1,5 @@
 //
-//  SearchCell.swift
+//  SearchCollectionCell.swift
 //  Instagram
 //
 //  Created by Alex Karamanets on 29.04.2023.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SearchCell: UICollectionViewCell {
+class SearchCollectionCell: UICollectionViewCell {
     
     //MARK: Public
     func configure(with image: UIImage) {
@@ -20,6 +20,7 @@ class SearchCell: UICollectionViewCell {
         super.init(frame: frame)
         initialize()
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -29,9 +30,6 @@ class SearchCell: UICollectionViewCell {
         static let iconTop: CGFloat = 10
         static let iconTrailing: CGFloat = -10
         static let iconSize: CGFloat = 20
-        static let imageShadowOffset: CGFloat = 2.0
-        static let imageShadowOpacity: Float = 0.5
-        static let imageShadowRadius: CGFloat = 3
     }
     
     //MARK: Private property
@@ -49,7 +47,7 @@ class SearchCell: UICollectionViewCell {
 }
 
 //MARK: - Private methods
-private extension SearchCell {
+private extension SearchCollectionCell {
     func initialize() {
 
         addSubview(imageView)

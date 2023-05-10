@@ -10,8 +10,6 @@ import SnapKit
 
 final class StoriesSetCell: UITableViewCell {
     
-    //private var collectionView2 = UICollectionView()
-    
     //MARK: Public method
     func configure(with info: StoriesCellInfo) {
         self.items = info
@@ -34,7 +32,7 @@ final class StoriesSetCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .null, collectionViewLayout: layout)
         
         collectionView.register(StoriesItemCell.self, forCellWithReuseIdentifier: String(describing: StoriesItemCell.self))
         collectionView.showsHorizontalScrollIndicator = false
@@ -50,6 +48,8 @@ final class StoriesSetCell: UITableViewCell {
 private extension StoriesSetCell {
     
     func initialize() {
+        ///View
+        contentView.backgroundColor = UIColor.theme.background
         /// CollectionView
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -92,8 +92,6 @@ extension StoriesSetCell: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: width, height: height)
     }
-    
-    
 }
 
 

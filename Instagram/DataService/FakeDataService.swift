@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct FakeDataService {
+@MainActor
+class FakeDataService {
     
     //MARK: Public
     var arrayFakeDataTypeStoryAndPostForHomeVC: [InstagramItemType] = []
@@ -20,8 +21,14 @@ struct FakeDataService {
         setUpArrayOfImagesForSearchVC()
     }
     
-    //MARK: Private methods
-    private mutating func setUpDataPost() {
+    //MARK: Methods
+    func setUpRandomImage() -> UIImage {
+        let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"].randomElement()
+        let image = UIImage(named: imagesName ?? "")
+        return image ?? UIImage()
+    }
+    
+    private func setUpDataPost() {
         
         var tempData: [InstagramItemType] = []
         
@@ -89,13 +96,7 @@ struct FakeDataService {
         return like
     }
     
-    func setUpRandomImage() -> UIImage {
-        let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"].randomElement()
-        let image = UIImage(named: imagesName ?? "")
-        return image ?? UIImage()
-    }
-    
-    private mutating func setUpArrayOfImagesForSearchVC() {
+    private func setUpArrayOfImagesForSearchVC() {
         var tempImageArray: [UIImage] = []
         
         for _ in 1...100 {

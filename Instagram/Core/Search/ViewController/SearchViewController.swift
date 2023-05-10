@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SearchViewController: UIViewController {
     
@@ -15,7 +16,7 @@ class SearchViewController: UIViewController {
         initialize()
     }
     
-    //MARK: Private property
+    //MARK: Private Property
     private let text: UITextField = {
         let text = UITextField()
         text.borderStyle = .roundedRect
@@ -36,7 +37,7 @@ class SearchViewController: UIViewController {
         layout.minimumLineSpacing = 2
         layout.minimumInteritemSpacing = 2
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(SearchCell.self, forCellWithReuseIdentifier: String(describing: SearchCell.self))
+        collectionView.register(SearchCollectionCell.self, forCellWithReuseIdentifier: String(describing: SearchCollectionCell.self))
         collectionView.showsVerticalScrollIndicator = false
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
         return collectionView
@@ -53,6 +54,9 @@ private extension SearchViewController {
         /// View
         view.backgroundColor = UIColor.theme.background
         
+        /// Methods
+        makeBarBottomIcon()
+        
         /// Elements Constraints
         text.delegate = self
         view.addSubview(text)
@@ -68,9 +72,6 @@ private extension SearchViewController {
             make.top.equalTo(text.snp.bottom).offset(10)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
-        /// Methods
-        makeBarBottomIcon()
     }
     
     /// Bar bottom image title tag
@@ -83,48 +84,53 @@ private extension SearchViewController {
 
 //MARK: TextField Delegate
 extension SearchViewController: UITextFieldDelegate {
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.text = ""
         textField.resignFirstResponder()
         return true
     }
 }
-    
+
 //MARK: CollectionView Delegate FlowLayout
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView:
                         UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.bounds.width / 3.075, height: view.bounds.height / 6.15)
+        let width = view.bounds.width / 3.06
+        
+        let height = view.bounds.height / 6.8
+        
+        return CGSize(width: width, height: height)
     }
 }
 
 //MARK: CollectionView DataSource
 extension SearchViewController: UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataService.arrayFakeDataImages.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SearchCell.self), for: indexPath) as! SearchCell
-        
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                                                        String(describing: SearchCollectionCell.self), for: indexPath) as! SearchCollectionCell
+
         cell.configure(with: dataService.arrayFakeDataImages[indexPath.item])
-        
+
         return cell
     }
 }
 
 //MARK: CollectionView Delegate
 extension SearchViewController: UICollectionViewDelegate {
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         let index = indexPath.item
-        
+
         print("[⚠️] Selected image number: \(index)")
     }
 }

@@ -19,8 +19,13 @@ class ProfileViewController: UIViewController {
 private extension ProfileViewController {
     
     func initialize() {
+        ///View
         view.backgroundColor = .systemGroupedBackground
+        ///Methods
         makeBarBottomIcon()
+        
+        ///Elements
+        
     }
     
     /// Bar bottom image title tag
