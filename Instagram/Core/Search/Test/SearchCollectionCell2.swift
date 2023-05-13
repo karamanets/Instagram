@@ -1,14 +1,13 @@
 //
-//  SearchCollectionCell.swift
+//  SearchCollectionCell2.swift
 //  Instagram
 //
-//  Created by Alex Karamanets on 29.04.2023.
+//  Created by Alex Karamanets on 13/05/2023.
 //
 
 import UIKit
-import SnapKit
 
-class SearchCollectionCell: UICollectionViewCell {
+class SearchCollectionCell2: UICollectionViewCell {
     
     //MARK: Public
     func configure(with image: UIImage) {
@@ -50,7 +49,7 @@ class SearchCollectionCell: UICollectionViewCell {
 }
 
 //MARK: - Private methods
-private extension SearchCollectionCell {
+private extension SearchCollectionCell2 {
     func initialize() {
         
         contentView.layer.shadowColor = UIColor.black.cgColor

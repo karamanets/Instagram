@@ -8,12 +8,14 @@
 import UIKit
 
 @MainActor
-class FakeDataService {
+final class FakeDataService {
+    
+    static let shared = FakeDataService()
     
     //MARK: Public
-    var arrayFakeDataTypeStoryAndPostForHomeVC: [InstagramItemType] = []
+    var arrayStoryAndPostForHomeVC: [InstagramItemType] = []
     
-    var arrayFakeDataImages: [UIImage] = []
+    var arrayImages: [UIImage] = []
     
     //MARK: Init
     init() {
@@ -45,7 +47,7 @@ class FakeDataService {
         
         tempData.insert(.stories(setUpDataStoriesArray()), at: 0)
         
-        arrayFakeDataTypeStoryAndPostForHomeVC = tempData
+        arrayStoryAndPostForHomeVC = tempData
     }
     
     private func setUpDataStoriesArray() -> [StoriesItemCellInfo] {
@@ -102,7 +104,7 @@ class FakeDataService {
         for _ in 1...100 {
             tempImageArray.append(setUpRandomImage())
         }
-        arrayFakeDataImages = tempImageArray
+        arrayImages = tempImageArray
     }
     
     private func setUpRandomComment() -> String {

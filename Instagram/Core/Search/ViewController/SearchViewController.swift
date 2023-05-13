@@ -44,7 +44,7 @@ class SearchViewController: UIViewController {
     }()
     
     //MARK: DataService
-    private let dataService = FakeDataService()
+    private let dataService: [UIImage] = FakeDataService.shared.arrayImages
 }
 
 //MARK: - Private methods
@@ -110,7 +110,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataService.arrayFakeDataImages.count
+        return dataService.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -118,7 +118,7 @@ extension SearchViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
                                                         String(describing: SearchCollectionCell.self), for: indexPath) as! SearchCollectionCell
 
-        cell.configure(with: dataService.arrayFakeDataImages[indexPath.item])
+        cell.configure(with: dataService[indexPath.item])
 
         return cell
     }

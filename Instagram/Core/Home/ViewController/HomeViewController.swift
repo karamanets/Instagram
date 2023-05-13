@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     //MARK: Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
-        items = dataService.arrayFakeDataTypeStoryAndPostForHomeVC
+        items = dataService.arrayStoryAndPostForHomeVC
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

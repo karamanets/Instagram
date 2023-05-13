@@ -32,9 +32,12 @@ class NewPostCell: UICollectionViewCell {
     //MARK: Private Property
     private let imageView: UIImageView = {
        let view = UIImageView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 3
         return view
     }()
     
+    private let shadow = UIView()
 }
 
 //MARK: - Private methods
@@ -43,7 +46,13 @@ private extension NewPostCell {
     func initialize() {
         /// View
         backgroundColor = UIColor.theme.background
-        addSubview(imageView)
+        
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowRadius = 1
+        contentView.layer.shadowOpacity = 0.2
+        contentView.layer.shadowOffset = .zero
+        
+        contentView.addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

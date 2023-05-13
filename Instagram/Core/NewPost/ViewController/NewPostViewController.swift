@@ -104,8 +104,11 @@ class NewPostViewController: UIViewController {
         layout.minimumLineSpacing = 2
         layout.minimumInteritemSpacing = 2
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.register(NewPostCell.self, forCellWithReuseIdentifier: String(describing: NewPostCell.self))
         collection.showsVerticalScrollIndicator = false
+        collection.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        
+        collection.register(NewPostCell.self, forCellWithReuseIdentifier: String(describing: NewPostCell.self))
+        
         return collection
     }()
     
@@ -116,7 +119,7 @@ class NewPostViewController: UIViewController {
     }()
     
     //MARK: DataService
-    private let items = FakeDataService()
+    private let items: [UIImage] = FakeDataService.shared.arrayImages
 }
 
 //MARK: - Private methods
@@ -247,14 +250,14 @@ private extension NewPostViewController {
 extension NewPostViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.arrayFakeDataImages.count
+        return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: NewPostCell.self), for: indexPath) as! NewPostCell
         
-        cell.configure(with: items.arrayFakeDataImages[indexPath.item])
+        cell.configure(with: items[indexPath.item])
         
         return cell
     }
@@ -263,8 +266,15 @@ extension NewPostViewController: UICollectionViewDataSource {
 //MARK: UICollectionView Delegate Flow Layout
 extension NewPostViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.bounds.width / 4.075, height: view.bounds.height / 8)
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = view.bounds.width / 4.1
+        
+        let height = view.bounds.height / 8.2
+        
+        return CGSize(width: width, height: height)
     }
 }
 
@@ -277,7 +287,7 @@ extension NewPostViewController: UICollectionViewDelegate {
         
         let indexNewImage = (indexPath.item)
         
-        mainImage.image = items.arrayFakeDataImages[indexNewImage]
+        mainImage.image = items[indexNewImage]
     
         return true
       
