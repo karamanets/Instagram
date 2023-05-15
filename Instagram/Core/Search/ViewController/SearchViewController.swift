@@ -1,75 +1,64 @@
 //
-//  SearchViewController.swift
+//  SearchView.swift
 //  Instagram
 //
-//  Created by Alex Karamanets on 27.04.2023.
+//  Created by Alex Karamanets on 10/05/2023.
 //
-
 import UIKit
 import SnapKit
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     
-    //MARK: Life Cycle
+    //MARK: Init
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
     
-    //MARK: Private Property
-    private let text: UITextField = {
-        let text = UITextField()
-        text.borderStyle = .roundedRect
-        text.font = UIFont.systemFont(ofSize: 22, weight: .light, width: .standard)
-        text.placeholder = "Search"
-        text.clearButtonMode = .always
-        text.keyboardType = .asciiCapable
-        text.enablesReturnKeyAutomatically = true
-        text.spellCheckingType = .yes
-        text.smartInsertDeleteType = .yes
-        text.tintColor = UIColor.theme.textFieldBackground
-        text.setIcon(UIImage(systemName: "magnifyingglass")!)
-        return text
-    }()
-    
-    private let collectionView: UICollectionView = {
+    //MARK: Private properties
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 2
         layout.minimumInteritemSpacing = 2
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(SearchCollectionCell.self, forCellWithReuseIdentifier: String(describing: SearchCollectionCell.self))
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
+        collectionView.alwaysBounceVertical = true
+        
+        collectionView.register(SearchCollectionCell.self,
+                                forCellWithReuseIdentifier: String(describing: SearchCollectionCell.self))
+        
+        collectionView.register(HeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: String(describing: HeaderView.self))
+       
         return collectionView
     }()
     
-    //MARK: DataService
-    private let dataService: [UIImage] = FakeDataService.shared.arrayImages
+    /// DataServer
+    private var items: [UIImage] = FakeDataService.shared.arrayImages
 }
 
 //MARK: - Private methods
 private extension SearchViewController {
     
     func initialize() {
-        /// View
+        ///View
         view.backgroundColor = UIColor.theme.background
         
-        /// Methods
+        ///Methods
         makeBarBottomIcon()
         
-        /// Elements Constraints
-        text.delegate = self
-        view.addSubview(text)
-        text.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(80)
-            make.leading.trailing.equalToSuperview().inset(16)
-        }
+        /// CollectionView
+        collectionView.dataSource = self
+        collectionView.delegate = self
         
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
+        /// Constraints
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(text.snp.bottom).offset(10)
+            make.top.equalToSuperview()
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -82,45 +71,57 @@ private extension SearchViewController {
     }
 }
 
-//MARK: TextField Delegate
-extension SearchViewController: UITextFieldDelegate {
+//MARK: CollectionView DataSource
+extension SearchViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                                                        String(describing: SearchCollectionCell.self), for: indexPath) as! SearchCollectionCell
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.text = ""
-        textField.resignFirstResponder()
-        return true
+        
+        cell.configure(with: items[indexPath.item])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath ) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                                     withReuseIdentifier: String(describing: HeaderView.self),
+                                                                     for: indexPath)
+        
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        let width = view.frame.width
+        let height = view.frame.width / 6
+        
+        return CGSize(width: width, height: height)
     }
 }
 
 //MARK: CollectionView Delegate FlowLayout
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(_ collectionView:
-                        UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = view.bounds.width / 3.06
         
         let height = view.bounds.height / 6.8
         
         return CGSize(width: width, height: height)
-    }
-}
-
-//MARK: CollectionView DataSource
-extension SearchViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataService.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-                                                        String(describing: SearchCollectionCell.self), for: indexPath) as! SearchCollectionCell
-
-        cell.configure(with: dataService[indexPath.item])
-
-        return cell
     }
 }
 
@@ -134,3 +135,4 @@ extension SearchViewController: UICollectionViewDelegate {
         print("[⚠️] Selected image number: \(index)")
     }
 }
+

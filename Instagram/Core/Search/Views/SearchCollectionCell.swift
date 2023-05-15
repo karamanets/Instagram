@@ -1,12 +1,11 @@
 //
-//  SearchCollectionCell.swift
+//  SearchCollectionCell2.swift
 //  Instagram
 //
-//  Created by Alex Karamanets on 29.04.2023.
+//  Created by Alex Karamanets on 13/05/2023.
 //
 
 import UIKit
-import SnapKit
 
 class SearchCollectionCell: UICollectionViewCell {
     
@@ -30,13 +29,16 @@ class SearchCollectionCell: UICollectionViewCell {
         static let iconTop: CGFloat = 10
         static let iconTrailing: CGFloat = -10
         static let iconSize: CGFloat = 20
+        static let iconCornerRadius: CGFloat = 3
+        static let shadowRadiusCell: CGFloat = 1
+        static let shadowOpacityCell: Float = 0.2
     }
     
     //MARK: Private property
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.clipsToBounds = true
-        view.layer.cornerRadius = 3
+        view.layer.cornerRadius = UIConstants.iconCornerRadius
         return view
     }()
     
@@ -51,11 +53,12 @@ class SearchCollectionCell: UICollectionViewCell {
 
 //MARK: - Private methods
 private extension SearchCollectionCell {
+    
     func initialize() {
         
         contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowRadius = 1
-        contentView.layer.shadowOpacity = 0.2
+        contentView.layer.shadowRadius = UIConstants.shadowRadiusCell
+        contentView.layer.shadowOpacity = UIConstants.shadowOpacityCell
         contentView.layer.shadowOffset = .zero
     
         contentView.addSubview(imageView)
