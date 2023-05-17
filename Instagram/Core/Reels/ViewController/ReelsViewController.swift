@@ -60,7 +60,7 @@ private extension ReelsViewController {
     /// Bar bottom image title tag
     func makeBarBottomIcon() {
         let image = UIImage(systemName: "play.rectangle.on.rectangle.fill")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
-        let tabItem = UITabBarItem(title: "", image: image , tag: 2)
+        let tabItem = UITabBarItem(title: "", image: image , tag: 3)
         self.tabBarItem = tabItem
     }
 }

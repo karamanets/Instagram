@@ -17,17 +17,26 @@ final class FakeDataService {
     
     var arrayImages: [UIImage] = []
     
+    var userImage: UIImage? = nil
+    
     //MARK: Init
     init() {
+        userSetUp()
         setUpDataPost()
         setUpArrayOfImagesForSearchVC()
     }
     
     //MARK: Methods
+    
     func setUpRandomImage() -> UIImage {
         let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"].randomElement()
         let image = UIImage(named: imagesName ?? "")
         return image ?? UIImage()
+    }
+    
+    private func userSetUp() {
+        let userImage = setUpRandomImage()
+        self.userImage = userImage
     }
     
     private func setUpDataPost() {
@@ -58,6 +67,8 @@ final class FakeDataService {
                                               userName: setUpRandomName(),
                                               isAddButtonVisible: true,
                                               isNewStory: setUpRandomIsNew())
+        
+        
         tempArray.append(userStories)
 
         for _ in 1...100 {
