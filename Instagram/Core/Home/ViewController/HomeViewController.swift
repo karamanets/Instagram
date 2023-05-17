@@ -26,6 +26,12 @@ class HomeViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: UiConstants
+    private enum UiConstants {
+        static let barItemHeight:CGFloat = 30
+        static let barItemWidth: CGFloat = 34
+    }
+    
     //MARK: Private properties
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -76,7 +82,12 @@ private extension HomeViewController {
     
     /// Bar bottom image title tag
     func makeBarBottomIcon() {
-        let image = UIImage(systemName: "homekit")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
+        let size = CGSize(width: UiConstants.barItemWidth, height: UiConstants.barItemHeight)
+        
+        let icon = UIImage(systemName: "homekit")
+        
+        let image = icon?.imageResized(to: size).withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
+        
         let tabItem = UITabBarItem(title: "", image: image , tag: 0)
         self.tabBarItem = tabItem
     }

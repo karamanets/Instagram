@@ -20,10 +20,10 @@ final class CustomTextField: UITextField {
         super.init(frame: .zero)
         
         placeholder = placeholderText
-        backgroundColor = UIColor.theme.iconBackground
+        backgroundColor = UIColor.theme.searchTextFieldBackground
         layer.borderColor = UIColor.theme.iconStroke.cgColor
         layer.cornerRadius = 15
-        layer.borderWidth = 1.0
+        layer.borderWidth = 0.3
         font = UIFont.systemFont(ofSize: 22, weight: .light, width: .standard)
         tintColor = UIColor.theme.icons
         clearButtonMode = .always

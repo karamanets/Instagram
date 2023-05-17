@@ -17,8 +17,9 @@ class NewPostViewController: UIViewController {
     }
     
     //MARK: Constants
-    private enum UIConstants {
-        
+    private enum UiConstants {
+        static let barItemHeight:CGFloat = 30
+        static let barItemWidth: CGFloat = 34
     }
 
     //MARK: Private property
@@ -172,7 +173,12 @@ private extension NewPostViewController {
     
     /// Bar bottom image title tag
     func makeTabBarIcon() {
-        let image = UIImage(systemName: "plus.square")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
+        let size = CGSize(width: UiConstants.barItemWidth, height: UiConstants.barItemHeight)
+        
+        let icon = UIImage(systemName: "plus.square")
+        
+        let image = icon?.imageResized(to: size).withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
+        
         let tabItem = UITabBarItem(title: "", image: image , tag: 2)
         self.tabBarItem = tabItem
     }

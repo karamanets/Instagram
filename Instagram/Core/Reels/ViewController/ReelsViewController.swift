@@ -21,6 +21,12 @@ class ReelsViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
+    //MARK: UiConstants
+    private enum UiConstants {
+        static let barItemHeight:CGFloat = 30
+        static let barItemWidth: CGFloat = 34
+    }
+    
     //MARK: Private Property
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -59,7 +65,12 @@ private extension ReelsViewController {
     
     /// Bar bottom image title tag
     func makeBarBottomIcon() {
-        let image = UIImage(systemName: "play.rectangle.on.rectangle.fill")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
+        let size = CGSize(width: UiConstants.barItemWidth, height: UiConstants.barItemHeight)
+        
+        let icon = UIImage(systemName: "play.rectangle.on.rectangle.fill")
+        
+        let image = icon?.imageResized(to: size).withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
+        
         let tabItem = UITabBarItem(title: "", image: image , tag: 3)
         self.tabBarItem = tabItem
     }

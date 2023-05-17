@@ -45,7 +45,7 @@ class GallerySheetViewController: UIViewController {
         table.register(GallerySheetCell.self, forCellReuseIdentifier: String(describing: GallerySheetCell.self))
         table.separatorColor = .clear
         table.showsVerticalScrollIndicator = false
-        table.backgroundColor = UIColor.theme.background
+        table.backgroundColor = UIColor.theme.sheetBackground
         return table
     }()
    
@@ -58,7 +58,7 @@ private extension GallerySheetViewController {
     
     func initialize() {
         /// View
-        view.backgroundColor = UIColor.theme.background
+        view.backgroundColor = UIColor.theme.sheetBackground
         
         /// Dismiss Button
         view.addSubview(dismissButton)

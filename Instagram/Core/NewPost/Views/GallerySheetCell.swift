@@ -29,7 +29,7 @@ class GallerySheetCell: UITableViewCell {
     private let labelItem: UILabel = {
        let label = UILabel()
         label.textAlignment = .left
-        label.backgroundColor = UIColor.theme.background
+        label.backgroundColor = UIColor.theme.sheetBackground
         label.font = UIFont.preferredFont(forTextStyle: .title1, compatibleWith: .current)
         return label
     }()
@@ -41,7 +41,7 @@ private extension GallerySheetCell {
     
     func initialize() {
         
-        contentView.backgroundColor = UIColor.theme.background
+        contentView.backgroundColor = UIColor.theme.sheetBackground
         
         contentView.addSubview(labelItem)
         labelItem.snp.makeConstraints { make in

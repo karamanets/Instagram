@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
     
     //MARK: UiConstants
     private enum UiConstants {
-        static let barItemSize:CGFloat = 37
+        static let barItemSize:CGFloat = 30
     }
     
     //MARK: Private Property
@@ -46,9 +46,18 @@ private extension ProfileViewController {
         
         let radius = size.width / 2
         
-        let image = dataService.userImage?.imageResized(to: size).withCorner(radius: radius)?.withRenderingMode(.alwaysOriginal)
+        let image = dataService.userImage?
+            .imageResized(to: size)
+            .withCorner(radius: radius)?
+            .withRenderingMode(.alwaysOriginal)
+            
+        
+           
+        
         
         let tabItem = UITabBarItem(title: "", image: image , tag: 4)
         self.tabBarItem = tabItem
     }
 }
+
+

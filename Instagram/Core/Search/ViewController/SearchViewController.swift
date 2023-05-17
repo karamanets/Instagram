@@ -15,6 +15,14 @@ final class SearchViewController: UIViewController {
         initialize()
     }
     
+    //MARK: UiConstants
+    fileprivate enum UiConstants {
+        static let barItemHeight:CGFloat = 30
+        static let barItemWidth: CGFloat = 34
+        static let inset: CGFloat = 8
+        static let textFieldHeight: CGFloat = 50
+    }
+    
     //MARK: Private properties
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -65,7 +73,12 @@ private extension SearchViewController {
     
     /// Bar bottom image title tag
     func makeBarBottomIcon() {
-        let image = UIImage(systemName: "magnifyingglass")?.withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
+        let size = CGSize(width: UiConstants.barItemWidth, height: UiConstants.barItemHeight)
+        
+        let icon = UIImage(systemName: "magnifyingglass")
+        
+        let image = icon?.imageResized(to: size).withTintColor(UIColor.theme.icons, renderingMode: .alwaysOriginal)
+        
         let tabItem = UITabBarItem(title: "", image: image , tag: 1)
         self.tabBarItem = tabItem
     }
@@ -157,12 +170,6 @@ final class HeaderView: UICollectionReusableView {
         return text
     }()
     
-    //MARK: Constants
-    private enum UIConstants {
-        static let inset: CGFloat = 8
-        static let textFieldHeight: CGFloat = 50
-    }
-    
     //MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -170,8 +177,8 @@ final class HeaderView: UICollectionReusableView {
         addSubview(textField)
         textField.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(UIConstants.inset)
-            make.height.equalTo(UIConstants.textFieldHeight)
+            make.leading.trailing.equalToSuperview().inset(SearchViewController.UiConstants.inset)
+            make.height.equalTo(SearchViewController.UiConstants.textFieldHeight)
         }
     }
     

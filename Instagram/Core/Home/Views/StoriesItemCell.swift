@@ -33,7 +33,7 @@ final class StoriesItemCell: UICollectionViewCell {
     //MARK: Private constants
     private enum UIConstants {
         static let imageSize: CGFloat = 80
-        static let imageInset: CGFloat = 6
+        static let imageInset: CGFloat = 10
         static let labelOffset: CGFloat = 6
         static let userTextFont: CGFloat = 10
         static let buttonSize: CGFloat = 27
