@@ -115,6 +115,7 @@ class NewPostViewController: UIViewController {
     private lazy var sheetViewController: UIViewController = {
        let sheet = GallerySheetViewController(nibName: nil, bundle: nil)
         sheet.modalPresentationStyle = .pageSheet
+        sheet.delegateSheet = self
         return sheet
     }()
     
@@ -294,4 +295,10 @@ extension NewPostViewController: UICollectionViewDelegate {
     }
 }
 
-
+//MARK: Sheet CustomDelegate for galleryButton label
+extension NewPostViewController: GallerySheetViewControllerDelegate {
+    
+    func didChange(_ string: String) {
+        galleryButton.setTitle(string, for: .normal)
+    }
+}

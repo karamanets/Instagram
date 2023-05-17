@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+//MARK: Logo Instagram for BarItem
 final class LogoView: UIView {
     
     //MARK: Init

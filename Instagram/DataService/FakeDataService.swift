@@ -53,11 +53,18 @@ final class FakeDataService {
     private func setUpDataStoriesArray() -> [StoriesItemCellInfo] {
 
         var tempArray: [StoriesItemCellInfo] = []
+        
+        let userStories = StoriesItemCellInfo(image: setUpRandomImage(),
+                                              userName: setUpRandomName(),
+                                              isAddButtonVisible: true,
+                                              isNewStory: setUpRandomIsNew())
+        tempArray.append(userStories)
 
         for _ in 1...100 {
             let story = StoriesItemCellInfo(image: setUpRandomImage(), userName: setUpRandomName(), isAddButtonVisible: false, isNewStory: setUpRandomIsNew())
             tempArray.append(story)
         }
+        
         return tempArray
     }
     

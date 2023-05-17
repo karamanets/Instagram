@@ -220,10 +220,15 @@ private extension PostCell {
     
     /// Button actions
     func buttonsAction() {
-        likeButton.addTarget(self, action: #selector(likeButtonAction(_:)), for: .touchUpInside)
-        commentButton.addTarget(self, action: #selector(commentButtonAction(_:)), for: .touchUpInside)
-        sharedButton.addTarget(self, action: #selector(sharedButtonAction(_:)), for: .touchUpInside)
-        bookMarkButton.addTarget(self, action: #selector(bookMarkButtonAction(_:)), for: .touchUpInside)
+        optionsButton.addTarget(self, action: #selector(optionsButtonAction), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(likeButtonAction), for: .touchUpInside)
+        commentButton.addTarget(self, action: #selector(commentButtonAction), for: .touchUpInside)
+        sharedButton.addTarget(self, action: #selector(sharedButtonAction), for: .touchUpInside)
+        bookMarkButton.addTarget(self, action: #selector(bookMarkButtonAction), for: .touchUpInside)
+    }
+    
+    @objc func optionsButtonAction(_ sender: UIButton) {
+        print("[⚠️] Options button pressed")
     }
     
     @objc func likeButtonAction(_ sender: UIButton) {

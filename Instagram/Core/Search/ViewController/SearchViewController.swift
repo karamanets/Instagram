@@ -96,7 +96,8 @@ extension SearchViewController: UICollectionViewDataSource {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                                                      withReuseIdentifier: String(describing: HeaderView.self),
-                                                                     for: indexPath)
+                                                                     for: indexPath) as! HeaderView
+        header.textField.delegate = self
         
         return header
     }
@@ -136,3 +137,45 @@ extension SearchViewController: UICollectionViewDelegate {
     }
 }
 
+//MARK: TextField Delegate
+extension SearchViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        /// passed data
+        textField.text = ""
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+//MARK: Header TextField
+final class HeaderView: UICollectionReusableView {
+    
+    //MARK: Fileprivate
+    fileprivate let textField: UITextField = {
+        let text = CustomTextField()
+        return text
+    }()
+    
+    //MARK: Constants
+    private enum UIConstants {
+        static let inset: CGFloat = 8
+        static let textFieldHeight: CGFloat = 50
+    }
+    
+    //MARK: Init
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(textField)
+        textField.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(UIConstants.inset)
+            make.height.equalTo(UIConstants.textFieldHeight)
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

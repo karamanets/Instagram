@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         items = dataService.arrayStoryAndPostForHomeVC
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -60,7 +61,7 @@ private extension HomeViewController {
     }
 }
 
-//MARK: - Bar Items
+//MARK: Bar Items
 private extension HomeViewController {
     
     func setUpBarItems() {
@@ -119,12 +120,13 @@ private extension HomeViewController {
     @objc func addBarAction() {
         print("[⚠️] Add button pressed")
     }
+    
     @objc func directButtonAction() {
         print("[⚠️] Direct button pressed")
     }
 }
 
-//MARK: - TableView DataSource
+//MARK: TableView DataSource
 extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

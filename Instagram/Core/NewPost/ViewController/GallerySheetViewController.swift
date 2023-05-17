@@ -8,7 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol GallerySheetViewControllerDelegate {
+    
+    func didChange(_ string: String)
+}
+
 class GallerySheetViewController: UIViewController {
+    
+    //MARK: Public
+    var delegateSheet: GallerySheetViewControllerDelegate?
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -92,8 +100,11 @@ private extension GallerySheetViewController {
 extension GallerySheetViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let index = indexPath.section
+        
+        delegateSheet?.didChange(items[index])
         
         print("[⚠️] Selected item: \(items[index])")
         

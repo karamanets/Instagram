@@ -34,7 +34,6 @@ class GallerySheetCell: UITableViewCell {
         return label
     }()
     
-
 }
 
 //MARK: Private methods

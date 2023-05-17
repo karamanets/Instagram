@@ -36,8 +36,10 @@ final class StoriesItemCell: UICollectionViewCell {
         static let imageInset: CGFloat = 6
         static let labelOffset: CGFloat = 6
         static let userTextFont: CGFloat = 10
-        static let buttonSize: CGFloat = 20
-        static let circleImageSize: CGFloat = 83
+        static let buttonSize: CGFloat = 27
+        static let circleImageSize: CGFloat = 92
+        static let buttonInset: CGFloat = -3
+        static let buttonBorderWidth: CGFloat = 3
     }
     
     //MARK: Private property
@@ -61,9 +63,15 @@ final class StoriesItemCell: UICollectionViewCell {
         return label
     }()
     
-    private var addButton: UIButton = {
+    private lazy var addButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "LogoPlus"), for: .normal)
+        let image = UIImage(named: "LogoPlus")?.withRenderingMode(.alwaysOriginal)
+        button.setImage(image, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = UIConstants.buttonSize / 2
+        button.layer.borderWidth = UIConstants.buttonBorderWidth
+        button.layer.borderColor = UIColor.theme.background.cgColor
+        button.addTarget(self, action: #selector(AddButtonAction), for: .touchUpInside)
         return button
     }()
 }
@@ -85,16 +93,20 @@ private extension StoriesItemCell {
             make.centerX.equalTo(imageView.snp.centerX)
         }
         
-        contentView.addSubview(addButton)
-        addButton.snp.makeConstraints { make in
-            make.trailing.bottom.equalTo(imageView)
-            make.size.equalTo(UIConstants.buttonSize)
-        }
-        
         contentView.addSubview(circleImage)
         circleImage.snp.makeConstraints { make in
             make.center.equalTo(imageView.snp.center)
             make.size.equalTo(UIConstants.circleImageSize)
         }
+        
+        contentView.addSubview(addButton)
+        addButton.snp.makeConstraints { make in
+            make.trailing.bottom.equalTo(imageView).inset(UIConstants.buttonInset)
+            make.size.equalTo(UIConstants.buttonSize)
+        }
+    }
+    
+    @objc func AddButtonAction(_ sender: UIButton) {
+        print("[⚠️] Add new stories button pressed")
     }
 }
