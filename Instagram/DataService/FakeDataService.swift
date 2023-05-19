@@ -19,19 +19,45 @@ final class FakeDataService {
     
     var userImage: UIImage? = nil
     
+    var reelsModels: [ReelsModel] = []
+    
     //MARK: Init
     init() {
         userSetUp()
         setUpDataPost()
         setUpArrayOfImagesForSearchVC()
+        setUpReels()
     }
     
     //MARK: Methods
     
-    func setUpRandomImage() -> UIImage {
+    private func setUpRandomImage() -> UIImage {
         let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"].randomElement()
         let image = UIImage(named: imagesName ?? "")
         return image ?? UIImage()
+    }
+    
+    private func setUpReels() {
+        
+        var temp: [ReelsModel] = []
+        
+        for _ in 1...10 {
+            
+            let reels = ReelsModel(reels: "logo",
+                                    isPlay: true,
+                                    volume: 5,
+                                    comment: [setUpRandomComment()],
+                                    numberOfLikes: setUpRandomLike(),
+                                    numberOfComment: setUpRandomLike(),
+                                    numberOfShare: setUpRandomLike(),
+                                    treck: "mc.cat",
+                                    reelsUser: User(userID: UUID().uuidString,
+                                                    userName: setUpRandomName(),
+                                                    userImage: setUpRandomImage(),
+                                                    userSubtitle: setUpRandomSubtitle()))
+            temp.append(reels)
+        }
+        self.reelsModels = temp
     }
     
     private func userSetUp() {
@@ -49,7 +75,9 @@ final class FakeDataService {
                                                             postSubtitle: setUpRandomSubtitle(),
                                                             postImage: setUpRandomImage(),
                                                             numberOfLikes: setUpRandomLike(),
-                                                            comment: CommentShortInfo(userName: setUpRandomName(), commentText: setUpRandomComment())))
+                                                             
+                                                            comment: CommentShortInfo(userName: setUpRandomName(),
+                                                                                      commentText: setUpRandomComment())))
             
             tempData.append(post)
         }

@@ -39,6 +39,9 @@ class ReelsViewController: UIViewController {
         collection.register(ReelsCell.self, forCellWithReuseIdentifier: String(describing: ReelsCell.self))
         return collection
     }()
+    
+    ///DataService
+    let dataService = FakeDataService.shared
 }
 
 //MARK: - Private Methods
@@ -79,6 +82,10 @@ private extension ReelsViewController {
 //MARK: CollectionView Delegate
 extension ReelsViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
 }
 
 //MARK: CollectionView Delegate FlowLayout
@@ -103,12 +110,14 @@ extension ReelsViewController: UICollectionViewDelegateFlowLayout {
 extension ReelsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return dataService.reelsModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ReelsCell.self), for: indexPath) as! ReelsCell
+        
+        cell.configure(with: dataService.reelsModels[indexPath.item])
         
         return cell
     }

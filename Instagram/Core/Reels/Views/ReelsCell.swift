@@ -7,12 +7,22 @@
 
 import UIKit
 import SnapKit
+import AVFoundation
+import AVKit
 
 final class ReelsCell: UICollectionViewCell {
     
     //MARK: Public
     public func configure(with info: ReelsModel) {
-        numberOfLikes.text = "\(info.likes)"
+        setUpReels(with: info)
+        numberOfLikes.text = String(describing: info.numberOfLikes)
+        numberOfComments.text = String(describing: info.numberOfComment)
+        numberOfShared.text = String(describing: info.numberOfShare)
+        rightUserImage.image = info.reelsUser.userImage
+        descriptionText.text = info.comment.first
+        leftUserImage.image = info.reelsUser.userImage
+        userName.text = info.reelsUser.userName
+        
     }
     
     //MARK: Init
@@ -43,15 +53,19 @@ final class ReelsCell: UICollectionViewCell {
     }
     
     //MARK: Private Property
-    private var reels: UIImageView = {
-        let view = UIImageView()
-        view.clipsToBounds = true
-        view.layer.cornerRadius = UIConstant.reelsCornerRadius
-        view.image = UIImage(named: "image6")
+    private let reelsContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black
         return view
     }()
     
-    private var labelReels: UILabel = {
+    private lazy var avpController: AVPlayerViewController = {
+        let view = AVPlayerViewController()
+        view.showsPlaybackControls = false
+        return view
+    }()
+    
+    private lazy var labelReels: UILabel = {
         let label = UILabel()
         label.text = "Reels"
         label.textColor = .white
@@ -59,7 +73,7 @@ final class ReelsCell: UICollectionViewCell {
         return label
     }()
     
-    private var reelsIcon: UIImageView = {
+    private lazy var reelsIcon: UIImageView = {
         let view = UIImageView()
         let image = UIImage(systemName: "camera.on.rectangle")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         view.image = image
@@ -76,7 +90,7 @@ final class ReelsCell: UICollectionViewCell {
         return button
     }()
     
-    private var numberOfLikes: UILabel = {
+    private lazy var numberOfLikes: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UIConstant.iconsNumbersFont, weight: .light)
         label.textColor = .white
@@ -94,7 +108,7 @@ final class ReelsCell: UICollectionViewCell {
         return button
     }()
     
-    private var numberOfComments: UILabel = {
+    private lazy var numberOfComments: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UIConstant.iconsNumbersFont, weight: .light)
         label.textColor = .white
@@ -112,7 +126,7 @@ final class ReelsCell: UICollectionViewCell {
         return button
     }()
     
-    private var numberOfShared: UILabel = {
+    private lazy var numberOfShared: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UIConstant.iconsNumbersFont, weight: .light)
         label.textColor = .white
@@ -130,9 +144,9 @@ final class ReelsCell: UICollectionViewCell {
         return button
     }()
     
-    private var rightUserImage: UIImageView = {
+    private lazy var rightUserImage: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "image3")
+        view.image = UIImage(systemName: "person")
         view.clipsToBounds = true
         view.layer.cornerRadius = 5
         view.layer.borderWidth = 3
@@ -140,54 +154,53 @@ final class ReelsCell: UICollectionViewCell {
         return view
     }()
     
-    private var musicIcon: UIImageView = {
+    private lazy var musicIcon: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(systemName: "lines.measurement.horizontal")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         return view
     }()
     
-    private var musicLabel: UILabel = {
+    private lazy var musicLabel: UILabel = {
         let label = UILabel()
         label.text = "github.com/karamanets"
         label.textColor = .white
         return label
     }()
     
-    private var locationIcon: UIImageView = {
+    private lazy var locationIcon: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(systemName: "globe.europe.africa")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         return view
     }()
     
-    private var locationLabel: UILabel = {
+    private lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.text = "Ukraine"
         label.textColor = .white
         return label
     }()
     
-    private var descriptionText: UILabel = {
+    private lazy var descriptionText: UILabel = {
         let text = UILabel()
         text.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         text.numberOfLines = 1
-        text.text = "Hello, how are you ?"
+        text.text = ""
         text.textColor = .white
         return text
     }()
     
-    private var leftUserImage: UIImageView = {
+    private lazy var leftUserImage: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "image3")
+        view.image = UIImage(systemName: "person")
         view.clipsToBounds = true
         view.layer.cornerRadius = UIConstant.leftImageSize / 2
         return view
     }()
     
-    private var userName: UILabel = {
+    private lazy var userName: UILabel = {
         let name = UILabel()
         name.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         name.textColor = .white
-        name.text = "karamanets"
         return name
     }()
     
@@ -207,15 +220,13 @@ final class ReelsCell: UICollectionViewCell {
     
 }
 
-//🔥 Change centre and start position right icons -> to rightUserImage
-
 //MARK: - Private Methods
 private extension ReelsCell {
     
     func initialize() {
-    
-        addSubview(reels)
-        reels.snp.makeConstraints { make in
+        
+        addSubview(reelsContainer)
+        reelsContainer.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -330,6 +341,26 @@ private extension ReelsCell {
         }
         
     }
+    
+    func setUpReels(with info: ReelsModel)  {
+        guard let path = Bundle.main.path(forResource: info.reels, ofType: "mp4") else { return }
+        
+        let url = URL(filePath: path)
+        
+        let player = AVPlayer(url: url)
+        
+        avpController.player = player
+        
+        avpController.view.frame = self.reelsContainer.bounds
+        
+        self.reelsContainer.addSubview(avpController.view)
+        
+        player.volume = Float(info.volume)
+        
+        if info.isPlay {
+            player.play()
+        }
+    }
 }
 
 //MARK: Button Action
@@ -364,7 +395,7 @@ private extension ReelsCell {
     func followButtonAction() -> UIAction {
         let action = UIAction { [weak self] _ in
             guard let _ = self else { return }
-            
+        
             print("[⚠️] Pressed Follow button")
         }
         return action

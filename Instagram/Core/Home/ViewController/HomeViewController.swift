@@ -19,7 +19,6 @@ class HomeViewController: UIViewController {
     //MARK: Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
-        items = dataService.arrayStoryAndPostForHomeVC
     }
     
     required init?(coder: NSCoder) {
@@ -43,10 +42,8 @@ class HomeViewController: UIViewController {
         return tableView
     }()
     
-    private var items: [InstagramItemType] = []
-    
-    //MARK: DataService
-    private let dataService = FakeDataService()
+    /// DataService
+    private var items: [InstagramItemType] = FakeDataService.shared.arrayStoryAndPostForHomeVC
 }
 
 //MARK: - Private methods

@@ -8,13 +8,15 @@
 import UIKit
 
 struct ReelsModel {
-    
-    let reels: UIImage
-    let likes: Int
-    let coment: [String]
-    let reelsUser: User
+    let reels: String
+    var isPlay: Bool
+    var volume: Int
+    var comment: [String]
+    var numberOfLikes: Int
+    var numberOfComment: Int
+    var numberOfShare: Int
     let treck: String
-    
+    let reelsUser: User
 }
 
 
