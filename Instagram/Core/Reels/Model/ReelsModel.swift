@@ -9,7 +9,6 @@ import UIKit
 
 struct ReelsModel {
     let reels: String
-    var isPlay: Bool
     var volume: Int
     var comment: [String]
     var numberOfLikes: Int
@@ -17,6 +16,7 @@ struct ReelsModel {
     var numberOfShare: Int
     let treck: String
     let reelsUser: User
+    
 }
 
 

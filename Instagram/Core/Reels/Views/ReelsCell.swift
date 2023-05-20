@@ -22,7 +22,6 @@ final class ReelsCell: UICollectionViewCell {
         descriptionText.text = info.comment.first
         leftUserImage.image = info.reelsUser.userImage
         userName.text = info.reelsUser.userName
-        
     }
     
     //MARK: Init
@@ -59,9 +58,10 @@ final class ReelsCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var avpController: AVPlayerViewController = {
+    lazy var avpController: AVPlayerViewController = {
         let view = AVPlayerViewController()
         view.showsPlaybackControls = false
+        view.videoGravity = .resizeAspectFill
         return view
     }()
     
@@ -357,9 +357,6 @@ private extension ReelsCell {
         
         player.volume = Float(info.volume)
         
-        if info.isPlay {
-            player.play()
-        }
     }
 }
 

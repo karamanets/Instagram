@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import AVKit
 
 class ReelsViewController: UIViewController {
 
@@ -25,12 +26,13 @@ class ReelsViewController: UIViewController {
     private enum UiConstants {
         static let barItemHeight:CGFloat = 30
         static let barItemWidth: CGFloat = 34
+        static let spacingBetweenCell: CGFloat = 2
     }
     
     //MARK: Private Property
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 2
+        layout.minimumLineSpacing = UiConstants.spacingBetweenCell
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .vertical
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -41,7 +43,7 @@ class ReelsViewController: UIViewController {
     }()
     
     ///DataService
-    let dataService = FakeDataService.shared
+    private let dataService = FakeDataService.shared
 }
 
 //MARK: - Private Methods
@@ -58,6 +60,8 @@ private extension ReelsViewController {
         collectionView.backgroundColor = UIColor.theme.background
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.prefetchDataSource = self
+        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -82,10 +86,7 @@ private extension ReelsViewController {
 //MARK: CollectionView Delegate
 extension ReelsViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
+ 
 }
 
 //MARK: CollectionView Delegate FlowLayout
@@ -117,8 +118,29 @@ extension ReelsViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ReelsCell.self), for: indexPath) as! ReelsCell
         
-        cell.configure(with: dataService.reelsModels[indexPath.item])
+        let index = indexPath.item
+        
+        cell.configure(with: dataService.reelsModels[index])
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+            
+            cell.avpController.player?.play()
+        }
+        
+        print("\(index)")
         
         return cell
     }
+}
+
+extension ReelsViewController: UICollectionViewDataSourcePrefetching {
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+        let index = indexPaths
+        
+        print(String(describing: index))
+    }
+    
+    
 }

@@ -32,7 +32,9 @@ final class FakeDataService {
     //MARK: Methods
     
     private func setUpRandomImage() -> UIImage {
-        let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"].randomElement()
+        
+        let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
+        
         let image = UIImage(named: imagesName ?? "")
         return image ?? UIImage()
     }
@@ -41,10 +43,9 @@ final class FakeDataService {
         
         var temp: [ReelsModel] = []
         
-        for _ in 1...10 {
+        for _ in 1...100 {
             
-            let reels = ReelsModel(reels: "logo",
-                                    isPlay: true,
+            let reels = ReelsModel(reels: setUpRandomVideo(),
                                     volume: 5,
                                     comment: [setUpRandomComment()],
                                     numberOfLikes: setUpRandomLike(),
@@ -58,6 +59,11 @@ final class FakeDataService {
             temp.append(reels)
         }
         self.reelsModels = temp
+    }
+    
+    private func setUpRandomVideo() -> String {
+        let video = ["cat1", "cat2", "cat3", "cat4"].randomElement()
+        return video ?? "cat1"
     }
     
     private func userSetUp() {

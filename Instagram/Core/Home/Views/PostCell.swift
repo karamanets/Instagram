@@ -80,6 +80,7 @@ final class PostCell: UITableViewCell {
     private lazy var postImage: UIImageView = {
        let view = UIImageView()
         view.image = UIImage(named: "LogoPost")
+        view.contentMode = .scaleAspectFill
         return view
     }()
     
