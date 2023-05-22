@@ -42,6 +42,8 @@ class ReelsViewController: UIViewController {
         return collection
     }()
     
+    private lazy var scroll: UIScrollView? = nil
+    
     ///DataService
     private let dataService = FakeDataService.shared
 }
@@ -62,6 +64,9 @@ private extension ReelsViewController {
         collectionView.dataSource = self
         collectionView.prefetchDataSource = self
         
+        
+        scroll?.delegate = self
+        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -81,11 +86,16 @@ private extension ReelsViewController {
         let tabItem = UITabBarItem(title: "", image: image , tag: 3)
         self.tabBarItem = tabItem
     }
+    
+   
 }
 
 //MARK: CollectionView Delegate
 extension ReelsViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Volume off")
+    }
  
 }
 
@@ -122,25 +132,38 @@ extension ReelsViewController: UICollectionViewDataSource {
         
         cell.configure(with: dataService.reelsModels[index])
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-            
-            cell.avpController.player?.play()
-        }
-        
-        print("\(index)")
-        
         return cell
     }
 }
 
 extension ReelsViewController: UICollectionViewDataSourcePrefetching {
-    
+
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        
-        let index = indexPaths
-        
-        print(String(describing: index))
+
+       // print(String(describing: indexPaths))
+
     }
+}
+
+extension ReelsViewController: UIScrollViewDelegate {
     
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let y = targetContentOffset.pointee.y
+        let item = Int(y / view.frame.height)
+        
+        let current = item + 1
+        
+        let previous = current <= 0 ? 0 : current - 1
+        
+        let next = current + 1
+        
+        dataService.reelsModels[current].avpController.player?.play()
+        
+        dataService.reelsModels[previous].avpController.player?.pause()
+        
+        //dataService.reelsModels[previousDown].avpController.player?.replaceCurrentItem(with: nil)
+        
+        print("PreviousDown cell: \(previous)")
+    }
     
 }

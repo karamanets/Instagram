@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import AVKit
 
 struct ReelsModel {
     let reels: String
+    var avpController: AVPlayerViewController
     var volume: Int
     var comment: [String]
     var numberOfLikes: Int
@@ -16,7 +18,6 @@ struct ReelsModel {
     var numberOfShare: Int
     let treck: String
     let reelsUser: User
-    
 }
 
 

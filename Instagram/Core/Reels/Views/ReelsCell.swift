@@ -23,7 +23,7 @@ final class ReelsCell: UICollectionViewCell {
         leftUserImage.image = info.reelsUser.userImage
         userName.text = info.reelsUser.userName
     }
-    
+        
     //MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,12 +58,12 @@ final class ReelsCell: UICollectionViewCell {
         return view
     }()
     
-    lazy var avpController: AVPlayerViewController = {
-        let view = AVPlayerViewController()
-        view.showsPlaybackControls = false
-        view.videoGravity = .resizeAspectFill
-        return view
-    }()
+//    lazy var avpController: AVPlayerViewController = {
+//        let view = AVPlayerViewController()
+//        view.showsPlaybackControls = false
+//        view.videoGravity = .resizeAspectFill
+//        return view
+//    }()
     
     private lazy var labelReels: UILabel = {
         let label = UILabel()
@@ -349,14 +349,17 @@ private extension ReelsCell {
         
         let player = AVPlayer(url: url)
         
-        avpController.player = player
+        info.avpController.player = player
         
-        avpController.view.frame = self.reelsContainer.bounds
+        info.avpController.view.frame = self.reelsContainer.bounds
         
-        self.reelsContainer.addSubview(avpController.view)
+        info.avpController.showsPlaybackControls = false
+        
+        info.avpController.videoGravity = .resizeAspectFill
+        
+        self.reelsContainer.addSubview(info.avpController.view)
         
         player.volume = Float(info.volume)
-        
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 @MainActor
 final class FakeDataService {
@@ -13,16 +14,16 @@ final class FakeDataService {
     static let shared = FakeDataService()
     
     //MARK: Public
-    var arrayStoryAndPostForHomeVC: [InstagramItemType] = []
+    public var arrayStoryAndPostForHomeVC: [InstagramItemType] = []
     
-    var arrayImages: [UIImage] = []
+    public var arrayImages: [UIImage] = []
     
-    var userImage: UIImage? = nil
+    public var userImage: UIImage? = nil
     
-    var reelsModels: [ReelsModel] = []
+    public var reelsModels: [ReelsModel] = []
     
     //MARK: Init
-    init() {
+    private init() {
         userSetUp()
         setUpDataPost()
         setUpArrayOfImagesForSearchVC()
@@ -30,7 +31,6 @@ final class FakeDataService {
     }
     
     //MARK: Methods
-    
     private func setUpRandomImage() -> UIImage {
         
         let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
@@ -46,6 +46,7 @@ final class FakeDataService {
         for _ in 1...100 {
             
             let reels = ReelsModel(reels: setUpRandomVideo(),
+                                    avpController: AVPlayerViewController(),
                                     volume: 5,
                                     comment: [setUpRandomComment()],
                                     numberOfLikes: setUpRandomLike(),
