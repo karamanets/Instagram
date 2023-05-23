@@ -11,7 +11,7 @@ import SnapKit
 final class PostCell: UITableViewCell {
     
     //MARK: Public
-    func configure(with info: PostItemInfo) {
+    func configure(with info: PostModel) {
         userImage.image = info.userImage
         userName.text = info.userName
         subtitle.text = info.postSubtitle

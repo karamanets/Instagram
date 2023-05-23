@@ -15,16 +15,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         initialize()
     }
-    
-    //MARK: Init
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+        
     //MARK: UiConstants
     private enum UiConstants {
         static let barItemHeight:CGFloat = 30

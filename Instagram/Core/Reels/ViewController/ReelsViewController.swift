@@ -46,6 +46,8 @@ class ReelsViewController: UIViewController {
     
     ///DataService
     private let dataService = FakeDataService.shared
+    
+    private var reels: [ReelsModel] = []
 }
 
 //MARK: - Private Methods
@@ -87,7 +89,6 @@ private extension ReelsViewController {
         self.tabBarItem = tabItem
     }
     
-   
 }
 
 //MARK: CollectionView Delegate
@@ -132,6 +133,10 @@ extension ReelsViewController: UICollectionViewDataSource {
         
         cell.configure(with: dataService.reelsModels[index])
         
+        if index == 0 {
+            dataService.reelsModels[index].avpController.player?.play()
+        }
+        
         return cell
     }
 }
@@ -140,7 +145,7 @@ extension ReelsViewController: UICollectionViewDataSourcePrefetching {
 
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
 
-       // print(String(describing: indexPaths))
+       print(String(describing: indexPaths))
 
     }
 }
@@ -154,16 +159,10 @@ extension ReelsViewController: UIScrollViewDelegate {
         let current = item + 1
         
         let previous = current <= 0 ? 0 : current - 1
-        
-        let next = current + 1
-        
+
         dataService.reelsModels[current].avpController.player?.play()
         
         dataService.reelsModels[previous].avpController.player?.pause()
-        
-        //dataService.reelsModels[previousDown].avpController.player?.replaceCurrentItem(with: nil)
-        
-        print("PreviousDown cell: \(previous)")
     }
     
 }

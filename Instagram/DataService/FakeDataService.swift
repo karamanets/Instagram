@@ -31,6 +31,7 @@ final class FakeDataService {
     }
     
     //MARK: Methods
+    
     private func setUpRandomImage() -> UIImage {
         
         let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
@@ -43,7 +44,7 @@ final class FakeDataService {
         
         var temp: [ReelsModel] = []
         
-        for _ in 1...100 {
+        for _ in 1...6 {
             
             let reels = ReelsModel(reels: setUpRandomVideo(),
                                     avpController: AVPlayerViewController(),
@@ -77,7 +78,7 @@ final class FakeDataService {
         var tempData: [InstagramItemType] = []
         
         for _ in 1...100 {
-            let post: InstagramItemType = .post(PostItemInfo(userImage: setUpRandomImage(),
+            let post: InstagramItemType = .post(PostModel(userImage: setUpRandomImage(),
                                                             userName: setUpRandomName(),
                                                             postSubtitle: setUpRandomSubtitle(),
                                                             postImage: setUpRandomImage(),
@@ -94,11 +95,11 @@ final class FakeDataService {
         arrayStoryAndPostForHomeVC = tempData
     }
     
-    private func setUpDataStoriesArray() -> [StoriesItemCellInfo] {
+    private func setUpDataStoriesArray() -> [StoriesModel] {
 
-        var tempArray: [StoriesItemCellInfo] = []
+        var tempArray: [StoriesModel] = []
         
-        let userStories = StoriesItemCellInfo(image: setUpRandomImage(),
+        let userStories = StoriesModel(image: setUpRandomImage(),
                                               userName: setUpRandomName(),
                                               isAddButtonVisible: true,
                                               isNewStory: setUpRandomIsNew())
@@ -107,7 +108,7 @@ final class FakeDataService {
         tempArray.append(userStories)
 
         for _ in 1...100 {
-            let story = StoriesItemCellInfo(image: setUpRandomImage(), userName: setUpRandomName(), isAddButtonVisible: false, isNewStory: setUpRandomIsNew())
+            let story = StoriesModel(image: setUpRandomImage(), userName: setUpRandomName(), isAddButtonVisible: false, isNewStory: setUpRandomIsNew())
             tempArray.append(story)
         }
         

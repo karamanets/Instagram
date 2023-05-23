@@ -11,10 +11,10 @@ import SnapKit
 final class StoriesSetCell: UITableViewCell {
     
     //MARK: Public method
-    func configure(with info: StoriesCellInfo) {
+    public func configure(with info: StoriesCells) {
         self.items = info
         collectionView.reloadData()
-        //print(info)
+        //print("[🔥] init configure StoriesSetCell")
     }
     
     //MARK: Init
@@ -34,14 +34,14 @@ final class StoriesSetCell: UITableViewCell {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
-        collectionView.register(StoriesItemCell.self, forCellWithReuseIdentifier: String(describing: StoriesItemCell.self))
+        collectionView.register(StoriesCell.self, forCellWithReuseIdentifier: String(describing: StoriesCell.self))
         collectionView.showsHorizontalScrollIndicator = false
 
         return collectionView
     }()
     
     /// typealias name (array)
-    private var items: StoriesCellInfo = []
+    private var items: StoriesCells = []
 }
 
 //MARK: - Private methods
@@ -73,7 +73,7 @@ extension StoriesSetCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-                                                        String(describing: StoriesItemCell.self), for: indexPath) as! StoriesItemCell
+                                                        String(describing: StoriesCell.self), for: indexPath) as! StoriesCell
         cell.configure(with: items[indexPath.item])
         return cell
     }

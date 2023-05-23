@@ -1,5 +1,5 @@
 //
-//  StoriesItemCell.swift
+//  StoriesCell.swift
 //  Instagram
 //
 //  Created by Alex Karamanets on 19.04.2023.
@@ -10,15 +10,15 @@
 import UIKit
 import SnapKit
 
-final class StoriesItemCell: UICollectionViewCell {
+final class StoriesCell: UICollectionViewCell {
     
     //MARK: Public
-    func configure(with info: StoriesItemCellInfo) { /// use one item from array of StoriesCellInfo
+    /// use one item from array of StoriesCellInfo
+    func configure(with info: StoriesModel) {
         imageView.image = info.image
         userLabel.text = info.userName
         addButton.isHidden = !info.isAddButtonVisible
         circleImage.isHidden = !info.isNewStory
-        //print(info)
     }
     
     //MARK: Init
@@ -26,6 +26,7 @@ final class StoriesItemCell: UICollectionViewCell {
         super.init(frame: frame)
         initialize()
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -34,7 +35,7 @@ final class StoriesItemCell: UICollectionViewCell {
     private enum UIConstants {
         static let imageSize: CGFloat = 80
         static let imageInset: CGFloat = 10
-        static let labelOffset: CGFloat = 6
+        static let labelOffset: CGFloat = 10
         static let userTextFont: CGFloat = 10
         static let buttonSize: CGFloat = 27
         static let circleImageSize: CGFloat = 92
@@ -77,7 +78,7 @@ final class StoriesItemCell: UICollectionViewCell {
 }
 
 //MARK: Private methods
-private extension StoriesItemCell {
+private extension StoriesCell {
     
     func initialize() {
         contentView.addSubview(imageView)
