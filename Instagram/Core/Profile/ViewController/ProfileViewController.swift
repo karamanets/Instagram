@@ -23,13 +23,12 @@ class ProfileViewController: UIViewController {
     
     //MARK: Private Property
     private let tableView: UITableView = {
-        let view = UITableView()
+        let view = UITableView(frame: .zero, style: .grouped)
         view.showsVerticalScrollIndicator = false
         view.separatorColor = UIColor.clear
-        
+        view.backgroundColor = UIColor.theme.background
         ///Register header
-        
-        
+        view.register(ProfileTableViewHeader.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileTableViewHeader.self))
         ///Register cells
         view.register(ProfileStoriesSetCells.self, forCellReuseIdentifier: String(describing: ProfileStoriesSetCells.self))
         
@@ -45,7 +44,7 @@ private extension ProfileViewController {
     
     func initialize() {
         ///View
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = UIColor.theme.background
         
         ///Methods
         makeBarBottomIcon()
@@ -53,6 +52,7 @@ private extension ProfileViewController {
         ///Elements
         view.addSubview(tableView)
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -94,5 +94,20 @@ extension ProfileViewController: UITableViewDataSource {
         cell.configure(with: dataService.arrayImages)
         
         return cell
+    }
+}
+
+//MARK: TableView Delegate
+extension ProfileViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileTableViewHeader.self))
+        
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return view.bounds.height / 4
     }
 }

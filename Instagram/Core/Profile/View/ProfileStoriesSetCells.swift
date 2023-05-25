@@ -32,6 +32,7 @@ final class ProfileStoriesSetCells: UITableViewCell {
         static let headerStoryOffSet: CGFloat = 8
         static let labelNewSize: CGFloat = 15
         static let ofSetHeaderLabel: CGFloat = 3
+        static let headerLeadingInset: CGFloat = 8
     }
     
     //MARK: Private Property
@@ -104,7 +105,6 @@ extension ProfileStoriesSetCells: UICollectionViewDataSource {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                                                      withReuseIdentifier: String(describing: HeaderStoryButton.self),
                                                                      for: indexPath) as! HeaderStoryButton
-        
         return header
     }
     
@@ -127,7 +127,7 @@ extension ProfileStoriesSetCells: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.bounds.width / 5
+        let width = collectionView.bounds.width / 4.7
         
         let height = collectionView.bounds.height - 16
         
@@ -162,8 +162,9 @@ final class HeaderStoryButton: UICollectionReusableView {
         
         addSubview(button)
         button.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(ProfileStoriesSetCells.UiConstants.headerLeadingInset)
             make.top.equalToSuperview().offset(ProfileStoriesSetCells.UiConstants.headerStoryOffSet)
-            make.width.height.equalTo(ProfileStoriesSetCells.UiConstants.headerStorySize)
+            make.size.equalTo(ProfileStoriesSetCells.UiConstants.headerStorySize)
         }
         
         addSubview(label)

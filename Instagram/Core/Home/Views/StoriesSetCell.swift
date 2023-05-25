@@ -31,12 +31,11 @@ final class StoriesSetCell: UITableViewCell {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        collectionView.register(StoriesCell.self, forCellWithReuseIdentifier: String(describing: StoriesCell.self))
         collectionView.showsHorizontalScrollIndicator = false
-
+        ///Register Cell
+        collectionView.register(StoriesCell.self, forCellWithReuseIdentifier: String(describing: StoriesCell.self))
+    
         return collectionView
     }()
     

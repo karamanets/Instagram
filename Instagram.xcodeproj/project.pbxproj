@@ -19,6 +19,7 @@
 		2C53C4F32A05F76B002666B3 /* ReelsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53C4F22A05F76B002666B3 /* ReelsCell.swift */; };
 		2C53C4F52A05F8B9002666B3 /* ReelsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53C4F42A05F8B9002666B3 /* ReelsModel.swift */; };
 		2C53C4F82A060715002666B3 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53C4F72A060715002666B3 /* UserModel.swift */; };
+		2C5E29F52A1F193D0040CA10 /* ProfileTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E29F42A1F193D0040CA10 /* ProfileTableViewHeader.swift */; };
 		2C6DD9972A036CFA0003069C /* GallerySheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DD9962A036CFA0003069C /* GallerySheetViewController.swift */; };
 		2C76DEC52A120F1700243D18 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76DEC42A120F1700243D18 /* CustomTextField.swift */; };
 		2CBE218D2A14BD92002B0A1C /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE218C2A14BD92002B0A1C /* UIImage.swift */; };
@@ -55,6 +56,7 @@
 		2C53C4F22A05F76B002666B3 /* ReelsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelsCell.swift; sourceTree = "<group>"; };
 		2C53C4F42A05F8B9002666B3 /* ReelsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelsModel.swift; sourceTree = "<group>"; };
 		2C53C4F72A060715002666B3 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		2C5E29F42A1F193D0040CA10 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
 		2C6DD9962A036CFA0003069C /* GallerySheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerySheetViewController.swift; sourceTree = "<group>"; };
 		2C76DEC42A120F1700243D18 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2CBE218C2A14BD92002B0A1C /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		2C4B72B32A1C5F070072F866 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2C5E29F42A1F193D0040CA10 /* ProfileTableViewHeader.swift */,
 				2C4B72B92A1C72F20072F866 /* ProfileStoriesSetCells.swift */,
 				2C4B72B72A1C65AD0072F866 /* ProfileStoriesCell.swift */,
 			);
@@ -434,6 +437,7 @@
 				2CD8D2DE29EF9D1000996964 /* LogoView.swift in Sources */,
 				2C6DD9972A036CFA0003069C /* GallerySheetViewController.swift in Sources */,
 				2CD8D2D729EF87FD00996964 /* HomeViewController.swift in Sources */,
+				2C5E29F52A1F193D0040CA10 /* ProfileTableViewHeader.swift in Sources */,
 				2CF859FF29FA16E7007ABE2D /* ReelsViewController.swift in Sources */,
 				2CD8D2E229EFAC7A00996964 /* HomeModel.swift in Sources */,
 				2C76DEC52A120F1700243D18 /* CustomTextField.swift in Sources */,

@@ -24,9 +24,10 @@ class HomeViewController: UIViewController {
     
     //MARK: Private properties
     private let tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.separatorColor = .clear
         tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = UIColor.theme.background
         /// Register  cells
         tableView.register(StoriesSetCell.self, forCellReuseIdentifier: String(describing: StoriesSetCell.self))
         tableView.register(PostCell.self, forCellReuseIdentifier: String(describing: PostCell.self))

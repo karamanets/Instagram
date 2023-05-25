@@ -107,7 +107,7 @@ class NewPostViewController: UIViewController {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.showsVerticalScrollIndicator = false
         collection.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        
+        collection.backgroundColor = UIColor.theme.background
         collection.register(NewPostCell.self, forCellWithReuseIdentifier: String(describing: NewPostCell.self))
         
         return collection

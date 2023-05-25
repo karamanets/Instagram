@@ -34,6 +34,7 @@ final class SearchViewController: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.alwaysBounceVertical = true
+        collectionView.backgroundColor = UIColor.theme.background
         
         collectionView.register(SearchCollectionCell.self,
                                 forCellWithReuseIdentifier: String(describing: SearchCollectionCell.self))
