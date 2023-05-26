@@ -57,7 +57,7 @@ private extension StoriesSetCell {
         contentView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.equalTo(contentView.bounds.height * 2.6)
+            //make.height.equalTo(contentView.bounds.height * 2.6)
         }
     }
 }

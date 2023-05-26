@@ -69,7 +69,7 @@ final class ProfileTableViewHeader: UITableViewHeaderFooterView {
         let view = UILabel()
         view.textColor = UIColor.theme.icons
         view.textAlignment = .center
-        view.text = "267"
+        view.text = "9267"
         view.font = .systemFont(ofSize: UiConstants.textFont, weight: .heavy)
         return view
     }()

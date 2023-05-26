@@ -69,7 +69,6 @@ private extension ProfileStoriesSetCells {
         contentView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.equalTo(contentView.bounds.height * 2.6)
         }
     }
 }
@@ -77,6 +76,7 @@ private extension ProfileStoriesSetCells {
 //MARK: CollectionView Delegate
 extension ProfileStoriesSetCells: UICollectionViewDelegate {
     
+
 }
 
 //MARK: CollectionView DataSource

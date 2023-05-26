@@ -37,6 +37,8 @@ class ProfileViewController: UIViewController {
     
     ///DataService
     let dataService = FakeDataService.shared
+    
+    var showStorySize: CGFloat = 120
 }
 
 //MARK: - Private methods
@@ -45,6 +47,10 @@ private extension ProfileViewController {
     func initialize() {
         ///View
         view.backgroundColor = UIColor.theme.background
+        navigationController?.navigationBar.tintColor = UIColor.theme.icons
+        
+        navigationItem.leftBarButtonItems = makeLeftBarButtonItem()
+        navigationItem.rightBarButtonItems = makeRightBarButtonItem()
         
         ///Methods
         makeBarBottomIcon()
@@ -57,6 +63,22 @@ private extension ProfileViewController {
             make.edges.equalToSuperview()
         }
     }
+    
+    func updateSize() {
+        if showStorySize == 0 {
+            self.tableView.beginUpdates()
+            self.showStorySize = 120
+            self.tableView.endUpdates()
+        } else {
+            self.tableView.beginUpdates()
+            self.showStorySize = 0
+            self.tableView.endUpdates()
+        }
+    }
+}
+
+//MARK: Bar Items
+private extension ProfileViewController {
     
     /// Bar bottom image title tag
     func makeBarBottomIcon() {
@@ -73,6 +95,60 @@ private extension ProfileViewController {
         let tabItem = UITabBarItem(title: "", image: image , tag: 4)
         self.tabBarItem = tabItem
     }
+    
+    /// Bar Button left
+    func makeLeftBarButtonItem() -> [UIBarButtonItem] {
+        
+        let user = dataService.userName
+        
+        /// Add logo mage
+        let userName = UIBarButtonItem(title: user,
+                                       style: .done,
+                                       target: self,
+                                       action: #selector(userNameAction))
+        /// Add bar button
+        let addAccount = UIBarButtonItem(image: UIImage(systemName: "chevron.down"),
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(settingsButtonAction))
+        
+        /// return logo and button
+        return [userName, addAccount]
+    }
+    
+    /// Bar Buttons right
+    func makeRightBarButtonItem() -> [UIBarButtonItem] {
+        /// Two button
+        let createButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus.app"),
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(createButtonAction))
+        
+        let settingsButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"),
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(settingsButtonAction))
+        
+        return [settingsButtonItem, createButtonItem]
+    }
+    
+    /// Right Bar Button Actions
+    @objc func createButtonAction() {
+        print("[⚠️] Created button pressed")
+    }
+    @objc func settingsButtonAction() {
+        print("[⚠️] Settings button pressed")
+        updateSize()
+    }
+    
+    /// Left Bar Button Actions
+    @objc func userNameAction() {
+        print("[⚠️] About account")
+    }
+    @objc func addAccountAction() {
+        print("[⚠️] Change Account button pressed")
+    }
+    
 }
 
 //MARK: TableView DataSource
@@ -110,4 +186,25 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return view.bounds.height / 4
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+            return showStorySize
+           } else {
+               return UITableView.automaticDimension
+           }
+ 
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+               return showStorySize
+           } else {
+               return UITableView.automaticDimension
+           }
+    }
 }
+
+

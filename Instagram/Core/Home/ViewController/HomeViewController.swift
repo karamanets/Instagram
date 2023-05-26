@@ -50,6 +50,7 @@ private extension HomeViewController {
         /// Elements
         view.addSubview(tableView)
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -149,4 +150,24 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
-
+extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+            return 100
+           } else {
+               return UITableView.automaticDimension
+           }
+ 
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+               return 100
+           } else {
+               return UITableView.automaticDimension
+           }
+    }
+}

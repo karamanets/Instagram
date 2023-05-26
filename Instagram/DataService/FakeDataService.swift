@@ -22,12 +22,15 @@ final class FakeDataService {
     
     public var reelsModels: [ReelsModel] = []
     
+    public var userName: String? = nil
+    
     //MARK: Init
     private init() {
         userSetUp()
         setUpDataPost()
         setUpArrayOfImagesForSearchVC()
         setUpReels()
+        setUpUserName()
     }
     
     //MARK: Methods
@@ -71,6 +74,10 @@ final class FakeDataService {
     private func userSetUp() {
         let userImage = setUpRandomImage()
         self.userImage = userImage
+    }
+    
+    private func setUpUserName() {
+        self.userName = setUpRandomName()
     }
     
     private func setUpDataPost() {
