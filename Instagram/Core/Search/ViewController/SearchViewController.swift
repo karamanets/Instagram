@@ -47,7 +47,7 @@ final class SearchViewController: UIViewController {
     }()
     
     /// DataServer
-    private var items: [UIImage] = FakeDataService.shared.arrayImages
+    private var items: [String] = FakeDataService.shared.arrayImages
 }
 
 //MARK: - Private methods

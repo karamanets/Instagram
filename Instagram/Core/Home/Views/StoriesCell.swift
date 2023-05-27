@@ -14,7 +14,7 @@ final class StoriesCell: UICollectionViewCell {
     
     //MARK: Public
     /// use one item from array of StoriesCellInfo
-    func configure(with info: StoriesModel) {
+    func configure(with info: HomeStoryModel) {
         imageView.image = info.image
         userLabel.text = info.userName
         addButton.isHidden = !info.isAddButtonVisible

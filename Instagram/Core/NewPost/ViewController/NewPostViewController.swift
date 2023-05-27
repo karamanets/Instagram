@@ -121,7 +121,7 @@ class NewPostViewController: UIViewController {
     }()
     
     //MARK: DataService
-    private let items: [UIImage] = FakeDataService.shared.arrayImages
+    private let items: [String] = FakeDataService.shared.arrayImages
 }
 
 //MARK: - Private methods
@@ -136,7 +136,7 @@ private extension NewPostViewController {
         /// Methods
         makeTabBarIcon()
         
-        self.isModalInPresentation = true
+        //self.isModalInPresentation = true
         
         /// Main Image
         view.addSubview(mainImage)
@@ -294,7 +294,7 @@ extension NewPostViewController: UICollectionViewDelegate {
         
         let indexNewImage = (indexPath.item)
         
-        mainImage.image = items[indexNewImage]
+        mainImage.image = UIImage(named: items[indexNewImage] )
     
         return true
       

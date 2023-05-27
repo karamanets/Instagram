@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     private enum UiConstants {
         static let barItemHeight:CGFloat = 30
         static let barItemWidth: CGFloat = 34
+        static let storyRowHeight: CGFloat = 100
     }
     
     //MARK: Private properties
@@ -35,7 +36,7 @@ class HomeViewController: UIViewController {
     }()
     
     /// DataService
-    private var items: [InstagramItemType] = FakeDataService.shared.arrayStoryAndPostForHomeVC
+    private var dataService: [HomeType] = FakeDataService.shared.homeType
 }
 
 //MARK: - Private methods
@@ -131,15 +132,17 @@ private extension HomeViewController {
 extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.count
+        //print("\(dataService.count)")
+        return dataService.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.row]
+        let item = dataService[indexPath.row]
+        
         switch item {
-        case .stories(let info):
+        case .stories(let story):
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: StoriesSetCell.self), for: indexPath) as! StoriesSetCell
-            cell.configure(with: info)
+            cell.configure(with: story)
             return cell
             
         case .post(let post):
@@ -155,7 +158,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 0 {
-            return 100
+            return UiConstants.storyRowHeight
            } else {
                return UITableView.automaticDimension
            }
@@ -165,7 +168,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 0 {
-               return 100
+            return UiConstants.storyRowHeight
            } else {
                return UITableView.automaticDimension
            }

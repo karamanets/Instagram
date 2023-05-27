@@ -11,8 +11,8 @@ import SnapKit
 final class StoriesSetCell: UITableViewCell {
     
     //MARK: Public method
-    public func configure(with info: StoriesCells) {
-        self.items = info
+    public func configure(with info: [HomeStoryModel]) {
+        self.dataService = info
         collectionView.reloadData()
         //print("[🔥] init configure StoriesSetCell")
     }
@@ -40,7 +40,7 @@ final class StoriesSetCell: UITableViewCell {
     }()
     
     /// typealias name (array)
-    private var items: StoriesCells = []
+    private var dataService: [HomeStoryModel] = []
 }
 
 //MARK: - Private methods
@@ -57,7 +57,6 @@ private extension StoriesSetCell {
         contentView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            //make.height.equalTo(contentView.bounds.height * 2.6)
         }
     }
 }
@@ -66,14 +65,14 @@ private extension StoriesSetCell {
 extension StoriesSetCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        items.count
+        dataService.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
                                                         String(describing: StoriesCell.self), for: indexPath) as! StoriesCell
-        cell.configure(with: items[indexPath.item])
+        cell.configure(with: dataService[indexPath.item])
         return cell
     }
 }

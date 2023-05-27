@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController {
         view.register(ProfileTableViewHeader.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileTableViewHeader.self))
         ///Register cells
         view.register(ProfileStoriesSetCells.self, forCellReuseIdentifier: String(describing: ProfileStoriesSetCells.self))
-        
+        view.register(ProfileGallerySetCells.self, forCellReuseIdentifier: String(describing: ProfileGallerySetCells.self))
         return view
     }()
     
@@ -110,8 +110,7 @@ private extension ProfileViewController {
         let addAccount = UIBarButtonItem(image: UIImage(systemName: "chevron.down"),
                                          style: .done,
                                          target: self,
-                                         action: #selector(settingsButtonAction))
-        
+                                         action: #selector(addAccountAction))
         /// return logo and button
         return [userName, addAccount]
     }
@@ -128,8 +127,15 @@ private extension ProfileViewController {
                                                  style: .plain,
                                                  target: self,
                                                  action: #selector(settingsButtonAction))
-        
         return [settingsButtonItem, createButtonItem]
+    }
+    
+    /// Left Bar Button Actions
+    @objc func userNameAction() {
+        print("[⚠️] About account")
+    }
+    @objc func addAccountAction() {
+        print("[⚠️] Change Account button pressed")
     }
     
     /// Right Bar Button Actions
@@ -139,14 +145,6 @@ private extension ProfileViewController {
     @objc func settingsButtonAction() {
         print("[⚠️] Settings button pressed")
         updateSize()
-    }
-    
-    /// Left Bar Button Actions
-    @objc func userNameAction() {
-        print("[⚠️] About account")
-    }
-    @objc func addAccountAction() {
-        print("[⚠️] Change Account button pressed")
     }
     
 }
@@ -159,17 +157,33 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return dataService.profileType.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileStoriesSetCells.self),
-                                                 for: indexPath) as! ProfileStoriesSetCells
+//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileStoriesSetCells.self),
+//                                                 for: indexPath) as! ProfileStoriesSetCells
+//        cell.configure(with: dataService.profileStory)
+//        return cell
         
-        cell.configure(with: dataService.arrayImages)
-        
-        return cell
+        let item = dataService.profileType[indexPath.row]
+
+        switch item {
+
+        case .stories(let story):
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileStoriesSetCells.self),
+                                                     for: indexPath) as! ProfileStoriesSetCells
+            cell.configure(with: story)
+            return cell
+
+        case .gallery(let gallery):
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileGallerySetCells.self),
+                                                     for: indexPath) as! ProfileGallerySetCells
+            cell.configure(with: gallery)
+            
+            return cell
+        }
     }
 }
 
@@ -206,5 +220,6 @@ extension ProfileViewController: UITableViewDelegate {
            }
     }
 }
+
 
 

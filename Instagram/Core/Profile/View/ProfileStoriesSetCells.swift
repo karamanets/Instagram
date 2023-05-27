@@ -11,8 +11,8 @@ import SnapKit
 final class ProfileStoriesSetCells: UITableViewCell {
     
     //MARK: Public
-    public func configure(with images: [UIImage]) {
-        self.imagesArray = images
+    public func configure(with info: [ProfileStoryModel]) {
+        self.dataService = info
         collectionView.reloadData()
     }
     
@@ -53,7 +53,7 @@ final class ProfileStoriesSetCells: UITableViewCell {
         return view
     }()
     
-    private var imagesArray: [UIImage] = []
+    private var dataService: [ProfileStoryModel] = []
 }
 
 //MARK: - Private Methods
@@ -83,7 +83,7 @@ extension ProfileStoriesSetCells: UICollectionViewDelegate {
 extension ProfileStoriesSetCells: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imagesArray.count
+        return dataService.count
     }
     
     ///CollectionCell stories and gallery
@@ -92,7 +92,7 @@ extension ProfileStoriesSetCells: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProfileStoriesCell.self),
                                                       for: indexPath) as! ProfileStoriesCell
         
-        cell.configure(with: imagesArray[indexPath.item])
+        cell.configure(with: dataService[indexPath.item])
         
         return cell
     }

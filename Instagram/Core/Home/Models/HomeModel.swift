@@ -8,18 +8,16 @@
 import UIKit
 
 
-//MARK: Stories Model
-struct StoriesModel {
+//MARK: Story Model
+struct HomeStoryModel {
     let image: UIImage
     let userName: String
     let isAddButtonVisible: Bool
     let isNewStory: Bool
 }
 
-typealias StoriesCells = [StoriesModel]
-
 //MARK: Post Model
-struct PostModel {
+struct HomePostModel {
     let userImage: UIImage
     let userName: String
     let postSubtitle: String
@@ -33,7 +31,7 @@ struct CommentShortInfo {
     let commentText: String
 }
 
-enum InstagramItemType {
-    case stories(StoriesCells)
-    case post(PostModel)
+enum HomeType {
+    case stories( [HomeStoryModel] )
+    case post( HomePostModel )
 }

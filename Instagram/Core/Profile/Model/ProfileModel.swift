@@ -7,5 +7,18 @@
 
 import Foundation
 
-//MARK: Story model in Profile
+//MARK: Story Model
+struct ProfileStoryModel {
+    let imageName: String
+}
+
+//MARK: Gallery Model
+struct ProfileGalleryModel {
+    let imageName: String
+}
+
+enum ProfileType {
+    case stories ( [ProfileStoryModel] )
+    case gallery ( ProfileGalleryModel )
+}
 

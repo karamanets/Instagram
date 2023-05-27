@@ -11,8 +11,8 @@ import SnapKit
 class NewPostCell: UICollectionViewCell {
     
     //MARK: Public
-    func configure(with image: UIImage) {
-        imageView.image = image
+    func configure(with image: String) {
+        imageView.image = UIImage(named: image)
     }
     
     //MARK: Init

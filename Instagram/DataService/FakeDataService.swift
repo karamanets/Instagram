@@ -14,15 +14,19 @@ final class FakeDataService {
     static let shared = FakeDataService()
     
     //MARK: Public
-    public var arrayStoryAndPostForHomeVC: [InstagramItemType] = []
+    public var homeType: [HomeType] = []
     
-    public var arrayImages: [UIImage] = []
+    public var arrayImages: [String] = []
     
     public var userImage: UIImage? = nil
     
     public var reelsModels: [ReelsModel] = []
     
     public var userName: String? = nil
+    
+    public var profileStory: [ProfileStoryModel] = []
+    
+    public var profileType: [ProfileType] = []
     
     //MARK: Init
     private init() {
@@ -31,9 +35,21 @@ final class FakeDataService {
         setUpArrayOfImagesForSearchVC()
         setUpReels()
         setUpUserName()
+        setUpProfileStory()
+        setUpProfile()
     }
     
     //MARK: Methods
+    private func setUpProfileStory() {
+        
+        var temp: [ProfileStoryModel] = []
+        
+        for _ in 1...100 {
+            let story = ProfileStoryModel(imageName: setUpRandomImageName())
+            temp.append(story)
+        }
+        self.profileStory = temp
+    }
     
     private func setUpRandomImage() -> UIImage {
         
@@ -80,12 +96,14 @@ final class FakeDataService {
         self.userName = setUpRandomName()
     }
     
+    //========== Home ViewController
+    
     private func setUpDataPost() {
         
-        var tempData: [InstagramItemType] = []
+        var tempData: [HomeType] = []
         
         for _ in 1...100 {
-            let post: InstagramItemType = .post(PostModel(userImage: setUpRandomImage(),
+            let post: HomeType = .post(HomePostModel(userImage: setUpRandomImage(),
                                                             userName: setUpRandomName(),
                                                             postSubtitle: setUpRandomSubtitle(),
                                                             postImage: setUpRandomImage(),
@@ -93,34 +111,65 @@ final class FakeDataService {
                                                              
                                                             comment: CommentShortInfo(userName: setUpRandomName(),
                                                                                       commentText: setUpRandomComment())))
-            
             tempData.append(post)
         }
         
         tempData.insert(.stories(setUpDataStoriesArray()), at: 0)
         
-        arrayStoryAndPostForHomeVC = tempData
+        homeType = tempData
     }
     
-    private func setUpDataStoriesArray() -> [StoriesModel] {
+    private func setUpDataStoriesArray() -> [HomeStoryModel] {
 
-        var tempArray: [StoriesModel] = []
+        var tempArray: [HomeStoryModel] = []
         
-        let userStories = StoriesModel(image: setUpRandomImage(),
+        let userStories = HomeStoryModel(image: setUpRandomImage(),
                                               userName: setUpRandomName(),
                                               isAddButtonVisible: true,
                                               isNewStory: setUpRandomIsNew())
-        
-        
         tempArray.append(userStories)
 
         for _ in 1...100 {
-            let story = StoriesModel(image: setUpRandomImage(), userName: setUpRandomName(), isAddButtonVisible: false, isNewStory: setUpRandomIsNew())
+            let story = HomeStoryModel(image: setUpRandomImage(), userName: setUpRandomName(), isAddButtonVisible: false, isNewStory: setUpRandomIsNew())
             tempArray.append(story)
         }
         
         return tempArray
     }
+    
+    //========== Profile ViewController
+    
+    private func setUpProfile() {
+        
+        var temp: [ProfileType] = []
+        
+        let story = setUpProfileStoriesArray()
+        
+        temp.insert(.stories(story), at: 0)
+        
+        for _ in 1...100 {
+            let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
+            
+            temp.append(.gallery(ProfileGalleryModel(imageName: imagesName ?? "")))
+        }
+        
+        self.profileType = temp
+    }
+    
+    private func setUpProfileStoriesArray() -> [ProfileStoryModel] {
+        
+        var temp: [ProfileStoryModel] = []
+        
+        for _ in 1...100 {
+            let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
+            
+            temp.append(ProfileStoryModel(imageName: imagesName ?? ""))
+        }
+        
+        return temp
+    }
+    
+    //=========== Else
     
     private func setUpRandomName() -> String {
         let userName = ["Cat_boss",
@@ -149,6 +198,13 @@ final class FakeDataService {
         return userName
     }
     
+    private func setUpRandomImageName() -> String {
+        
+        let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
+        
+        return imagesName ?? ""
+    }
+    
     private func setUpRandomSubtitle() -> String {
         let subtitle = ["Sponsored", setUpRandomName()].randomElement() ?? ""
         return subtitle
@@ -160,10 +216,12 @@ final class FakeDataService {
     }
     
     private func setUpArrayOfImagesForSearchVC() {
-        var tempImageArray: [UIImage] = []
-        
+        var tempImageArray: [String] = []
         for _ in 1...100 {
-            tempImageArray.append(setUpRandomImage())
+            
+            guard let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement() else { return }
+            
+            tempImageArray.append(imagesName)
         }
         arrayImages = tempImageArray
     }
