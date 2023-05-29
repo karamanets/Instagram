@@ -8,17 +8,17 @@
 import Foundation
 
 //MARK: Story Model
-struct ProfileStoryModel {
+struct ProfileStoryModel_2 {
     let imageName: String
 }
 
 //MARK: Gallery Model
-struct ProfileGalleryModel {
+struct ProfileGalleryModel_2 {
     let imageName: String
 }
 
-enum ProfileType {
-    case stories ( [ProfileStoryModel] )
-    case gallery ( ProfileGalleryModel )
+enum ProfileType_2 {
+    case stories ( [ProfileStoryModel_2] )
+    case gallery ( [ProfileGalleryModel_2] )
 }
 

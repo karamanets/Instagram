@@ -8,7 +8,9 @@
 import UIKit
 import SnapKit
 
-class ProfileViewController: UIViewController {
+//🔥 Incorrect Example
+
+class ProfileViewController_2: UIViewController {
 
     //MARK: Life Cycle
     override func viewDidLoad() {
@@ -28,10 +30,10 @@ class ProfileViewController: UIViewController {
         view.separatorColor = UIColor.clear
         view.backgroundColor = UIColor.theme.background
         ///Register header
-        view.register(ProfileTableViewHeader.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileTableViewHeader.self))
+        view.register(ProfileTableViewHeader_2.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileTableViewHeader_2.self))
         ///Register cells
-        view.register(ProfileStoriesSetCells.self, forCellReuseIdentifier: String(describing: ProfileStoriesSetCells.self))
-        view.register(ProfileGallerySetCells.self, forCellReuseIdentifier: String(describing: ProfileGallerySetCells.self))
+        view.register(ProfileStoriesSetCells_2.self, forCellReuseIdentifier: String(describing: ProfileStoriesSetCells_2.self))
+        view.register(ProfileGallerySetCells_2.self, forCellReuseIdentifier: String(describing: ProfileGallerySetCells_2.self))
         return view
     }()
     
@@ -42,7 +44,7 @@ class ProfileViewController: UIViewController {
 }
 
 //MARK: - Private methods
-private extension ProfileViewController {
+private extension ProfileViewController_2 {
     
     func initialize() {
         ///View
@@ -78,7 +80,7 @@ private extension ProfileViewController {
 }
 
 //MARK: Bar Items
-private extension ProfileViewController {
+private extension ProfileViewController_2 {
     
     /// Bar bottom image title tag
     func makeBarBottomIcon() {
@@ -150,36 +152,27 @@ private extension ProfileViewController {
 }
 
 //MARK: TableView DataSource
-extension ProfileViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
+extension ProfileViewController_2: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataService.profileType.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileStoriesSetCells.self),
-//                                                 for: indexPath) as! ProfileStoriesSetCells
-//        cell.configure(with: dataService.profileStory)
-//        return cell
-        
+
         let item = dataService.profileType[indexPath.row]
 
         switch item {
 
         case .stories(let story):
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileStoriesSetCells.self),
-                                                     for: indexPath) as! ProfileStoriesSetCells
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileStoriesSetCells_2.self),
+                                                     for: indexPath) as! ProfileStoriesSetCells_2
             cell.configure(with: story)
             return cell
 
         case .gallery(let gallery):
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileGallerySetCells.self),
-                                                     for: indexPath) as! ProfileGallerySetCells
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileGallerySetCells_2.self),
+                                                     for: indexPath) as! ProfileGallerySetCells_2
             cell.configure(with: gallery)
             
             return cell
@@ -188,11 +181,11 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 //MARK: TableView Delegate
-extension ProfileViewController: UITableViewDelegate {
+extension ProfileViewController_2: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileTableViewHeader.self))
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileTableViewHeader_2.self))
         
         return header
     }
@@ -206,7 +199,7 @@ extension ProfileViewController: UITableViewDelegate {
         if indexPath.row == 0 {
             return showStorySize
            } else {
-               return UITableView.automaticDimension
+               return view.bounds.height
            }
  
     }
@@ -216,7 +209,7 @@ extension ProfileViewController: UITableViewDelegate {
         if indexPath.row == 0 {
                return showStorySize
            } else {
-               return UITableView.automaticDimension
+               return view.bounds.height
            }
     }
 }

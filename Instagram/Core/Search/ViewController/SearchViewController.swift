@@ -35,19 +35,18 @@ final class SearchViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.alwaysBounceVertical = true
         collectionView.backgroundColor = UIColor.theme.background
-        
-        collectionView.register(SearchCollectionCell.self,
-                                forCellWithReuseIdentifier: String(describing: SearchCollectionCell.self))
-        
+        ///Registr Header
         collectionView.register(HeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: String(describing: HeaderView.self))
-       
+        ///Register Cell
+        collectionView.register(SearchCollectionCell.self,
+                                forCellWithReuseIdentifier: String(describing: SearchCollectionCell.self))
         return collectionView
     }()
     
     /// DataServer
-    private var items: [String] = FakeDataService.shared.arrayImages
+    private var items: [String] = FakeDataService.shared.SearchArrayImagesName
 }
 
 //MARK: - Private methods
@@ -87,11 +86,7 @@ private extension SearchViewController {
 
 //MARK: CollectionView DataSource
 extension SearchViewController: UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }

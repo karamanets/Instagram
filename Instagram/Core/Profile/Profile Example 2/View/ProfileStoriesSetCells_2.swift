@@ -8,10 +8,10 @@
 import UIKit
 import SnapKit
 
-final class ProfileStoriesSetCells: UITableViewCell {
+final class ProfileStoriesSetCells_2: UITableViewCell {
     
     //MARK: Public
-    public func configure(with info: [ProfileStoryModel]) {
+    public func configure(with info: [ProfileStoryModel_2]) {
         self.dataService = info
         collectionView.reloadData()
     }
@@ -44,20 +44,19 @@ final class ProfileStoriesSetCells: UITableViewCell {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.showsHorizontalScrollIndicator = false
         ///Register header
-        view.register(HeaderStoryButton.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                      withReuseIdentifier: String(describing: HeaderStoryButton.self))
+        view.register(HeaderStoryButton_2.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                      withReuseIdentifier: String(describing: HeaderStoryButton_2.self))
         ///Register cell
-        view.register(ProfileStoriesCell.self, forCellWithReuseIdentifier: String(describing: ProfileStoriesCell.self))
-        
-        
+        view.register(ProfileStoriesCell_2.self, forCellWithReuseIdentifier: String(describing: ProfileStoriesCell_2.self))
+
         return view
     }()
     
-    private var dataService: [ProfileStoryModel] = []
+    private var dataService: [ProfileStoryModel_2] = []
 }
 
 //MARK: - Private Methods
-private extension ProfileStoriesSetCells {
+private extension ProfileStoriesSetCells_2 {
     
     func initialize() {
         ///View
@@ -74,13 +73,13 @@ private extension ProfileStoriesSetCells {
 }
 
 //MARK: CollectionView Delegate
-extension ProfileStoriesSetCells: UICollectionViewDelegate {
+extension ProfileStoriesSetCells_2: UICollectionViewDelegate {
     
 
 }
 
 //MARK: CollectionView DataSource
-extension ProfileStoriesSetCells: UICollectionViewDataSource {
+extension ProfileStoriesSetCells_2: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataService.count
@@ -89,8 +88,8 @@ extension ProfileStoriesSetCells: UICollectionViewDataSource {
     ///CollectionCell stories and gallery
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProfileStoriesCell.self),
-                                                      for: indexPath) as! ProfileStoriesCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProfileStoriesCell_2.self),
+                                                      for: indexPath) as! ProfileStoriesCell_2
         
         cell.configure(with: dataService[indexPath.item])
         
@@ -103,8 +102,8 @@ extension ProfileStoriesSetCells: UICollectionViewDataSource {
                         at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
-                                                                     withReuseIdentifier: String(describing: HeaderStoryButton.self),
-                                                                     for: indexPath) as! HeaderStoryButton
+                                                                     withReuseIdentifier: String(describing: HeaderStoryButton_2.self),
+                                                                     for: indexPath) as! HeaderStoryButton_2
         return header
     }
     
@@ -121,7 +120,7 @@ extension ProfileStoriesSetCells: UICollectionViewDataSource {
 }
 
 //MARK: CollectionView Flow Layout
-extension ProfileStoriesSetCells: UICollectionViewDelegateFlowLayout {
+extension ProfileStoriesSetCells_2: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -136,7 +135,7 @@ extension ProfileStoriesSetCells: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: HeaderView Add Button
-final class HeaderStoryButton: UICollectionReusableView {
+final class HeaderStoryButton_2: UICollectionReusableView {
     
     //MARK: Fileprivate
     private lazy var button: UIButton = {
@@ -150,7 +149,7 @@ final class HeaderStoryButton: UICollectionReusableView {
     private lazy var label: UILabel = {
         let view = UILabel()
         view.text = "New"
-        view.font = UIFont.systemFont(ofSize: ProfileStoriesSetCells.UiConstants.labelNewSize, weight: .medium)
+        view.font = UIFont.systemFont(ofSize: ProfileStoriesSetCells_2.UiConstants.labelNewSize, weight: .medium)
         view.textColor = UIColor.theme.icons
         view.textAlignment = .center
         return view
@@ -162,14 +161,14 @@ final class HeaderStoryButton: UICollectionReusableView {
         
         addSubview(button)
         button.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(ProfileStoriesSetCells.UiConstants.headerLeadingInset)
-            make.top.equalToSuperview().offset(ProfileStoriesSetCells.UiConstants.headerStoryOffSet)
-            make.size.equalTo(ProfileStoriesSetCells.UiConstants.headerStorySize)
+            make.leading.equalToSuperview().inset(ProfileStoriesSetCells_2.UiConstants.headerLeadingInset)
+            make.top.equalToSuperview().offset(ProfileStoriesSetCells_2.UiConstants.headerStoryOffSet)
+            make.size.equalTo(ProfileStoriesSetCells_2.UiConstants.headerStorySize)
         }
         
         addSubview(label)
         label.snp.makeConstraints { make in
-            make.top.equalTo(button.snp.bottom).offset(ProfileStoriesSetCells.UiConstants.ofSetHeaderLabel)
+            make.top.equalTo(button.snp.bottom).offset(ProfileStoriesSetCells_2.UiConstants.ofSetHeaderLabel)
             make.centerX.equalTo(button.snp.centerX)
         }
     }

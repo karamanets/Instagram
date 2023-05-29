@@ -121,7 +121,7 @@ class NewPostViewController: UIViewController {
     }()
     
     //MARK: DataService
-    private let items: [String] = FakeDataService.shared.arrayImages
+    private let items: [String] = FakeDataService.shared.NewPostArrayImagesName
 }
 
 //MARK: - Private methods

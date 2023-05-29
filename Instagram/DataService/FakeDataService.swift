@@ -16,49 +16,111 @@ final class FakeDataService {
     //MARK: Public
     public var homeType: [HomeType] = []
     
-    public var arrayImages: [String] = []
+    public var SearchArrayImagesName: [String] = []
+    
+    public var NewPostArrayImagesName: [String] = []
     
     public var userImage: UIImage? = nil
     
+    public var userName: String? = nil
+    
     public var reelsModels: [ReelsModel] = []
     
-    public var userName: String? = nil
+    public var profileType: [ProfileType_2] = []
     
     public var profileStory: [ProfileStoryModel] = []
     
-    public var profileType: [ProfileType] = []
+    public var profileGallery: [ProfileGalleryModel] = []
     
     //MARK: Init
     private init() {
-        userSetUp()
-        setUpDataPost()
+        ///Home VC
+        setUpHome()
+        
+        ///Search VC
         setUpArrayOfImagesForSearchVC()
+        
+        ///NewPost VC
+        setUpArrayOfImagesForNewPostVC()
+        
+        ///Reels VC
         setUpReels()
         setUpUserName()
-        setUpProfileStory()
-        setUpProfile()
+        
+        ///Profile VC
+        userSetUp()
+        setUpProfile_2()
+        setUpProfileGalleryArray()
+        setUpProfileStoriesArray()
     }
     
-    //MARK: Methods
-    private func setUpProfileStory() {
+    //MARK: Private Methods
+    //========== Home ViewController
+    private func setUpHome() {
         
-        var temp: [ProfileStoryModel] = []
+        var tempData: [HomeType] = []
         
         for _ in 1...100 {
-            let story = ProfileStoryModel(imageName: setUpRandomImageName())
-            temp.append(story)
+            let post: HomeType = .post(HomePostModel(userImage: setUpRandomImage(),
+                                                            userName: setUpRandomName(),
+                                                            postSubtitle: setUpRandomSubtitle(),
+                                                            postImage: setUpRandomImage(),
+                                                            numberOfLikes: setUpRandomLike(),
+                                                             
+                                                            comment: CommentShortInfo(userName: setUpRandomName(),
+                                                                                      commentText: setUpRandomComment())))
+            tempData.append(post)
         }
-        self.profileStory = temp
+        
+        tempData.insert(.stories(setUpHomeStoriesArray()), at: 0)
+        
+        homeType = tempData
     }
     
-    private func setUpRandomImage() -> UIImage {
+    private func setUpHomeStoriesArray() -> [HomeStoryModel] {
+
+        var tempArray: [HomeStoryModel] = []
         
-        let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
+        let userStories = HomeStoryModel(image: setUpRandomImage(),
+                                              userName: setUpRandomName(),
+                                              isAddButtonVisible: true,
+                                              isNewStory: setUpRandomIsNew())
+        tempArray.append(userStories)
+
+        for _ in 1...100 {
+            let story = HomeStoryModel(image: setUpRandomImage(), userName: setUpRandomName(), isAddButtonVisible: false, isNewStory: setUpRandomIsNew())
+            tempArray.append(story)
+        }
         
-        let image = UIImage(named: imagesName ?? "")
-        return image ?? UIImage()
+        return tempArray
     }
     
+    //========== NewPost ViewController
+    private func setUpArrayOfImagesForNewPostVC() {
+        var tempImageArray: [String] = []
+        for _ in 1...100 {
+            
+            guard let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement() else { return }
+            
+            tempImageArray.append(imagesName)
+        }
+        NewPostArrayImagesName = tempImageArray
+    }
+    
+    
+    //========== Search ViewController
+    private func setUpArrayOfImagesForSearchVC() {
+        var tempImageArray: [String] = []
+        for _ in 1...100 {
+            
+            guard let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement() else { return }
+            
+            tempImageArray.append(imagesName)
+        }
+        SearchArrayImagesName = tempImageArray
+    }
+    
+    //========== Reels ViewController
     private func setUpReels() {
         
         var temp: [ReelsModel] = []
@@ -87,76 +149,22 @@ final class FakeDataService {
         return video ?? "cat1"
     }
     
-    private func userSetUp() {
-        let userImage = setUpRandomImage()
-        self.userImage = userImage
-    }
-    
-    private func setUpUserName() {
-        self.userName = setUpRandomName()
-    }
-    
-    //========== Home ViewController
-    
-    private func setUpDataPost() {
-        
-        var tempData: [HomeType] = []
-        
-        for _ in 1...100 {
-            let post: HomeType = .post(HomePostModel(userImage: setUpRandomImage(),
-                                                            userName: setUpRandomName(),
-                                                            postSubtitle: setUpRandomSubtitle(),
-                                                            postImage: setUpRandomImage(),
-                                                            numberOfLikes: setUpRandomLike(),
-                                                             
-                                                            comment: CommentShortInfo(userName: setUpRandomName(),
-                                                                                      commentText: setUpRandomComment())))
-            tempData.append(post)
-        }
-        
-        tempData.insert(.stories(setUpDataStoriesArray()), at: 0)
-        
-        homeType = tempData
-    }
-    
-    private func setUpDataStoriesArray() -> [HomeStoryModel] {
-
-        var tempArray: [HomeStoryModel] = []
-        
-        let userStories = HomeStoryModel(image: setUpRandomImage(),
-                                              userName: setUpRandomName(),
-                                              isAddButtonVisible: true,
-                                              isNewStory: setUpRandomIsNew())
-        tempArray.append(userStories)
-
-        for _ in 1...100 {
-            let story = HomeStoryModel(image: setUpRandomImage(), userName: setUpRandomName(), isAddButtonVisible: false, isNewStory: setUpRandomIsNew())
-            tempArray.append(story)
-        }
-        
-        return tempArray
-    }
-    
     //========== Profile ViewController
-    
-    private func setUpProfile() {
+    private func setUpProfileGalleryArray() {
         
-        var temp: [ProfileType] = []
-        
-        let story = setUpProfileStoriesArray()
-        
-        temp.insert(.stories(story), at: 0)
+        var temp: [ProfileGalleryModel] = []
         
         for _ in 1...100 {
             let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
             
-            temp.append(.gallery(ProfileGalleryModel(imageName: imagesName ?? "")))
+            let item = ProfileGalleryModel(imageName: imagesName ?? "")
+            
+            temp.append(item)
         }
-        
-        self.profileType = temp
+        self.profileGallery = temp
     }
     
-    private func setUpProfileStoriesArray() -> [ProfileStoryModel] {
+    private func setUpProfileStoriesArray() {
         
         var temp: [ProfileStoryModel] = []
         
@@ -166,10 +174,68 @@ final class FakeDataService {
             temp.append(ProfileStoryModel(imageName: imagesName ?? ""))
         }
         
+        self.profileStory = temp
+    }
+    
+    private func setUpProfile_2() {
+        
+        var temp: [ProfileType_2] = []
+        
+        let stories = setUpProfileStoriesArray_2()
+        
+        let gallery = setUpProfileGalleryArray_2()
+        
+        temp.append(.stories(stories))
+        
+        temp.append(.gallery(gallery))
+        
+        self.profileType = temp
+    }
+    
+    private func setUpProfileGalleryArray_2() -> [ProfileGalleryModel_2] {
+        
+        var temp: [ProfileGalleryModel_2] = []
+        
+        for _ in 1...100 {
+            let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
+            
+            let item = ProfileGalleryModel_2(imageName: imagesName ?? "")
+            
+            temp.append(item)
+        }
+        return temp
+    }
+    
+    private func setUpProfileStoriesArray_2() -> [ProfileStoryModel_2] {
+        
+        var temp: [ProfileStoryModel_2] = []
+        
+        for _ in 1...100 {
+            let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
+            
+            temp.append(ProfileStoryModel_2(imageName: imagesName ?? ""))
+        }
+        
         return temp
     }
     
     //=========== Else
+    private func setUpRandomImage() -> UIImage {
+        
+        let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement()
+        
+        let image = UIImage(named: imagesName ?? "")
+        return image ?? UIImage()
+    }
+    
+    private func userSetUp() {
+        let userImage = setUpRandomImage()
+        self.userImage = userImage
+    }
+    
+    private func setUpUserName() {
+        self.userName = setUpRandomName()
+    }
     
     private func setUpRandomName() -> String {
         let userName = ["Cat_boss",
@@ -213,17 +279,6 @@ final class FakeDataService {
     private func setUpRandomLike() -> Int {
         let like = Int.random(in: 0...1000)
         return like
-    }
-    
-    private func setUpArrayOfImagesForSearchVC() {
-        var tempImageArray: [String] = []
-        for _ in 1...100 {
-            
-            guard let imagesName = ["image1", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10", "image11", "image12", "image13", "image14", "image15"].randomElement() else { return }
-            
-            tempImageArray.append(imagesName)
-        }
-        arrayImages = tempImageArray
     }
     
     private func setUpRandomComment() -> String {

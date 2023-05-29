@@ -1,14 +1,14 @@
 //
-//  ProfileStoriesCell.swift
+//  ProfileStoryCell.swift
 //  Instagram
 //
-//  Created by Alex Karamanets on 23/05/2023.
+//  Created by Alex Karamanets on 29/05/2023.
 //
 
 import UIKit
 import SnapKit
 
-final class ProfileStoriesCell: UICollectionViewCell {
+final class ProfileStoryCell: UICollectionViewCell {
     
     //MARK: Public
     public func configure(with info: ProfileStoryModel) {
@@ -42,7 +42,7 @@ final class ProfileStoriesCell: UICollectionViewCell {
 }
 
 //MARK: - Private Methods
-private extension ProfileStoriesCell {
+private extension ProfileStoryCell {
     
     func initialize() {
     
