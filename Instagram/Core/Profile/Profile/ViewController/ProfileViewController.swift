@@ -20,7 +20,7 @@ class ProfileViewController: UIViewController {
     //MARK: UiConstants
     private enum UiConstants {
         static let barItemSize:CGFloat = 30
-        static let insetHeaderToCollectionCell:CGFloat = 30
+        static let insetHeaderToCollectionCell:CGFloat = 25
     }
 
     //MARK: Private Property
@@ -43,6 +43,8 @@ class ProfileViewController: UIViewController {
 
     ///DataService
     let dataService = FakeDataService.shared
+    
+    var showStory: Bool = true
 }
 
 //MARK: - Private methods
@@ -65,6 +67,22 @@ private extension ProfileViewController {
         collectionView.delegate = self
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    func updateCollectionSize() {
+        self.showStory.toggle()
+        self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    func getHeight(with size: CGFloat) -> CGFloat {
+        let heightSE = collectionView.bounds.height / 2 - UiConstants.insetHeaderToCollectionCell
+        let heightMAX = collectionView.bounds.height / 3 + UiConstants.insetHeaderToCollectionCell
+        
+        if size > 700 {
+            return heightMAX
+        } else {
+            return heightSE
         }
     }
 }
@@ -136,7 +154,7 @@ private extension ProfileViewController {
     }
     @objc func settingsButtonAction() {
         print("[⚠️] Settings button pressed")
-        //updateSize()
+        updateCollectionSize()
     }
 
 }
@@ -153,7 +171,7 @@ extension ProfileViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProfileGalleryCell.self),
                                                       for: indexPath) as! ProfileGalleryCell
 
-        cell.configure(with: dataService.profileGallery[indexPath.item].imageName)
+        cell.configure(with: dataService.profileGallery[indexPath.item])
 
         return cell
     }
@@ -166,7 +184,6 @@ extension ProfileViewController: UICollectionViewDataSource {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                                                      withReuseIdentifier: String(describing: ProfileHeader.self),
                                                                      for: indexPath) as! ProfileHeader
-        
         header.configure(with: dataService.profileStory)
         
         return header
@@ -178,9 +195,12 @@ extension ProfileViewController: UICollectionViewDataSource {
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         let width =  collectionView.bounds.width
-        let height =  collectionView.bounds.height / 3 + UiConstants.insetHeaderToCollectionCell
         
-        return CGSize(width: width, height: height)
+        let height = getHeight(with: collectionView.bounds.height)
+
+        let heightClose = getHeight(with: collectionView.bounds.height) - collectionView.bounds.width / 3.4
+        
+        return CGSize(width: width, height: showStory ? height : heightClose )
     }
 }
 
@@ -202,7 +222,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let width = view.bounds.width / 3.06
+        let width = view.bounds.width / 3.0666
 
         let height = view.bounds.height / 6.8
 

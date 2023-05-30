@@ -41,17 +41,18 @@ final class StoriesCell: UICollectionViewCell {
         static let circleImageSize: CGFloat = 92
         static let buttonInset: CGFloat = -3
         static let buttonBorderWidth: CGFloat = 3
+        static let insetImageToBorder: CGFloat = 6
     }
     
     //MARK: Private property
-    private var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
        let view = UIImageView()
         view.clipsToBounds = true
-        view.layer.cornerRadius = UIConstants.imageSize / 2
+        view.layer.cornerRadius = cornerRadiusImage
         return view
     }()
     
-    private var circleImage: UIImageView = {
+    private lazy var circleImage: UIImageView = {
        let view = UIImageView()
         view.image = UIImage(named: "LogoCircle")
         return view
@@ -75,17 +76,24 @@ final class StoriesCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(AddButtonAction), for: .touchUpInside)
         return button
     }()
+    
+    var cornerRadiusImage: CGFloat = 0
 }
 
 //MARK: Private methods
 private extension StoriesCell {
     
     func initialize() {
+        
+        /// Size for image cell
+        let imageSize = contentView.bounds.width 
+        cornerRadiusImage = imageSize / 2 - (UIConstants.insetImageToBorder / 2)
+        
         contentView.addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(UIConstants.imageInset)
-            make.width.height.equalTo(UIConstants.imageSize)
+            make.size.equalTo(imageSize - UIConstants.insetImageToBorder)
         }
         
         contentView.addSubview(userLabel)
@@ -97,7 +105,7 @@ private extension StoriesCell {
         contentView.addSubview(circleImage)
         circleImage.snp.makeConstraints { make in
             make.center.equalTo(imageView.snp.center)
-            make.size.equalTo(UIConstants.circleImageSize)
+            make.size.equalTo(imageSize + UIConstants.insetImageToBorder)
         }
         
         contentView.addSubview(addButton)

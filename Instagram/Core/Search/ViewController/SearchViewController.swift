@@ -127,7 +127,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = view.bounds.width / 3.06
+        let width = view.bounds.width / 3.0666
         
         let height = view.bounds.height / 6.8
         

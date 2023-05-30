@@ -16,8 +16,3 @@ struct ProfileStoryModel {
 struct ProfileGalleryModel {
     let imageName: String
 }
-
-enum ProfileType {
-    case stories ( [ProfileStoryModel] )
-    case gallery ( [ProfileGalleryModel] )
-}

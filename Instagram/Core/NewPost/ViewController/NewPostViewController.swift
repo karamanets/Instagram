@@ -277,7 +277,7 @@ extension NewPostViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = view.bounds.width / 4.1
+        let width = view.bounds.width / 4.111
         
         let height = view.bounds.height / 8.2
         

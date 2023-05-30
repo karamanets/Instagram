@@ -28,12 +28,10 @@ final class ProfileHeader: UICollectionReusableView {
     
     //MARK: UiConstants
     fileprivate enum UiConstants {
-        static let headerStorySize: CGFloat = 80
         static let headerStoryOffSet: CGFloat = 8
         static let labelNewSize: CGFloat = 15
         static let ofSetHeaderLabel: CGFloat = 3
         static let headerLeadingInset: CGFloat = 8
-        static let userImageSize: CGFloat = 100
         static let textFont: CGFloat = 20
         static let textFontSubtitle: CGFloat = 15
         static let inset: CGFloat = 16
@@ -43,12 +41,12 @@ final class ProfileHeader: UICollectionReusableView {
     }
     
     //MARK: Private Property
-    private let userImage: UIImageView = {
+    private lazy var userImage: UIImageView = {
         let view = UIImageView()
         let image = UIImage(named: "image1")
         view.image = image
         view.clipsToBounds = true
-        view.layer.cornerRadius = UiConstants.userImageSize / 2
+        view.layer.cornerRadius = customSizeUserImage
         return view
     }()
     
@@ -170,6 +168,7 @@ final class ProfileHeader: UICollectionReusableView {
         layout.minimumInteritemSpacing = 0
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.showsHorizontalScrollIndicator = false
+        view.alwaysBounceVertical = false
         ///Register header
         view.register(HeaderStoryButton.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                       withReuseIdentifier: String(describing: HeaderStoryButton.self))
@@ -181,6 +180,9 @@ final class ProfileHeader: UICollectionReusableView {
     
     ///DataCervice
     private var items: [ProfileStoryModel] = []
+    
+    ///Make cornerRadius for user image
+    private var customSizeUserImage: CGFloat = 0
 }
 
 //MARK: - Private Methods
@@ -190,10 +192,14 @@ private extension ProfileHeader {
         ///View
         backgroundColor = UIColor.theme.background
         
+        ///Size for User image
+        let imageSize = bounds.width / 4.2
+        customSizeUserImage = imageSize / 2
+        
         ///Element - userImage
         addSubview(userImage)
         userImage.snp.makeConstraints { make in
-            make.size.equalTo(UiConstants.userImageSize)
+            make.size.equalTo(imageSize)
             make.leading.equalToSuperview().inset(UiConstants.inset)
             make.top.equalToSuperview().inset(UiConstants.inset)
         }
@@ -239,7 +245,7 @@ private extension ProfileHeader {
         ///Element -  StoryHighlights Subtitle Label
         addSubview(storyHighlightsSubtitleLabel)
         storyHighlightsSubtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(storyHighlightsLabel.snp.bottom).offset(4)
+            make.top.equalTo(storyHighlightsLabel.snp.bottom).offset(6)
             make.leading.equalTo(storyHighlightsLabel.snp.leading)
         }
         
@@ -300,26 +306,31 @@ private extension ProfileHeader {
         }
         return action
     }
+    
 }
 
 //MARK: CollectionView Delegate
 extension ProfileHeader: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("[⚠️] Selected image: \(indexPath.item)")
+    }
 
 }
 
 //MARK: CollectionView DataSource
 extension ProfileHeader: UICollectionViewDataSource {
     
+    ///Count Cell
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
 
+    ///Configure cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProfileStoryCell.self),
                                                       for: indexPath) as! ProfileStoryCell
-        
         cell.configure(with: items[indexPath.item])
         
         return cell
@@ -357,7 +368,7 @@ extension ProfileHeader: UICollectionViewDelegateFlowLayout {
         
         let width = collectionView.bounds.width / 4.7
         
-        let height = collectionView.bounds.height - 16
+        let height = collectionView.bounds.height - UiConstants.inset
         
         return CGSize(width: width, height: height)
     }
@@ -388,11 +399,13 @@ final class HeaderStoryButton: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        let imageSize = bounds.width - ProfileHeader.UiConstants.headerLeadingInset
+        
         addSubview(button)
         button.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(ProfileHeader.UiConstants.headerLeadingInset)
             make.top.equalToSuperview().offset(ProfileHeader.UiConstants.headerStoryOffSet)
-            make.size.equalTo(ProfileHeader.UiConstants.headerStorySize)
+            make.size.equalTo(imageSize)
         }
         
         addSubview(label)

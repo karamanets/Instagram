@@ -17,7 +17,6 @@ final class ProfileStoryCell: UICollectionViewCell {
     
     //MARK: UiConstants
     private enum UiConstants {
-        static let imageSize: CGFloat = 80
         static let imageInset: CGFloat = 8
     }
     
@@ -32,24 +31,45 @@ final class ProfileStoryCell: UICollectionViewCell {
     }
     
     //MARK: Private Property
-    private let imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.layer.cornerRadius = UiConstants.imageSize / 2
+        view.layer.cornerRadius = cornerRadiusImage
         return view
     }()
+    
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted {
+                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                    self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                }, completion: nil)
+            } else {
+                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                    self.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }, completion: nil)
+            }
+        }
+    }
+
+    var cornerRadiusImage: CGFloat = 0
 }
 
 //MARK: - Private Methods
 private extension ProfileStoryCell {
     
     func initialize() {
+        /// Size for image cell
+        let imageSize = bounds.width - UiConstants.imageInset
+        cornerRadiusImage = imageSize / 2
     
+        ///Elements
         addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(UiConstants.imageInset)
-            make.size.equalTo(UiConstants.imageSize)
+            make.size.equalTo(imageSize)
         }
     }
+    
 }

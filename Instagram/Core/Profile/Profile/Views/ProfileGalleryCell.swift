@@ -10,8 +10,8 @@ import UIKit
 class ProfileGalleryCell: UICollectionViewCell {
     
     //MARK: Public
-    func configure(with imageName: String) {
-        self.imageView.image = UIImage(named: imageName)
+    func configure(with info: ProfileGalleryModel) {
+        self.imageView.image = UIImage(named: info.imageName)
     }
     
     //MARK: Init
