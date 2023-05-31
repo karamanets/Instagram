@@ -8,13 +8,25 @@
 import UIKit
 import SnapKit
 
+//MARK: Custom Delegate for show story
+protocol ProfileShowStoryDelegate {
+    
+    func didChange(_ show: Bool)
+}
+
 final class ProfileHeader: UICollectionReusableView {
     
     //MARK: Public
-    public func configure(with info: [ProfileStoryModel]) {
-        self.items = info
+    public func configure(with info: [ProfileStoryModel], user: UserModel) {
+        items = info
+        userImage.image = UIImage(named: user.userImage)
+        numberOfPosts.text = "\(user.posts)"
+        numberOfFollowers.text = "\(user.followers)"
+        numberOfFollowing.text = "\(user.following)"
         collectionView.reloadData()
     }
+    
+    public var showStoryDelegate: ProfileShowStoryDelegate?
     
     //MARK: Init
     override init(frame: CGRect) {
@@ -43,10 +55,9 @@ final class ProfileHeader: UICollectionReusableView {
     //MARK: Private Property
     private lazy var userImage: UIImageView = {
         let view = UIImageView()
-        let image = UIImage(named: "image1")
-        view.image = image
         view.clipsToBounds = true
         view.layer.cornerRadius = customSizeUserImage
+        view.contentMode = .scaleAspectFill
         return view
     }()
     
@@ -54,7 +65,6 @@ final class ProfileHeader: UICollectionReusableView {
         let view = UILabel()
         view.textColor = UIColor.theme.icons
         view.textAlignment = .center
-        view.text = "19"
         view.font = .systemFont(ofSize: UiConstants.textFont, weight: .heavy)
         return view
     }()
@@ -72,7 +82,6 @@ final class ProfileHeader: UICollectionReusableView {
         let view = UILabel()
         view.textColor = UIColor.theme.icons
         view.textAlignment = .center
-        view.text = "9267"
         view.font = .systemFont(ofSize: UiConstants.textFont, weight: .heavy)
         return view
     }()
@@ -90,7 +99,6 @@ final class ProfileHeader: UICollectionReusableView {
         let view = UILabel()
         view.textColor = UIColor.theme.icons
         view.textAlignment = .center
-        view.text = "199"
         view.font = .systemFont(ofSize: UiConstants.textFont, weight: .heavy)
         return view
     }()
@@ -113,7 +121,7 @@ final class ProfileHeader: UICollectionReusableView {
         return view
     }()
     
-    private let storyHighlightsSubtitleLabel: UILabel = {
+    private lazy var storyHighlightsSubtitleLabel: UILabel = {
         let view = UILabel()
         view.textColor = UIColor.theme.icons
         view.textAlignment = .center
@@ -150,14 +158,14 @@ final class ProfileHeader: UICollectionReusableView {
         return button
     }()
     
-    private lazy var showRecommendButton: UIButton = {
+    private lazy var showStoryButton: UIButton = {
         var config = UIButton.Configuration.filled()
         config.baseForegroundColor = UIColor.theme.icons
         config.baseBackgroundColor = .clear
         let imageIcon = UIImage(systemName: "chevron.down")
         config.image = imageIcon
-        let button = UIButton(configuration: config, primaryAction: discoverPeopleButtonAction())
-        button.imageView?.layer.transform = CATransform3DMakeScale(0.8, 0.8, 0.8)
+        let button = UIButton(configuration: config, primaryAction: showStoryButtonAction())
+        button.imageView?.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.2)
         return button
     }()
     
@@ -183,6 +191,8 @@ final class ProfileHeader: UICollectionReusableView {
     
     ///Make cornerRadius for user image
     private var customSizeUserImage: CGFloat = 0
+    
+    private var showStory: Bool = true
 }
 
 //MARK: - Private Methods
@@ -250,13 +260,14 @@ private extension ProfileHeader {
         }
         
         ///Element -  ShowRecommend Button
-        addSubview(showRecommendButton)
-        showRecommendButton.snp.makeConstraints { make in
+        addSubview(showStoryButton)
+        showStoryButton.snp.makeConstraints { make in
             make.size.equalTo(UiConstants.inset)
             make.top.equalTo(storyHighlightsLabel.snp.top)
             make.trailing.equalTo(discoverPeopleButton.snp.trailing).offset(-UiConstants.inset / 2)
         }
         
+        ///Element - CollectionView
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -267,7 +278,7 @@ private extension ProfileHeader {
         }
     }
     
-    private func VStack(with view: [UIView]) -> UIStackView {
+    func VStack(with view: [UIView]) -> UIStackView {
         
         let stack = UIStackView(arrangedSubviews: view)
         stack.backgroundColor = UIColor.theme.background
@@ -280,7 +291,7 @@ private extension ProfileHeader {
         return stack
     }
     
-    private func HStack(with view: [UIView]) -> UIStackView {
+    func HStack(with view: [UIView]) -> UIStackView {
         
         let stack = UIStackView(arrangedSubviews: view)
         stack.backgroundColor = UIColor.theme.background
@@ -302,11 +313,26 @@ private extension ProfileHeader {
     
     func discoverPeopleButtonAction() -> UIAction {
         let action = UIAction { _ in
-            print("[⚠️] Discover people button pressed")
+            print("[⚠️] People button pressed")
         }
         return action
     }
     
+    func showStoryButtonAction() -> UIAction {
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
+            self.showStory.toggle()
+            self.storyHighlightsSubtitleLabel.alpha = self.showStory ? 1.0 : 0.0
+            self.collectionView.alpha = self.showStory ? 1.0 : 0.0
+            self.showStoryDelegate?.didChange(self.showStory)
+            
+            UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseInOut) {
+                let upsideDown = CGAffineTransform(rotationAngle: .pi * -0.999)
+                self.showStoryButton.transform = self.showStory ? .identity : upsideDown
+            }
+        }
+        return action
+    }
 }
 
 //MARK: CollectionView Delegate
@@ -380,7 +406,8 @@ final class HeaderStoryButton: UICollectionReusableView {
     //MARK: Fileprivate
     private lazy var button: UIButton = {
         let button = UIButton(type: .system)
-        let image = UIImage(named: "storyImage")?.withRenderingMode(.alwaysOriginal)
+        let image = UIImage(named: "storyImage")?
+            .withRenderingMode(.alwaysOriginal)
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
         return button

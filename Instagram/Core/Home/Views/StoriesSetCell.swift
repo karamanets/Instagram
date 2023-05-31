@@ -14,7 +14,6 @@ final class StoriesSetCell: UITableViewCell {
     public func configure(with info: [HomeStoryModel]) {
         self.dataService = info
         collectionView.reloadData()
-        //print("[🔥] init configure StoriesSetCell")
     }
     
     //MARK: Init
@@ -39,7 +38,7 @@ final class StoriesSetCell: UITableViewCell {
         return collectionView
     }()
     
-    /// typealias name (array)
+    ///Data Cervice
     private var dataService: [HomeStoryModel] = []
 }
 
@@ -92,4 +91,11 @@ extension StoriesSetCell: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: CollectionView Delegate
+extension StoriesSetCell: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("[⚠️] Selected story: \(indexPath.item)")
+    }
+}
 

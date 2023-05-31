@@ -34,6 +34,7 @@ class NewPostCell: UICollectionViewCell {
        let view = UIImageView()
         view.clipsToBounds = true
         view.layer.cornerRadius = 3
+        view.contentMode = .scaleAspectFill
         return view
     }()
     

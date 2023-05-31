@@ -39,6 +39,7 @@ class ProfileGalleryCell: UICollectionViewCell {
         let view = UIImageView()
         view.clipsToBounds = true
         view.layer.cornerRadius = UIConstants.iconCornerRadius
+        view.contentMode = .scaleAspectFill
         return view
     }()
     

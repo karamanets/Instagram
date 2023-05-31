@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
     private enum UiConstants {
         static let barItemHeight:CGFloat = 30
         static let barItemWidth: CGFloat = 34
-        static let storyRowHeight: CGFloat = 100
+        static let storyRowHeight: CGFloat = 120
     }
     
     //MARK: Private properties
@@ -132,7 +132,6 @@ private extension HomeViewController {
 extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print("\(dataService.count)")
         return dataService.count
     }
     
@@ -158,7 +157,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 0 {
-            return UiConstants.storyRowHeight
+            return view.bounds.height.getCustomRowHeight(with: view.bounds.height)
            } else {
                return UITableView.automaticDimension
            }
@@ -168,7 +167,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 0 {
-            return UiConstants.storyRowHeight
+            return view.bounds.height.getCustomRowHeight(with: view.bounds.height)
            } else {
                return UITableView.automaticDimension
            }

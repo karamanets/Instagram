@@ -44,7 +44,12 @@ class ProfileViewController: UIViewController {
     ///DataService
     let dataService = FakeDataService.shared
     
-    var showStory: Bool = true
+    /// Resize
+    private var showStory: Bool = true {
+        didSet {
+            updateCollectionSize()
+        }
+    }
 }
 
 //MARK: - Private methods
@@ -71,19 +76,7 @@ private extension ProfileViewController {
     }
     
     func updateCollectionSize() {
-        self.showStory.toggle()
         self.collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
-    func getHeight(with size: CGFloat) -> CGFloat {
-        let heightSE = collectionView.bounds.height / 2 - UiConstants.insetHeaderToCollectionCell
-        let heightMAX = collectionView.bounds.height / 3 + UiConstants.insetHeaderToCollectionCell
-        
-        if size > 700 {
-            return heightMAX
-        } else {
-            return heightSE
-        }
     }
 }
 
@@ -96,8 +89,8 @@ private extension ProfileViewController {
         let size = CGSize(width: UiConstants.barItemSize, height: UiConstants.barItemSize)
 
         let radius = size.width / 2
-
-        let image = dataService.userImage?
+        
+        let image = UIImage(named: dataService.userModel?.userImage ?? "")?
             .imageResized(to: size)
             .withCorner(radius: radius)?
             .withRenderingMode(.alwaysOriginal)
@@ -109,7 +102,7 @@ private extension ProfileViewController {
     /// Bar Button left
     func makeLeftBarButtonItem() -> [UIBarButtonItem] {
 
-        let user = dataService.userName
+        let user = dataService.userModel?.name
 
         /// Add logo mage
         let userName = UIBarButtonItem(title: user,
@@ -154,9 +147,7 @@ private extension ProfileViewController {
     }
     @objc func settingsButtonAction() {
         print("[⚠️] Settings button pressed")
-        updateCollectionSize()
     }
-
 }
 
 //MARK: CollectionView DataSource
@@ -184,7 +175,12 @@ extension ProfileViewController: UICollectionViewDataSource {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                                                      withReuseIdentifier: String(describing: ProfileHeader.self),
                                                                      for: indexPath) as! ProfileHeader
-        header.configure(with: dataService.profileStory)
+        ///Custom delegate
+        header.showStoryDelegate = self
+        
+        let user = dataService.userModel ?? UserModel(name: "", userImage: "", posts: 0, followers: 0, following: 0)
+        
+        header.configure(with: dataService.profileStory, user: user)
         
         return header
     }
@@ -196,9 +192,9 @@ extension ProfileViewController: UICollectionViewDataSource {
         
         let width =  collectionView.bounds.width
         
-        let height = getHeight(with: collectionView.bounds.height)
-
-        let heightClose = getHeight(with: collectionView.bounds.height) - collectionView.bounds.width / 3.4
+        let height = collectionView.bounds.height.getCustomHeaderHeightProfile(with: collectionView.bounds.height)
+        
+        let heightClose = height - collectionView.bounds.width / 3.4
         
         return CGSize(width: width, height: showStory ? height : heightClose )
     }
@@ -224,8 +220,16 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 
         let width = view.bounds.width / 3.0666
 
-        let height = view.bounds.height / 6.8
+        let height = view.bounds.height / 6.86
 
         return CGSize(width: width, height: height)
+    }
+}
+
+//MARK: CustomDelegate for showStory
+extension ProfileViewController: ProfileShowStoryDelegate {
+    
+    func didChange(_ show: Bool) {
+        self.showStory = show
     }
 }

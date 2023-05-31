@@ -33,12 +33,10 @@ final class StoriesCell: UICollectionViewCell {
     
     //MARK: Private constants
     private enum UIConstants {
-        static let imageSize: CGFloat = 80
         static let imageInset: CGFloat = 10
         static let labelOffset: CGFloat = 10
         static let userTextFont: CGFloat = 10
         static let buttonSize: CGFloat = 27
-        static let circleImageSize: CGFloat = 92
         static let buttonInset: CGFloat = -3
         static let buttonBorderWidth: CGFloat = 3
         static let insetImageToBorder: CGFloat = 6
@@ -49,6 +47,7 @@ final class StoriesCell: UICollectionViewCell {
        let view = UIImageView()
         view.clipsToBounds = true
         view.layer.cornerRadius = cornerRadiusImage
+        view.contentMode = .scaleAspectFill
         return view
     }()
     
@@ -76,6 +75,20 @@ final class StoriesCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(AddButtonAction), for: .touchUpInside)
         return button
     }()
+    
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted {
+                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                    self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                }, completion: nil)
+            } else {
+                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                    self.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }, completion: nil)
+            }
+        }
+    }
     
     var cornerRadiusImage: CGFloat = 0
 }

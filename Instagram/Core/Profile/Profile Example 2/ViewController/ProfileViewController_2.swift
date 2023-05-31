@@ -89,7 +89,7 @@ private extension ProfileViewController_2 {
         
         let radius = size.width / 2
         
-        let image = dataService.userImage?
+        let image = UIImage(named: dataService.userModel?.userImage ?? "")?
             .imageResized(to: size)
             .withCorner(radius: radius)?
             .withRenderingMode(.alwaysOriginal)
@@ -101,7 +101,7 @@ private extension ProfileViewController_2 {
     /// Bar Button left
     func makeLeftBarButtonItem() -> [UIBarButtonItem] {
         
-        let user = dataService.userName
+        let user = dataService.userModel?.name
         
         /// Add logo mage
         let userName = UIBarButtonItem(title: user,

@@ -14,15 +14,13 @@ final class FakeDataService {
     static let shared = FakeDataService()
     
     //MARK: Public
+    public var userModel: UserModel? = nil
+    
     public var homeType: [HomeType] = []
     
     public var SearchArrayImagesName: [String] = []
     
     public var NewPostArrayImagesName: [String] = []
-    
-    public var userImage: UIImage? = nil
-    
-    public var userName: String? = nil
     
     public var reelsModels: [ReelsModel] = []
     
@@ -34,6 +32,9 @@ final class FakeDataService {
     
     //MARK: Init
     private init() {
+        ///User
+        setUpUserModel()
+        
         ///Home VC
         setUpHome()
         
@@ -45,10 +46,9 @@ final class FakeDataService {
         
         ///Reels VC
         setUpReels()
-        setUpUserName()
+       // setUpUserName()
         
         ///Profile VC
-        userSetUp()
         setUpProfile_2()
         setUpProfileGalleryArray()
         setUpProfileStoriesArray()
@@ -81,7 +81,9 @@ final class FakeDataService {
 
         var tempArray: [HomeStoryModel] = []
         
-        let userStories = HomeStoryModel(image: setUpRandomImage(),
+        let image = UIImage(named: userModel?.userImage ?? "") ?? setUpRandomImage()
+        
+        let userStories = HomeStoryModel(image: image,
                                               userName: setUpRandomName(),
                                               isAddButtonVisible: true,
                                               isNewStory: setUpRandomIsNew())
@@ -177,6 +179,17 @@ final class FakeDataService {
         self.profileStory = temp
     }
     
+    private func setUpUserModel() {
+        
+        let user = UserModel(name: setUpRandomName(),
+                             userImage: setUpRandomImageName(),
+                             posts: setUpRandomLike(),
+                             followers: setUpRandomLike(),
+                             following: setUpRandomLike())
+        
+        self.userModel = user
+    }
+    
     private func setUpProfile_2() {
         
         var temp: [ProfileType_2] = []
@@ -226,15 +239,6 @@ final class FakeDataService {
         
         let image = UIImage(named: imagesName ?? "")
         return image ?? UIImage()
-    }
-    
-    private func userSetUp() {
-        let userImage = setUpRandomImage()
-        self.userImage = userImage
-    }
-    
-    private func setUpUserName() {
-        self.userName = setUpRandomName()
     }
     
     private func setUpRandomName() -> String {

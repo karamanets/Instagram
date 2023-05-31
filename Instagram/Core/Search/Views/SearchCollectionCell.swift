@@ -39,11 +39,13 @@ class SearchCollectionCell: UICollectionViewCell {
         let view = UIImageView()
         view.clipsToBounds = true
         view.layer.cornerRadius = UIConstants.iconCornerRadius
+        view.contentMode = .scaleAspectFill
         return view
     }()
     
     private let icon: UIImageView = {
-        let icon = UIImage(systemName: "photo.fill.on.rectangle.fill")?.withRenderingMode(.alwaysTemplate)
+        let icon = UIImage(systemName: "photo.fill.on.rectangle.fill")?
+            .withRenderingMode(.alwaysTemplate)
         let view = UIImageView(image: icon)
         view.tintColor = .white
         return view

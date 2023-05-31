@@ -113,8 +113,9 @@ extension SearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        let width = view.frame.width
-        let height = view.frame.width / 6
+        let width = view.bounds.width
+        
+        let height = view.bounds.height.getCustomHeaderHeightSearch(with: view.bounds.height)
         
         return CGSize(width: width, height: height)
     }
@@ -129,7 +130,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         
         let width = view.bounds.width / 3.0666
         
-        let height = view.bounds.height / 6.8
+        let height = view.bounds.height / 6.98
         
         return CGSize(width: width, height: height)
     }

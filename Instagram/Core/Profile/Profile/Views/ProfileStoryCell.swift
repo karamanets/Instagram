@@ -43,7 +43,7 @@ final class ProfileStoryCell: UICollectionViewCell {
         didSet {
             if isHighlighted {
                 UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-                    self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                    self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
                 }, completion: nil)
             } else {
                 UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {

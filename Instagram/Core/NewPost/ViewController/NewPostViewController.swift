@@ -135,9 +135,7 @@ private extension NewPostViewController {
         navigationItem.rightBarButtonItem = makeRightBarItem()
         /// Methods
         makeTabBarIcon()
-        
-        //self.isModalInPresentation = true
-        
+
         /// Main Image
         view.addSubview(mainImage)
         mainImage.snp.makeConstraints { make in
@@ -279,7 +277,7 @@ extension NewPostViewController: UICollectionViewDelegateFlowLayout {
         
         let width = view.bounds.width / 4.111
         
-        let height = view.bounds.height / 8.2
+        let height = view.bounds.height / 8.72
         
         return CGSize(width: width, height: height)
     }
