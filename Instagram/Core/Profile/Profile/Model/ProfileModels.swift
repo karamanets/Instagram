@@ -25,3 +25,10 @@ struct UserModel {
     let followers: Int
     let following: Int
 }
+
+//MARK: Discover UserModel
+struct DiscoverUserModel {
+    let image: String
+    let name: String
+    let followedUsers: [String]
+}

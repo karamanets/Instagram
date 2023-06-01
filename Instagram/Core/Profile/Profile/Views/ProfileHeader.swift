@@ -169,6 +169,17 @@ final class ProfileHeader: UICollectionReusableView {
         return button
     }()
     
+//    private lazy var tableView: UITableView = {
+//        let view = UITableView(frame: .zero, style: .grouped)
+//        view.showsHorizontalScrollIndicator = false
+//        view.separatorColor = .clear
+//        view.backgroundColor = UIColor.theme.background
+//        view.estimatedRowHeight = 100
+//        ///Register cell
+//        view.register(ProfileDiscoverSetCell.self, forCellReuseIdentifier: String(describing: ProfileDiscoverSetCell.self))
+//        return view
+//    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -244,6 +255,15 @@ private extension ProfileHeader {
             make.trailing.equalToSuperview().offset(-UiConstants.inset / 2)
             make.size.equalTo(UiConstants.buttonSize)
         }
+        
+        ///Element - TableView
+//        addSubview(tableView)
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.snp.makeConstraints { make in
+//            make.leading.trailing.equalToSuperview()
+//            make.top.equalTo(editButton.snp.bottom)
+//        }
         
         ///Element -  StoryHighlights Label
         addSubview(storyHighlightsLabel)
@@ -450,3 +470,36 @@ final class HeaderStoryButton: UICollectionReusableView {
         print("[⚠️] Profile add story")
     }
 }
+
+////MARK: TableView Delegate
+//extension ProfileHeader: UITableViewDelegate {
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        return 100
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        return 100
+//    }
+//}
+//
+////MARK: TableView DataSource
+//extension ProfileHeader: UITableViewDataSource {
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        1
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileDiscoverSetCell.self),
+//                                                 for: indexPath) as! ProfileDiscoverSetCell
+//
+//        return cell
+//    }
+//
+//
+//}

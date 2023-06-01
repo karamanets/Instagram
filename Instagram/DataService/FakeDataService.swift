@@ -30,6 +30,8 @@ final class FakeDataService {
     
     public var profileGallery: [ProfileGalleryModel] = []
     
+    public var discoverUsers: [DiscoverUserModel] = []
+    
     //MARK: Init
     private init() {
         ///User
@@ -52,6 +54,7 @@ final class FakeDataService {
         setUpProfile_2()
         setUpProfileGalleryArray()
         setUpProfileStoriesArray()
+        setUpDiscoverUsers()
     }
     
     //MARK: Private Methods
@@ -188,6 +191,23 @@ final class FakeDataService {
                              following: setUpRandomLike())
         
         self.userModel = user
+    }
+    
+    private func setUpDiscoverUsers() {
+        
+        var temp: [DiscoverUserModel] = []
+        
+        for _ in 1...100 {
+            
+            let followed1 = setUpRandomName()
+            let followed2 = setUpRandomName()
+            
+            let user = DiscoverUserModel(image: setUpRandomImageName(),
+                                         name: setUpRandomName(),
+                                         followedUsers: [followed1, followed2])
+            temp.append(user)
+        }
+        self.discoverUsers = temp
     }
     
     private func setUpProfile_2() {

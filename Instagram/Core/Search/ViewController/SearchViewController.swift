@@ -21,17 +21,18 @@ final class SearchViewController: UIViewController {
         static let barItemWidth: CGFloat = 34
         static let inset: CGFloat = 8
         static let textFieldHeight: CGFloat = 50
+        static let insetForRowCollection: CGFloat = 4
     }
     
     //MARK: Private properties
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 2
-        layout.minimumInteritemSpacing = 2
+        layout.minimumLineSpacing = 3
+        layout.minimumInteritemSpacing = 3
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        collectionView.contentInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.alwaysBounceVertical = true
         collectionView.backgroundColor = UIColor.theme.background
@@ -128,7 +129,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = view.bounds.width / 3.0666
+        let width = view.bounds.width / 3 - UiConstants.insetForRowCollection
         
         let height = view.bounds.height / 6.98
         

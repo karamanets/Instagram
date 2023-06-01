@@ -17,9 +17,9 @@ extension CGFloat {
         let sizeMAX = size / 7.5
         let sizeIPad = size / 5.5
         
-        if size <= 670 {
+        if size <= Device.iPhoneSE {
             return sizeSE
-        } else if size <= 940 {
+        } else if size <= Device.iPhoneMAX {
             return sizeMAX
         } else {
             return sizeIPad
@@ -33,10 +33,11 @@ extension CGFloat {
         let sizeSE = size / 2.15
         let sizeMAX = size / 2.75
         let sizeIPad = size / 2.1
+
         
-        if size <= 670 {
+        if size <= Device.iPhoneSE {
             return sizeSE
-        } else if size <= 940 {
+        } else if size <= Device.iPhoneMAX {
             return sizeMAX
         } else {
             return sizeIPad
@@ -51,31 +52,20 @@ extension CGFloat {
         let sizeMAX = size / 11
         let sizeIPad = size / 15
         
-        if size <= 670 {
+        if size <= Device.iPhoneSE {
             return sizeSE
-        } else if size <= 940 {
+        } else if size <= Device.iPhoneMAX {
             return sizeMAX
         } else {
             return sizeIPad
         }
     }
     
-    private func reSize(_ size: CGFloat, type: Device) -> CGFloat  {
-        
-        switch type {
-        case .iPhoneSE:
-            return type.rawValue
-        case .iPhoneMAX:
-            return type.rawValue
-        case .iPad:
-            return type.rawValue
-        }
-    }
     
-    private enum Device: CGFloat {
-        case iPhoneSE  = 670
-        case iPhoneMAX = 940
-        case iPad      = 1300
+    private enum Device {
+        static let iPhoneSE: CGFloat  = 670
+        static let iPhoneMAX: CGFloat = 940
+        static let iPad: CGFloat      = 1300
     }
 }
 

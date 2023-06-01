@@ -21,17 +21,18 @@ class ProfileViewController: UIViewController {
     private enum UiConstants {
         static let barItemSize:CGFloat = 30
         static let insetHeaderToCollectionCell:CGFloat = 25
+        static let insetForRowCollection: CGFloat = 4
     }
 
     //MARK: Private Property
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 2
-        layout.minimumInteritemSpacing = 2
+        layout.minimumLineSpacing = 3
+        layout.minimumInteritemSpacing = 3
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.showsVerticalScrollIndicator = false
-        view.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        view.contentInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         ///Register header
         view.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                       withReuseIdentifier: String(describing: ProfileHeader.self))
@@ -218,7 +219,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let width = view.bounds.width / 3.0666
+        let width = view.bounds.width / 3 - UiConstants.insetForRowCollection
 
         let height = view.bounds.height / 6.86
 

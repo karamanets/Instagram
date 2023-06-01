@@ -19,7 +19,16 @@ final class ProfileStoriesSetCells_2: UITableViewCell {
     //MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        initialize()
+        ///View
+        contentView.backgroundColor = UIColor.theme.background
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        contentView.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -43,6 +52,7 @@ final class ProfileStoriesSetCells_2: UITableViewCell {
         layout.minimumInteritemSpacing = 0
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.showsHorizontalScrollIndicator = false
+        
         ///Register header
         view.register(HeaderStoryButton_2.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                       withReuseIdentifier: String(describing: HeaderStoryButton_2.self))
@@ -53,23 +63,6 @@ final class ProfileStoriesSetCells_2: UITableViewCell {
     }()
     
     private var dataService: [ProfileStoryModel_2] = []
-}
-
-//MARK: - Private Methods
-private extension ProfileStoriesSetCells_2 {
-    
-    func initialize() {
-        ///View
-        contentView.backgroundColor = UIColor.theme.background
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        contentView.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-    }
 }
 
 //MARK: CollectionView Delegate

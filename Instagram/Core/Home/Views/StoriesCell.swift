@@ -57,7 +57,7 @@ final class StoriesCell: UICollectionViewCell {
         return view
     }()
     
-    private var userLabel: UILabel = {
+    private lazy var userLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: UIConstants.userTextFont)
         label.textAlignment = .center

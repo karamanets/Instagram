@@ -20,6 +20,7 @@ class NewPostViewController: UIViewController {
     private enum UiConstants {
         static let barItemHeight:CGFloat = 30
         static let barItemWidth: CGFloat = 34
+        static let insetForRowCollection: CGFloat = 4
     }
 
     //MARK: Private property
@@ -102,11 +103,11 @@ class NewPostViewController: UIViewController {
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 2
+        layout.minimumLineSpacing = 3
         layout.minimumInteritemSpacing = 2
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.showsVerticalScrollIndicator = false
-        collection.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        collection.contentInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         collection.backgroundColor = UIColor.theme.background
         collection.register(NewPostCell.self, forCellWithReuseIdentifier: String(describing: NewPostCell.self))
         
@@ -275,7 +276,7 @@ extension NewPostViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = view.bounds.width / 4.111
+        let width = view.bounds.width / 4 - UiConstants.insetForRowCollection
         
         let height = view.bounds.height / 8.72
         
