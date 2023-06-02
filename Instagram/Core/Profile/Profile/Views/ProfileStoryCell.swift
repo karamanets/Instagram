@@ -16,8 +16,12 @@ final class ProfileStoryCell: UICollectionViewCell {
     }
     
     //MARK: UiConstants
-    private enum UiConstants {
+    fileprivate enum UiConstants {
         static let imageInset: CGFloat = 8
+        static let headerLeadingInset: CGFloat = 8
+        static let labelNewSize: CGFloat = 15
+        static let headerStoryOffSet: CGFloat = 8
+        static let ofSetHeaderLabel: CGFloat = 3
     }
     
     //MARK: Init
@@ -53,7 +57,7 @@ final class ProfileStoryCell: UICollectionViewCell {
         }
     }
 
-    var cornerRadiusImage: CGFloat = 0
+    var cornerRadiusImage: CGFloat = .zero
 }
 
 //MARK: - Private Methods
@@ -72,4 +76,55 @@ private extension ProfileStoryCell {
         }
     }
     
+}
+
+//MARK: HeaderView Add Button
+final class HeaderStoryButton: UICollectionReusableView {
+    
+    //MARK: Fileprivate
+    private lazy var button: UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(named: "storyImage")?
+            .withRenderingMode(.alwaysOriginal)
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var label: UILabel = {
+        let view = UILabel()
+        view.text = "New"
+        view.font = UIFont.systemFont(ofSize: ProfileStoryCell.UiConstants.labelNewSize, weight: .medium)
+        view.textColor = UIColor.theme.icons
+        view.textAlignment = .center
+        return view
+    }()
+    
+    //MARK: Init
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        let imageSize = bounds.width - ProfileStoryCell.UiConstants.headerLeadingInset
+        
+        addSubview(button)
+        button.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(ProfileStoryCell.UiConstants.headerLeadingInset)
+            make.top.equalToSuperview().offset(ProfileStoryCell.UiConstants.headerStoryOffSet)
+            make.size.equalTo(imageSize)
+        }
+        
+        addSubview(label)
+        label.snp.makeConstraints { make in
+            make.top.equalTo(button.snp.bottom).offset(ProfileStoryCell.UiConstants.ofSetHeaderLabel)
+            make.centerX.equalTo(button.snp.centerX)
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func addButtonAction(_ sender: UIButton) {
+        print("[⚠️] Profile add story")
+    }
 }

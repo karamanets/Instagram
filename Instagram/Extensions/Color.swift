@@ -23,4 +23,6 @@ struct ColorsTheme {
     let newPostImageBack = UIColor(named: "newPostImageBack")             ?? .systemGroupedBackground
     let searchTextFieldBackground = UIColor(named: "textFieldSearchBack") ?? .systemGroupedBackground
     let sheetBackground = UIColor(named: "sheetBackground")               ?? .systemGroupedBackground
+    let textColor = UIColor(named: "textColor")                           ?? .systemGroupedBackground
+    let customBlue = UIColor(named: "customBlue")                         ?? .systemGroupedBackground
 }

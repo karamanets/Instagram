@@ -39,11 +39,7 @@ final class ProfileHeader: UICollectionReusableView {
     }
     
     //MARK: UiConstants
-    fileprivate enum UiConstants {
-        static let headerStoryOffSet: CGFloat = 8
-        static let labelNewSize: CGFloat = 15
-        static let ofSetHeaderLabel: CGFloat = 3
-        static let headerLeadingInset: CGFloat = 8
+    private enum UiConstants {
         static let textFont: CGFloat = 20
         static let textFontSubtitle: CGFloat = 15
         static let inset: CGFloat = 16
@@ -63,7 +59,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private let numberOfPosts: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor.theme.icons
+        view.textColor = UIColor.theme.textColor
         view.textAlignment = .center
         view.font = .systemFont(ofSize: UiConstants.textFont, weight: .heavy)
         return view
@@ -71,7 +67,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private let postsLabel: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor.theme.icons
+        view.textColor = UIColor.theme.textColor
         view.textAlignment = .center
         view.text = "Posts"
         view.font = .systemFont(ofSize: UiConstants.textFontSubtitle, weight: .heavy)
@@ -80,7 +76,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private let numberOfFollowers: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor.theme.icons
+        view.textColor = UIColor.theme.textColor
         view.textAlignment = .center
         view.font = .systemFont(ofSize: UiConstants.textFont, weight: .heavy)
         return view
@@ -88,7 +84,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private let followerLabel: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor.theme.icons
+        view.textColor = UIColor.theme.textColor
         view.textAlignment = .center
         view.text = "Followers"
         view.font = .systemFont(ofSize: UiConstants.textFontSubtitle, weight: .heavy)
@@ -97,7 +93,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private let numberOfFollowing: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor.theme.icons
+        view.textColor = UIColor.theme.textColor
         view.textAlignment = .center
         view.font = .systemFont(ofSize: UiConstants.textFont, weight: .heavy)
         return view
@@ -105,7 +101,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private let followingLabel: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor.theme.icons
+        view.textColor = UIColor.theme.textColor
         view.textAlignment = .center
         view.text = "Following"
         view.font = .systemFont(ofSize: UiConstants.textFontSubtitle, weight: .heavy)
@@ -114,7 +110,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private let storyHighlightsLabel: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor.theme.icons
+        view.textColor = UIColor.theme.textColor
         view.textAlignment = .center
         view.text = "Story Highlights"
         view.font = .systemFont(ofSize: UiConstants.textFontSubtitle, weight: .medium)
@@ -123,7 +119,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private lazy var storyHighlightsSubtitleLabel: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor.theme.icons
+        view.textColor = UIColor.theme.textColor
         view.textAlignment = .center
         view.text = "Keep your favourite stories on your profile"
         view.font = .systemFont(ofSize: UiConstants.textFontSubtitle - 2 , weight: .light)
@@ -160,7 +156,7 @@ final class ProfileHeader: UICollectionReusableView {
     
     private lazy var showStoryButton: UIButton = {
         var config = UIButton.Configuration.filled()
-        config.baseForegroundColor = UIColor.theme.icons
+        config.baseForegroundColor = UIColor.theme.textColor
         config.baseBackgroundColor = .clear
         let imageIcon = UIImage(systemName: "chevron.down")
         config.image = imageIcon
@@ -169,22 +165,11 @@ final class ProfileHeader: UICollectionReusableView {
         return button
     }()
     
-//    private lazy var tableView: UITableView = {
-//        let view = UITableView(frame: .zero, style: .grouped)
-//        view.showsHorizontalScrollIndicator = false
-//        view.separatorColor = .clear
-//        view.backgroundColor = UIColor.theme.background
-//        view.estimatedRowHeight = 100
-//        ///Register cell
-//        view.register(ProfileDiscoverSetCell.self, forCellReuseIdentifier: String(describing: ProfileDiscoverSetCell.self))
-//        return view
-//    }()
-    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = .zero
+        layout.minimumInteritemSpacing = .zero
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.showsHorizontalScrollIndicator = false
         view.alwaysBounceVertical = false
@@ -201,7 +186,7 @@ final class ProfileHeader: UICollectionReusableView {
     private var items: [ProfileStoryModel] = []
     
     ///Make cornerRadius for user image
-    private var customSizeUserImage: CGFloat = 0
+    private var customSizeUserImage: CGFloat = .zero
     
     private var showStory: Bool = true
 }
@@ -417,57 +402,6 @@ extension ProfileHeader: UICollectionViewDelegateFlowLayout {
         let height = collectionView.bounds.height - UiConstants.inset
         
         return CGSize(width: width, height: height)
-    }
-}
-
-//MARK: HeaderView Add Button
-final class HeaderStoryButton: UICollectionReusableView {
-    
-    //MARK: Fileprivate
-    private lazy var button: UIButton = {
-        let button = UIButton(type: .system)
-        let image = UIImage(named: "storyImage")?
-            .withRenderingMode(.alwaysOriginal)
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var label: UILabel = {
-        let view = UILabel()
-        view.text = "New"
-        view.font = UIFont.systemFont(ofSize: ProfileHeader.UiConstants.labelNewSize, weight: .medium)
-        view.textColor = UIColor.theme.icons
-        view.textAlignment = .center
-        return view
-    }()
-    
-    //MARK: Init
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        let imageSize = bounds.width - ProfileHeader.UiConstants.headerLeadingInset
-        
-        addSubview(button)
-        button.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(ProfileHeader.UiConstants.headerLeadingInset)
-            make.top.equalToSuperview().offset(ProfileHeader.UiConstants.headerStoryOffSet)
-            make.size.equalTo(imageSize)
-        }
-        
-        addSubview(label)
-        label.snp.makeConstraints { make in
-            make.top.equalTo(button.snp.bottom).offset(ProfileHeader.UiConstants.ofSetHeaderLabel)
-            make.centerX.equalTo(button.snp.centerX)
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc private func addButtonAction(_ sender: UIButton) {
-        print("[⚠️] Profile add story")
     }
 }
 

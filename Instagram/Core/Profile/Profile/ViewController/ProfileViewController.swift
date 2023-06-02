@@ -22,17 +22,18 @@ class ProfileViewController: UIViewController {
         static let barItemSize:CGFloat = 30
         static let insetHeaderToCollectionCell:CGFloat = 25
         static let insetForRowCollection: CGFloat = 4
+        static let inset: CGFloat = 3
     }
 
     //MARK: Private Property
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 3
-        layout.minimumInteritemSpacing = 3
+        layout.minimumLineSpacing = UiConstants.inset
+        layout.minimumInteritemSpacing = UiConstants.inset
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.showsVerticalScrollIndicator = false
-        view.contentInset = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
+        view.contentInset = UIEdgeInsets(top: UiConstants.inset, left: UiConstants.inset, bottom: UiConstants.inset, right: UiConstants.inset)
         ///Register header
         view.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                       withReuseIdentifier: String(describing: ProfileHeader.self))

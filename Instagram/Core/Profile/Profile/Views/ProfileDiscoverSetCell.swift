@@ -30,7 +30,6 @@ final class ProfileDiscoverSetCell: UITableViewCell {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
     }
     
     required init?(coder: NSCoder) {
@@ -39,6 +38,9 @@ final class ProfileDiscoverSetCell: UITableViewCell {
     
     //MARK: UiConstants
     fileprivate enum UiConstants {
+        static let minimumLineSpacing: CGFloat = 5
+        static let itemInRowNumber: CGFloat = 2.5
+        static let itemInRowTopBottomOffset: CGFloat = 16
 
     }
     
@@ -46,14 +48,17 @@ final class ProfileDiscoverSetCell: UITableViewCell {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = UiConstants.minimumLineSpacing
+        layout.minimumInteritemSpacing = .zero
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.showsHorizontalScrollIndicator = false
         view.alwaysBounceHorizontal = true
         ///Register cell
         view.register(ProfileDiscoverCell.self, forCellWithReuseIdentifier: String(describing: ProfileDiscoverCell.self))
-
+        ///Register footer
+        view.register(FooterForDiscoverCell.self,
+                      forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                      withReuseIdentifier: String(describing: FooterForDiscoverCell.self))
         return view
     }()
     
@@ -63,6 +68,9 @@ final class ProfileDiscoverSetCell: UITableViewCell {
 //MARK: CollectionView Delegate
 extension ProfileDiscoverSetCell: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("[⚠️] Selected item number: \(indexPath.item)")
+    }
 
 }
 
@@ -73,7 +81,6 @@ extension ProfileDiscoverSetCell: UICollectionViewDataSource {
         return dataService.count
     }
     
-    ///CollectionCell stories and gallery
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProfileDiscoverCell.self),
@@ -82,6 +89,30 @@ extension ProfileDiscoverSetCell: UICollectionViewDataSource {
         cell.configure(with: dataService[indexPath.item])
         
         return cell
+    }
+    
+    ///Footer for DiscoverSetCell
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter,
+                                                                     withReuseIdentifier: String(describing: FooterForDiscoverCell.self),
+                                                                     for: indexPath) as! FooterForDiscoverCell
+        header.configure(with: ["image1", "image2"])
+        
+        return header
+    }
+    
+    ///Footer size  for DiscoverSetCell
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
+        let width =  collectionView.bounds.width / 2.5
+        
+        let height =  collectionView.bounds.height
+        
+        return CGSize(width: width, height: height)
     }
 }
 
@@ -92,53 +123,10 @@ extension ProfileDiscoverSetCell: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.bounds.width / 4.7
+        let width = collectionView.bounds.width / UiConstants.itemInRowNumber
         
-        let height = collectionView.bounds.height - 16
+        let height = collectionView.bounds.height - UiConstants.itemInRowTopBottomOffset
         
         return CGSize(width: width, height: height)
     }
 }
-
-//==================== Cell
-
-final class ProfileDiscoverCell: UICollectionViewCell {
-    
-    //MARK: Public
-    public func configure(with info: DiscoverUserModel) {
-        imageView.image = UIImage(named: info.image)
-    }
-    
-    //MARK: UiConstants
-    private enum UiConstants {
-        static let imageSize: CGFloat = 80
-        static let imageInset: CGFloat = 8
-    }
-    
-    //MARK: Init
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        addSubview(imageView)
-        imageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(UiConstants.imageInset)
-            make.size.equalTo(UiConstants.imageSize)
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK: Private Property
-    private let imageView: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
-        view.layer.cornerRadius = UiConstants.imageSize / 2
-        return view
-    }()
-    
-
-}
-

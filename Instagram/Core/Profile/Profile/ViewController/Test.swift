@@ -20,7 +20,7 @@ class Test: UIViewController {
     private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
         view.showsVerticalScrollIndicator = false
-        view.separatorColor = UIColor.clear
+        view.separatorColor = UIColor.theme.background
         view.backgroundColor = UIColor.theme.background
         view.alwaysBounceVertical = false
         view.alwaysBounceHorizontal = false
@@ -89,7 +89,7 @@ extension Test: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 120
+        return 230
  
     }
 }

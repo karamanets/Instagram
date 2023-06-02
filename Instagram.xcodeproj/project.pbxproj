@@ -29,6 +29,7 @@
 		2C6DD9972A036CFA0003069C /* GallerySheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DD9962A036CFA0003069C /* GallerySheetViewController.swift */; };
 		2C76DEC52A120F1700243D18 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76DEC42A120F1700243D18 /* CustomTextField.swift */; };
 		2C81F6572A21C502004E7C9E /* ProfileGallerySetCells_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81F6562A21C502004E7C9E /* ProfileGallerySetCells_2.swift */; };
+		2C90FAC82A29B5F100384AF2 /* ProfileDiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C90FAC72A29B5F100384AF2 /* ProfileDiscoverCell.swift */; };
 		2CBE218D2A14BD92002B0A1C /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE218C2A14BD92002B0A1C /* UIImage.swift */; };
 		2CC67D5429F1210800550457 /* FakeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC67D5329F1210800550457 /* FakeDataService.swift */; };
 		2CC96E712A2853C700ECDDCA /* ProfileDiscoverSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC96E702A2853C700ECDDCA /* ProfileDiscoverSetCell.swift */; };
@@ -76,6 +77,7 @@
 		2C6DD9962A036CFA0003069C /* GallerySheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerySheetViewController.swift; sourceTree = "<group>"; };
 		2C76DEC42A120F1700243D18 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2C81F6562A21C502004E7C9E /* ProfileGallerySetCells_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGallerySetCells_2.swift; sourceTree = "<group>"; };
+		2C90FAC72A29B5F100384AF2 /* ProfileDiscoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDiscoverCell.swift; sourceTree = "<group>"; };
 		2CBE218C2A14BD92002B0A1C /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		2CC67D5329F1210800550457 /* FakeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDataService.swift; sourceTree = "<group>"; };
 		2CC96E702A2853C700ECDDCA /* ProfileDiscoverSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDiscoverSetCell.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				2C4195A02A246F0E00D06F95 /* ProfileHeader.swift */,
 				2CC96E702A2853C700ECDDCA /* ProfileDiscoverSetCell.swift */,
+				2C90FAC72A29B5F100384AF2 /* ProfileDiscoverCell.swift */,
 				2C4195A62A2485E600D06F95 /* ProfileStoryCell.swift */,
 				2C4195A42A24722C00D06F95 /* ProfileGalleryCell.swift */,
 			);
@@ -528,6 +531,7 @@
 				2CC96E732A28666900ECDDCA /* Test.swift in Sources */,
 				2C4B72B62A1C61F30072F866 /* ProfileModel_2.swift in Sources */,
 				2CDBE8742A0B417C00F7AC49 /* SearchViewController.swift in Sources */,
+				2C90FAC82A29B5F100384AF2 /* ProfileDiscoverCell.swift in Sources */,
 				2CF385E62A04C0A2006A6CEA /* GallerySheetCell.swift in Sources */,
 				2CD44BFE2A0F53D800B212B2 /* SearchCollectionCell.swift in Sources */,
 				2CD8D2C329EF874D00996964 /* SceneDelegate.swift in Sources */,

@@ -197,14 +197,20 @@ final class FakeDataService {
         
         var temp: [DiscoverUserModel] = []
         
-        for _ in 1...100 {
+        for _ in 1...5 {
             
-            let followed1 = setUpRandomName()
-            let followed2 = setUpRandomName()
+            var follows: [String] = []
+            
+            let random = Int.random(in: 1...10)
+            
+            for _ in 1...random {
+                let user = setUpRandomName()
+                follows.append(user)
+            }
             
             let user = DiscoverUserModel(image: setUpRandomImageName(),
                                          name: setUpRandomName(),
-                                         followedUsers: [followed1, followed2])
+                                         followedUsers: follows)
             temp.append(user)
         }
         self.discoverUsers = temp
