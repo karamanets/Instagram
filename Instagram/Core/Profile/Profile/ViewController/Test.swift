@@ -17,7 +17,7 @@ class Test: UIViewController {
     }
     
     //MARK: Private Property
-    private let tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
         view.showsVerticalScrollIndicator = false
         view.separatorColor = UIColor.theme.background
@@ -32,17 +32,12 @@ class Test: UIViewController {
     
     ///DataService
     let dataService = FakeDataService.shared
-    
-    var showStorySize: CGFloat = 120
 }
 
 //MARK: - Private methods
 private extension Test {
     
     func initialize() {
-        ///View
-        view.backgroundColor = UIColor.theme.background
-        navigationController?.navigationBar.tintColor = UIColor.theme.icons
 
         ///Elements
         view.addSubview(tableView)
@@ -50,18 +45,6 @@ private extension Test {
         tableView.delegate = self
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-        }
-    }
-    
-    func updateSize() {
-        if showStorySize == 0 {
-            self.tableView.beginUpdates()
-            self.showStorySize = 120
-            self.tableView.endUpdates()
-        } else {
-            self.tableView.beginUpdates()
-            self.showStorySize = 0
-            self.tableView.endUpdates()
         }
     }
 }

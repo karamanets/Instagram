@@ -52,7 +52,8 @@ final class ProfileDiscoverSetCell: UITableViewCell {
         layout.minimumInteritemSpacing = .zero
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.showsHorizontalScrollIndicator = false
-        view.alwaysBounceHorizontal = true
+        view.alwaysBounceHorizontal = false
+        view.alwaysBounceVertical = false
         ///Register cell
         view.register(ProfileDiscoverCell.self, forCellWithReuseIdentifier: String(describing: ProfileDiscoverCell.self))
         ///Register footer

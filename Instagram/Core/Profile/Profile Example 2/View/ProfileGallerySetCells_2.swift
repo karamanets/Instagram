@@ -39,7 +39,7 @@ final class ProfileGallerySetCells_2: UITableViewCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.alwaysBounceVertical = true
+        collectionView.alwaysBounceVertical = false
         collectionView.backgroundColor = UIColor.theme.background
         ///Register Cell
         collectionView.register(ProfileGalleryCell_2.self,

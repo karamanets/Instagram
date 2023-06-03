@@ -14,6 +14,12 @@ protocol ProfileShowStoryDelegate {
     func didChange(_ show: Bool)
 }
 
+//MARK: Custom Delegate for show Discover
+protocol ProfileShowDiscoverDelegate {
+    
+    func didChangeDiscoverSize(_ show: Bool)
+}
+
 final class ProfileHeader: UICollectionReusableView {
     
     //MARK: Public
@@ -27,6 +33,8 @@ final class ProfileHeader: UICollectionReusableView {
     }
     
     public var showStoryDelegate: ProfileShowStoryDelegate?
+    
+    public var showDiscoverDelegate: ProfileShowDiscoverDelegate?
     
     //MARK: Init
     override init(frame: CGRect) {
@@ -182,13 +190,34 @@ final class ProfileHeader: UICollectionReusableView {
         return view
     }()
     
+    private lazy var tableView: UITableView = {
+        let view = UITableView(frame: .zero, style: .grouped)
+        view.showsVerticalScrollIndicator = false
+        view.separatorColor = UIColor.theme.background
+        view.backgroundColor = UIColor.theme.background
+        view.alwaysBounceVertical = false
+        view.alwaysBounceHorizontal = true
+        view.isScrollEnabled = false
+        view.rowHeight = 230
+        ///Remove space top
+        view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0.1))
+        ///Register cells
+        view.register(ProfileDiscoverSetCell.self, forCellReuseIdentifier: String(describing: ProfileDiscoverSetCell.self))
+
+        return view
+    }()
+    
     ///DataCervice
     private var items: [ProfileStoryModel] = []
+    
+    private let dataService = FakeDataService.shared
     
     ///Make cornerRadius for user image
     private var customSizeUserImage: CGFloat = .zero
     
     private var showStory: Bool = true
+    
+    private var showDiscover: Bool = true
 }
 
 //MARK: - Private Methods
@@ -242,18 +271,19 @@ private extension ProfileHeader {
         }
         
         ///Element - TableView
-//        addSubview(tableView)
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.snp.makeConstraints { make in
-//            make.leading.trailing.equalToSuperview()
-//            make.top.equalTo(editButton.snp.bottom)
-//        }
+        addSubview(tableView)
+        tableView.dataSource = self
+        tableView.alpha = showDiscover ? 1.0 : .zero
+        tableView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(editButton.snp.bottom)
+            make.height.equalTo(showDiscover ? 230 : .zero)
+        }
         
         ///Element -  StoryHighlights Label
         addSubview(storyHighlightsLabel)
         storyHighlightsLabel.snp.makeConstraints { make in
-            make.top.equalTo(editButton.snp.bottom).offset(UiConstants.inset)
+            make.top.equalTo(tableView.snp.bottom).offset(UiConstants.inset)
             make.leading.equalTo(editButton.snp.leading)
         }
         
@@ -317,8 +347,14 @@ private extension ProfileHeader {
     }
     
     func discoverPeopleButtonAction() -> UIAction {
-        let action = UIAction { _ in
-            print("[⚠️] People button pressed")
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
+            self.showDiscover.toggle()
+            self.tableView.alpha = self.showDiscover ? 1.0 : .zero
+            self.tableView.rowHeight = self.showDiscover ? 230 : .zero
+            
+            print("row height \(self.tableView.rowHeight)")
+            self.showDiscoverDelegate?.didChangeDiscoverSize(self.showDiscover)
         }
         return action
     }
@@ -405,35 +441,30 @@ extension ProfileHeader: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: TableView DataSource
+extension ProfileHeader: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileDiscoverSetCell.self),
+                                                 for: indexPath) as! ProfileDiscoverSetCell
+        
+        cell.configure(with: dataService.discoverUsers)
+        
+        return cell
+    }
+}
+
 ////MARK: TableView Delegate
 //extension ProfileHeader: UITableViewDelegate {
 //
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //
-//        return 100
+//        return 230
 //
 //    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        return 100
-//    }
-//}
-//
-////MARK: TableView DataSource
-//extension ProfileHeader: UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        1
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileDiscoverSetCell.self),
-//                                                 for: indexPath) as! ProfileDiscoverSetCell
-//
-//        return cell
-//    }
-//
-//
 //}

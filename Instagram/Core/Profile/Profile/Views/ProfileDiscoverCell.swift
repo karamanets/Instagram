@@ -212,7 +212,7 @@ final class FooterForDiscoverCell: UICollectionReusableView {
         view.textColor = UIColor.theme.textColor
         view.textAlignment = .center
         view.font = UIFont.systemFont(ofSize: ProfileDiscoverCell.UiConstants.mainFont, weight: .medium, width: .standard)
-        view.text = "Find More People"
+        view.text = "Find More Cats"
         return view
     }()
     

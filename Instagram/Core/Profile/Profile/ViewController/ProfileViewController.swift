@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController {
         layout.minimumInteritemSpacing = UiConstants.inset
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.showsVerticalScrollIndicator = false
+        view.alwaysBounceVertical = false
         view.contentInset = UIEdgeInsets(top: UiConstants.inset, left: UiConstants.inset, bottom: UiConstants.inset, right: UiConstants.inset)
         ///Register header
         view.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -46,8 +47,15 @@ class ProfileViewController: UIViewController {
     ///DataService
     let dataService = FakeDataService.shared
     
-    /// Resize
+    /// Resize for story cell
     private var showStory: Bool = true {
+        didSet {
+            updateCollectionSize()
+        }
+    }
+    
+    /// Resize for Discover cell
+    private var showDiscover: Bool = true {
         didSet {
             updateCollectionSize()
         }
@@ -179,6 +187,7 @@ extension ProfileViewController: UICollectionViewDataSource {
                                                                      for: indexPath) as! ProfileHeader
         ///Custom delegate
         header.showStoryDelegate = self
+        header.showDiscoverDelegate = self
         
         let user = dataService.userModel ?? UserModel(name: "", userImage: "", posts: 0, followers: 0, following: 0)
         
@@ -194,9 +203,9 @@ extension ProfileViewController: UICollectionViewDataSource {
         
         let width =  collectionView.bounds.width
         
-        let height = collectionView.bounds.height.getCustomHeaderHeightProfile(with: collectionView.bounds.height)
+        let height = collectionView.bounds.height.getCustomHeaderHeightProfile(with: collectionView.bounds.height) + (showDiscover ? 230 : 230)
         
-        let heightClose = height - collectionView.bounds.width / 3.4
+        let heightClose = height - collectionView.bounds.width / 3.3
         
         return CGSize(width: width, height: showStory ? height : heightClose )
     }
@@ -233,5 +242,13 @@ extension ProfileViewController: ProfileShowStoryDelegate {
     
     func didChange(_ show: Bool) {
         self.showStory = show
+    }
+}
+
+//MARK: CustomDelegate for showDiscover
+extension ProfileViewController: ProfileShowDiscoverDelegate {
+    
+    func didChangeDiscoverSize(_ show: Bool) {
+        self.showDiscover = show
     }
 }
