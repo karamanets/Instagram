@@ -204,7 +204,7 @@ extension ProfileViewController: UICollectionViewDataSource {
         let width =  collectionView.bounds.width
         
         let height = collectionView.bounds.height.getCustomHeaderHeightProfile(with: collectionView.bounds.height) + (showDiscover ? 230 : 230)
-        
+
         let heightClose = height - collectionView.bounds.width / 3.3
         
         return CGSize(width: width, height: showStory ? height : heightClose )

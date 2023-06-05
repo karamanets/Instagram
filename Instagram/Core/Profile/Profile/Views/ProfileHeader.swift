@@ -190,7 +190,7 @@ final class ProfileHeader: UICollectionReusableView {
         return view
     }()
     
-    private lazy var tableView: UITableView = {
+    private let tableView: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
         view.showsVerticalScrollIndicator = false
         view.separatorColor = UIColor.theme.background
@@ -350,10 +350,7 @@ private extension ProfileHeader {
         let action = UIAction { [weak self] _ in
             guard let self = self else { return }
             self.showDiscover.toggle()
-            self.tableView.alpha = self.showDiscover ? 1.0 : .zero
-            self.tableView.rowHeight = self.showDiscover ? 230 : .zero
-            
-            print("row height \(self.tableView.rowHeight)")
+  
             self.showDiscoverDelegate?.didChangeDiscoverSize(self.showDiscover)
         }
         return action
@@ -458,13 +455,3 @@ extension ProfileHeader: UITableViewDataSource {
         return cell
     }
 }
-
-////MARK: TableView Delegate
-//extension ProfileHeader: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        return 230
-//
-//    }
-//}
