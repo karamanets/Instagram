@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//
+
 class ProfileGalleryCell: UICollectionViewCell {
     
     //MARK: Public

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIColor {
     
@@ -25,4 +26,18 @@ struct ColorsTheme {
     let sheetBackground = UIColor(named: "sheetBackground")               ?? .systemGroupedBackground
     let textColor = UIColor(named: "textColor")                           ?? .systemGroupedBackground
     let customBlue = UIColor(named: "customBlue")                         ?? .systemGroupedBackground
+}
+
+extension Color {
+    
+    static let theme = ColorsThemeSwiftUi()
+}
+
+struct ColorsThemeSwiftUi {
+    
+    let background = Color("background")
+    let icons = Color("icons")
+    let textColor = Color("textColor")
+    let iconBackground = Color("iconBackground")
+    let customBlue = Color("customBlue")
 }

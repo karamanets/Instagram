@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 
-
 class ProfileViewController: UIViewController {
 
     //MARK: Life Cycle
@@ -45,7 +44,7 @@ class ProfileViewController: UIViewController {
     }()
 
     ///DataService
-    let dataService = FakeDataService.shared
+    private let dataService = FakeDataService.shared
     
     /// Resize for story cell
     private var showStory: Bool = true {

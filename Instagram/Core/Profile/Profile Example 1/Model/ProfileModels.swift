@@ -8,12 +8,14 @@
 import Foundation
 
 //MARK: Story Model
-struct ProfileStoryModel {
+struct ProfileStoryModel: Identifiable {
+    var id = UUID()
     let imageName: String
 }
 
 //MARK: Gallery Model
-struct ProfileGalleryModel {
+struct ProfileGalleryModel: Identifiable {
+    var id = UUID()
     let imageName: String
 }
 
@@ -27,7 +29,9 @@ struct UserModel {
 }
 
 //MARK: Discover UserModel
-struct DiscoverUserModel {
+struct DiscoverUserModel: Identifiable {
+    
+    var id = UUID()
     let image: String
     let name: String
     let followedUsers: [String]

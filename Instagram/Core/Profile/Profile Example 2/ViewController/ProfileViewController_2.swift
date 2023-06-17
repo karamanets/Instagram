@@ -203,15 +203,6 @@ extension ProfileViewController_2: UITableViewDelegate {
            }
  
     }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.row == 0 {
-               return showStorySize
-           } else {
-               return view.bounds.height
-           }
-    }
 }
 
 

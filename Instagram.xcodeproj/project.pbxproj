@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C009F2529FF62E400A79861 /* NewPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C009F2429FF62E400A79861 /* NewPostCell.swift */; };
 		2C0D967A2A0237A10031D680 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D96792A0237A10031D680 /* Color.swift */; };
+		2C23530B2A3D667900B68EB5 /* ProfileViewControllerHosting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23530A2A3D667900B68EB5 /* ProfileViewControllerHosting.swift */; };
 		2C4195982A244B1400D06F95 /* ProfileGalleryCell_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4195972A244B1400D06F95 /* ProfileGalleryCell_2.swift */; };
 		2C41959F2A246CFB00D06F95 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C41959E2A246CFB00D06F95 /* ProfileViewController.swift */; };
 		2C4195A12A246F0E00D06F95 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4195A02A246F0E00D06F95 /* ProfileHeader.swift */; };
@@ -28,6 +29,12 @@
 		2C5E29F52A1F193D0040CA10 /* ProfileTableViewHeader_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E29F42A1F193D0040CA10 /* ProfileTableViewHeader_2.swift */; };
 		2C6DD9972A036CFA0003069C /* GallerySheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6DD9962A036CFA0003069C /* GallerySheetViewController.swift */; };
 		2C76DEC52A120F1700243D18 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76DEC42A120F1700243D18 /* CustomTextField.swift */; };
+		2C7C84892A3C1C3A00371123 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C84882A3C1C3A00371123 /* ProfileView.swift */; };
+		2C7C848B2A3C2A2F00371123 /* ProfileViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C848A2A3C2A2F00371123 /* ProfileViewMode.swift */; };
+		2C7C848D2A3C2CBD00371123 /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C848C2A3C2CBD00371123 /* DiscoverCell.swift */; };
+		2C7C84912A3C401000371123 /* DiscoverFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C84902A3C401000371123 /* DiscoverFooter.swift */; };
+		2C7C84932A3CA62400371123 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C84922A3CA62400371123 /* StoryCell.swift */; };
+		2C7C84952A3CB22E00371123 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C84942A3CB22E00371123 /* ImageCell.swift */; };
 		2C81F6572A21C502004E7C9E /* ProfileGallerySetCells_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81F6562A21C502004E7C9E /* ProfileGallerySetCells_2.swift */; };
 		2C90FAC82A29B5F100384AF2 /* ProfileDiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C90FAC72A29B5F100384AF2 /* ProfileDiscoverCell.swift */; };
 		2CBE218D2A14BD92002B0A1C /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE218C2A14BD92002B0A1C /* UIImage.swift */; };
@@ -56,6 +63,7 @@
 /* Begin PBXFileReference section */
 		2C009F2429FF62E400A79861 /* NewPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCell.swift; sourceTree = "<group>"; };
 		2C0D96792A0237A10031D680 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		2C23530A2A3D667900B68EB5 /* ProfileViewControllerHosting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerHosting.swift; sourceTree = "<group>"; };
 		2C4195972A244B1400D06F95 /* ProfileGalleryCell_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGalleryCell_2.swift; sourceTree = "<group>"; };
 		2C41959E2A246CFB00D06F95 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		2C4195A02A246F0E00D06F95 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
@@ -75,6 +83,12 @@
 		2C5E29F42A1F193D0040CA10 /* ProfileTableViewHeader_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader_2.swift; sourceTree = "<group>"; };
 		2C6DD9962A036CFA0003069C /* GallerySheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerySheetViewController.swift; sourceTree = "<group>"; };
 		2C76DEC42A120F1700243D18 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		2C7C84882A3C1C3A00371123 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		2C7C848A2A3C2A2F00371123 /* ProfileViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewMode.swift; sourceTree = "<group>"; };
+		2C7C848C2A3C2CBD00371123 /* DiscoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCell.swift; sourceTree = "<group>"; };
+		2C7C84902A3C401000371123 /* DiscoverFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverFooter.swift; sourceTree = "<group>"; };
+		2C7C84922A3CA62400371123 /* StoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
+		2C7C84942A3CB22E00371123 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		2C81F6562A21C502004E7C9E /* ProfileGallerySetCells_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGallerySetCells_2.swift; sourceTree = "<group>"; };
 		2C90FAC72A29B5F100384AF2 /* ProfileDiscoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDiscoverCell.swift; sourceTree = "<group>"; };
 		2CBE218C2A14BD92002B0A1C /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -142,21 +156,22 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
-		2C4195992A24672C00D06F95 /* Profile */ = {
+		2C4195992A24672C00D06F95 /* Profile Example 1 */ = {
 			isa = PBXGroup;
 			children = (
 				2C41959B2A246CC500D06F95 /* ViewController */,
 				2C41959C2A246CD100D06F95 /* Views */,
 				2C41959D2A246CD800D06F95 /* Model */,
 			);
-			path = Profile;
+			path = "Profile Example 1";
 			sourceTree = "<group>";
 		};
 		2C41959A2A24674F00D06F95 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				2C4195992A24672C00D06F95 /* Profile */,
+				2C4195992A24672C00D06F95 /* Profile Example 1 */,
 				2C8287BD29FB70310064E58A /* Profile Example 2 */,
+				2C7C84872A3C1C0400371123 /* Profile Example 3 */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -248,6 +263,36 @@
 				2C76DEC42A120F1700243D18 /* CustomTextField.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		2C7C84872A3C1C0400371123 /* Profile Example 3 */ = {
+			isa = PBXGroup;
+			children = (
+				2C7C848E2A3C2CDA00371123 /* Views */,
+				2C7C848F2A3C2CE700371123 /* ViewModel */,
+			);
+			path = "Profile Example 3";
+			sourceTree = "<group>";
+		};
+		2C7C848E2A3C2CDA00371123 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C23530A2A3D667900B68EB5 /* ProfileViewControllerHosting.swift */,
+				2C7C84882A3C1C3A00371123 /* ProfileView.swift */,
+				2C7C848C2A3C2CBD00371123 /* DiscoverCell.swift */,
+				2C7C84902A3C401000371123 /* DiscoverFooter.swift */,
+				2C7C84922A3CA62400371123 /* StoryCell.swift */,
+				2C7C84942A3CB22E00371123 /* ImageCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C7C848F2A3C2CE700371123 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2C7C848A2A3C2A2F00371123 /* ProfileViewMode.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		2C8287B829FB6FC60064E58A /* Core */ = {
@@ -509,13 +554,17 @@
 				2C6DD9972A036CFA0003069C /* GallerySheetViewController.swift in Sources */,
 				2CD8D2D729EF87FD00996964 /* HomeViewController.swift in Sources */,
 				2CC96E712A2853C700ECDDCA /* ProfileDiscoverSetCell.swift in Sources */,
+				2C7C84952A3CB22E00371123 /* ImageCell.swift in Sources */,
 				2C5E29F52A1F193D0040CA10 /* ProfileTableViewHeader_2.swift in Sources */,
 				2CF859FF29FA16E7007ABE2D /* ReelsViewController.swift in Sources */,
 				2CD8D2E229EFAC7A00996964 /* HomeModel.swift in Sources */,
+				2C23530B2A3D667900B68EB5 /* ProfileViewControllerHosting.swift in Sources */,
 				2C4195A52A24722C00D06F95 /* ProfileGalleryCell.swift in Sources */,
 				2C76DEC52A120F1700243D18 /* CustomTextField.swift in Sources */,
 				2C53C4F52A05F8B9002666B3 /* ReelsModel.swift in Sources */,
 				2C41959F2A246CFB00D06F95 /* ProfileViewController.swift in Sources */,
+				2C7C84892A3C1C3A00371123 /* ProfileView.swift in Sources */,
+				2C7C84932A3CA62400371123 /* StoryCell.swift in Sources */,
 				2CD8D2EE29EFC2E900996964 /* StoriesCell.swift in Sources */,
 				2C53C4F82A060715002666B3 /* UserModel.swift in Sources */,
 				2C4195A32A24717A00D06F95 /* ProfileModels.swift in Sources */,
@@ -524,7 +573,9 @@
 				2C4B72BA2A1C72F20072F866 /* ProfileStoriesSetCells_2.swift in Sources */,
 				2CD8D2EC29EFB8A100996964 /* PostCell.swift in Sources */,
 				2C4195A12A246F0E00D06F95 /* ProfileHeader.swift in Sources */,
+				2C7C848B2A3C2A2F00371123 /* ProfileViewMode.swift in Sources */,
 				2C0D967A2A0237A10031D680 /* Color.swift in Sources */,
+				2C7C84912A3C401000371123 /* DiscoverFooter.swift in Sources */,
 				2C4B72B62A1C61F30072F866 /* ProfileModel_2.swift in Sources */,
 				2CDBE8742A0B417C00F7AC49 /* SearchViewController.swift in Sources */,
 				2C90FAC82A29B5F100384AF2 /* ProfileDiscoverCell.swift in Sources */,
@@ -534,6 +585,7 @@
 				2CF85A0129FA16F9007ABE2D /* ProfileViewController_2.swift in Sources */,
 				2CE85E7F2A27325A00217A2E /* CGFloat.swift in Sources */,
 				2C81F6572A21C502004E7C9E /* ProfileGallerySetCells_2.swift in Sources */,
+				2C7C848D2A3C2CBD00371123 /* DiscoverCell.swift in Sources */,
 				2C53C4F32A05F76B002666B3 /* ReelsCell.swift in Sources */,
 				2CC67D5429F1210800550457 /* FakeDataService.swift in Sources */,
 				2C009F2529FF62E400A79861 /* NewPostCell.swift in Sources */,

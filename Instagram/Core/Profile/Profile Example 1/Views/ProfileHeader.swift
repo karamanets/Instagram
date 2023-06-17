@@ -449,7 +449,6 @@ extension ProfileHeader: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProfileDiscoverSetCell.self),
                                                  for: indexPath) as! ProfileDiscoverSetCell
-        
         cell.configure(with: dataService.discoverUsers)
         
         return cell
