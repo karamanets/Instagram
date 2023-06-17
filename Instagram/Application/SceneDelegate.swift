@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let vcSearch = SearchViewController()
         let vcNewPost = NewPostViewController()
         let vcReels = ReelsViewController()
-        let vcProfile = ProfileViewController()
+        let vcProfile = ProfileViewControllerHosting()
         
         /// NavigationControllers
         let navHome = UINavigationController(rootViewController: vcHome)

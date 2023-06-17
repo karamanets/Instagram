@@ -16,6 +16,7 @@ struct ProfileView: View {
     let storyGrid = [GridItem(.flexible())]
     let discoverGrid = [GridItem(.flexible())]
     let galleryGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    //let galleryGrid = [GridItem(.adaptive(minimum: 110, maximum: 200))]
     
     @State private var showDiscover = false
     @State private var showStory = true
@@ -49,9 +50,9 @@ struct ProfileView: View {
         .scrollContentBackground(.hidden)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background { Color.theme.background }
-        .animation(.easeInOut(duration: 0.4), value: showDiscover)
-        .animation(.easeInOut(duration: 0.4), value: showStory)
-        .animation(.spring(), value: showStoryHeader)
+        .animation(.easeInOut(duration: 0.2), value: showDiscover)
+        .animation(.easeInOut(duration: 0.2), value: showStory)
+        .animation(.easeInOut(duration: 0.2), value: showStoryHeader)
     }
 }
 
@@ -190,36 +191,38 @@ extension ProfileView {
     }
     
     private func story(size: CGFloat) -> some View {
-        VStack {
+        Group {
             HStack {
-                VStack (alignment: .leading, spacing: 5) {
-                    Text("Story Highlights")
-                        .font(.headline)
-                        .foregroundColor(Color.theme.icons)
-                    
-                    if showStoryHeader {
-                        Text("Keep your favourite story on your profile")
-                            .font(.subheadline)
-                            .foregroundColor(Color.theme.icons)
-                    }
-                }
+                Text("Story Highlights")
+                    .font(.headline)
+                    .foregroundColor(Color.theme.icons)
+                    .padding(.leading)
                 Spacer()
-                VStack {
-                    Button {
-                        showStory.toggle()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            showStoryHeader.toggle()
-                        }
-                    } label: {
-                        Image(systemName: "chevron.up")
-                            .font(.title2)
-                            .foregroundColor(Color.theme.icons)
-                            .rotationEffect(Angle(degrees: showStory ? 180 : 0))
+                
+                Button {
+                    showStory.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        showStoryHeader.toggle()
                     }
-                    Spacer()
+                } label: {
+                    Image(systemName: "chevron.up")
+                        .font(.title2)
+                        .foregroundColor(Color.theme.icons)
+                        .rotationEffect(Angle(degrees: showStory ? 180 : 0))
+                        .padding(.trailing)
                 }
             }
-            .padding(.horizontal)
+          
+            HStack {
+                if showStoryHeader {
+                    Text("Keep your favourite story on your profile")
+                        .font(.caption)
+                        .foregroundColor(Color.theme.icons)
+                        .padding(.leading)
+                }
+                
+                Spacer()
+            }
             
             if showStoryHeader {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -243,12 +246,9 @@ extension ProfileView {
     }
     
     private func posts(size: CGFloat) -> some View {
-        LazyVGrid(columns: galleryGrid, alignment: .center, spacing: 3) {
-            ForEach(vm.user.profileGallery) { item in
-                ImageCell(post: item, size: size / 3.03)
-            }
+        CustomGridLayout(vm.user.profileGallery, numberOfColumns: 3, spacing: -3) { item in
+            ImageCell(post: item, size: size / 3.05)
+                
         }
-        .padding(.horizontal, 2)
     }
 }
-

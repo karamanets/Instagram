@@ -7,13 +7,27 @@
 
 import UIKit
 import SwiftUI
+import SnapKit
 
 class ProfileViewControllerHosting: UIViewController {
 
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
+        
+        makeBarBottomIcon()
+        
+        let swiftUIView = ProfileView()
+        
+        let hostingController = UIHostingController(rootView: swiftUIView)
+        
+        view.addSubview(hostingController.view)
+        hostingController.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        addChild(hostingController)
+        hostingController.didMove(toParent: self)
     }
     
     //MARK: UiConstants
@@ -21,18 +35,14 @@ class ProfileViewControllerHosting: UIViewController {
         static let barItemSize:CGFloat = 30
     }
     
-    //
+    //MARK: Private Property
+    
     ///DataService
-    private let dataService = FakeDataService.shared
+    let dataService = FakeDataService.shared
 }
 
 //MARK: - Private methods
 private extension ProfileViewControllerHosting {
-
-    func initialize() {
-        ///Methods
-        makeBarBottomIcon()
-    }
     
     /// Bar bottom image title tag
     func makeBarBottomIcon() {
